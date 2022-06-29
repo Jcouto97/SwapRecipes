@@ -1,0 +1,25 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  sql: #
+    init: #
+    #  mode: always #
+  output:
+    ansi:
+      enabled: ALWAYS
+  jpa:
+    # defer-datasource-initialization: true #
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        #org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: ${HIBERNATE_DDL_AUTO:create-drop} #create-drop #mandar para deploy mandar com UPDATE
+      show-sql: true
+  datasource:
+    platform: postgres
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/SwapRecipes}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:password}
+    driverClassName: org.postgresql.Driver
