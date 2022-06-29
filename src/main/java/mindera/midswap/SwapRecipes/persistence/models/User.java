@@ -4,11 +4,13 @@ package mindera.midswap.SwapRecipes.persistence.models;
 import lombok.*;
 import javax.persistence.*;
 
-@Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@ToString
+@EqualsAndHashCode
 @Entity
 @Table(name = "users")
 public class User {

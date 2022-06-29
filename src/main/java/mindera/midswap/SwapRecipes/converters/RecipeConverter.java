@@ -1,12 +1,15 @@
 package mindera.midswap.SwapRecipes.converters;
 
+import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+@AllArgsConstructor
+@Component
 public class RecipeConverter implements DtoConvertersI <Recipe, RecipeDto> {
 
     public ModelMapper MODEL_MAPPER;

@@ -9,13 +9,13 @@ import java.util.List;
 
 
 
-@Setter
 @Getter
-@EqualsAndHashCode
-@ToString
-@Builder
-@RequiredArgsConstructor
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString
+@EqualsAndHashCode
 @Entity
 @Table(name= "recipes")
 public class Recipe {
