@@ -23,11 +23,6 @@ public class RecipeController {
         return this.recipeService.getRecipes();
     }
 
-    //Not done yet
-    // @GetMapping("/category/{category}")
-    // public List<Recipe> getRecipesByCategory (@PathVariable("category") String category) {
-    //     return this.recipeService.getRecipes();
-    // }
 
     @GetMapping("/byId/{id}")
     public Recipe getRecipeById(@PathVariable("id") Long id) {
@@ -35,17 +30,28 @@ public class RecipeController {
     }
 
 
-//    @GetMapping("/ingredient/{ingredient}")
-//    public List<Recipe> getRecipesByIngredients(@PathVariable("ingredient") String ingredient) {
-//        return this.recipeService.getRecipesByIngredient(ingredient);
-//
-//    }
     @PostMapping
-    public RecipeDto addRecipe(@RequestBody RecipeDto recipeDto){
+    public RecipeDto addRecipe(@RequestBody RecipeDto recipeDto) {
         return this.recipeService.addRecipe(recipeDto);
     }
 
-  @DeleteMapping("{id}")
-    public void deleteRecipe(@PathVariable("id") Long id) {this.recipeService.removeRecipe(id);};
+    @DeleteMapping("{id}")
+    public void deleteRecipe(@PathVariable("id") Long id) {
+        this.recipeService.removeRecipe(id);
+    }
+
+    @GetMapping("/ingredient/{ingredient}")
+    public List<Recipe> getRecipesByIngredients(@PathVariable("ingredient") String ingredient) {
+        return this.recipeService.getRecipesByIngredient(ingredient);
+
+    }
 
 }
+
+//Not done yet
+// @GetMapping("/category/{category}")
+// public List<Recipe> getRecipesByCategory (@PathVariable("category") String category) {
+//     return this.recipeService.getRecipes();
+// }
+
+

@@ -17,7 +17,7 @@ public interface RecipeServiceI {
     void removeRecipe(Long id);
 
 
-//    List<Recipe> getRecipesByIngredient(String ingredient);
-    //coment
+List<Recipe> getRecipesByIngredient(String ingredient);
+
 
 }

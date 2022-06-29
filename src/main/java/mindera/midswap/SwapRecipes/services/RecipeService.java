@@ -40,8 +40,9 @@ public class RecipeService implements RecipeServiceI {
         this.recipeRepository.delete(getRecipeById(id));
     }
 
-//    @Override
-//    public List<Recipe> getRecipesByIngredient(String ingredient) {
-//        return this.recipeRepository.findByIngredient(ingredient);
-//    }
+
+   @Override
+    public List<Recipe> getRecipesByIngredient(String ingredient) {
+       return this.recipeRepository.findByIngredient(ingredient);
+   }
 }
