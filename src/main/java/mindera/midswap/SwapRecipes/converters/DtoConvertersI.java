@@ -9,4 +9,6 @@ public interface DtoConvertersI<Entity, Dto> {
     Entity dtoToEntity(Dto dto);
 
     List<Dto> entityListToDtoList(List<Entity> entityList);
+
+    List<Entity> DtoListToEntityList(List<Dto> dtoList);
 }
