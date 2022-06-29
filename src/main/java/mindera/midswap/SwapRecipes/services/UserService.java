@@ -1,7 +1,9 @@
 package mindera.midswap.SwapRecipes.services;
 
+import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.UserDto;
-import mindera.midswap.SwapRecipes.converters.DtoConvertersI;
+
+import mindera.midswap.SwapRecipes.converters.UserConverter;
 import mindera.midswap.SwapRecipes.exceptions.UserNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.User;
 import mindera.midswap.SwapRecipes.persistence.repositories.IUserRepository;
@@ -9,16 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class UserService implements IUserService {
 
     private IUserRepository iUserRepository;
-    private DtoConvertersI iUserConverter;
+    private UserConverter iUserConverter;
 
-    @Autowired
-    public UserService(IUserRepository iUserRepository, DtoConvertersI iUserConverter) {
-        this.iUserRepository = iUserRepository;
-        this.iUserRepository = iUserRepository;
-    }
+
 
     @Override
     public UserDto findById(Long id) {
@@ -27,10 +26,8 @@ public class UserService implements IUserService {
 
 
 
-        UserDto userDto = this.iUserConverter.entityToDto(user);
+        //UserDto userDto = this.iUserConverter.entityToDto(user);
 
-        return userDto;
+        return null;
     }
-
-
 }

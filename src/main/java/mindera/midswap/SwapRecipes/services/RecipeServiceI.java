@@ -11,5 +11,5 @@ public interface RecipeServiceI {
     Recipe getRecipeById(Long id);
 
 
-    List<Recipe> getRecipesByIngredient(String ingredient);
+//    List<Recipe> getRecipesByIngredient(String ingredient);
 }

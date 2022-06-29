@@ -24,9 +24,11 @@ public class Ingredient {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @JsonIgnore //para problema de recursividade
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+//    @JsonIgnore //para problema de recursividade
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+//    @JoinColumn(name = "colorId", referencedColumnName = "id")
+
     //PERSIST em vez de ALL, porque com PERSIST impede que a brand seja apagada se pelo menos um vehículo a esitver a usar
 
-    private List<Recipe> recipes;
+    //private List<Recipe> recipes;
 }

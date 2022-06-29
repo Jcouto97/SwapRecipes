@@ -24,15 +24,15 @@ public class Recipe {
     @Column(nullable = false, unique = true, updatable = false)
     private Long id;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
-            cascade = CascadeType.DETACH)
-    private User user;
+//    @JsonIgnore
+//    @ManyToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
+//            cascade = CascadeType.DETACH)
+    //private User user;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
-            cascade = CascadeType.DETACH)
-    private List<Ingredient> ingredientList;
+//    @JsonIgnore
+//    @ManyToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
+//            cascade = CascadeType.DETACH)
+    //private List<Ingredient> ingredientList;
 
     private String description;
 

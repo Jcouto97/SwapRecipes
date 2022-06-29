@@ -4,10 +4,13 @@ import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
 import mindera.midswap.SwapRecipes.persistence.models.User;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+@Component
 public class UserConverter implements DtoConvertersI<User, UserDto>, UpdateDtoConverterI<User, UserUpdateDto> {
 
     private final ModelMapper modelMapper;

@@ -23,8 +23,8 @@ public class RecipeService implements RecipeServiceI {
         return this.recipeRepository.findById(id).orElseThrow();
     }
 
-    @Override
-    public List<Recipe> getRecipesByIngredient(String ingredient) {
-        return this.recipeRepository.findByIngredient(ingredient);
-    }
+//    @Override
+//    public List<Recipe> getRecipesByIngredient(String ingredient) {
+//        return this.recipeRepository.findByIngredient(ingredient);
+//    }
 }

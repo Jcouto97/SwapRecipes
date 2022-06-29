@@ -35,9 +35,9 @@ public class RecipeController {
     }
 
 
-    @GetMapping("/ingredient/{ingredient}")
-    public List<Recipe> getRecipesByIngredients(@PathVariable("ingredient") String ingredient) {
-        return this.recipeService.getRecipesByIngredient(ingredient);
-
-    }
+//    @GetMapping("/ingredient/{ingredient}")
+//    public List<Recipe> getRecipesByIngredients(@PathVariable("ingredient") String ingredient) {
+//        return this.recipeService.getRecipesByIngredient(ingredient);
+//
+//    }
 }
