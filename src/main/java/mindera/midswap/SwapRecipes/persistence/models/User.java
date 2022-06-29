@@ -1,8 +1,6 @@
 package mindera.midswap.SwapRecipes.persistence.models;
 
 import lombok.*;
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 
 @Builder
@@ -24,7 +22,14 @@ public class User {
 
     @Column(nullable = false, unique = false, updatable = true)
     private String username;
+
+    @Column(nullable = false, unique = false, updatable = true)
     private String password;
+
+    @Column(nullable = false, unique = false, updatable = true)
     private Long favouriteRecipes;
+
+
+
 
 }
