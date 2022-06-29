@@ -25,13 +25,13 @@ public class Recipe {
     private Long id;
 
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "userId", referencedColumnName = "id")
+    @ManyToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
+            cascade = CascadeType.DETACH)
     private User user;
 
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "ingredientId", referencedColumnName = "id")
+    @ManyToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
+            cascade = CascadeType.DETACH)
     private List<Ingredient> ingredientList;
 
     private String description;
