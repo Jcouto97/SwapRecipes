@@ -35,6 +35,6 @@ public class UserDto {
     private String password;
 
 
-    private Long favouriteRecipes;
+    private Long favouriteRecipeId;
 
 }

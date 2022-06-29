@@ -6,7 +6,7 @@ import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
 import java.util.List;
-
+import java.util.Set;
 
 
 @Getter
@@ -17,7 +17,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table(name= "recipes")
+@Table(name = "recipes")
 public class Recipe {
 
     @Id
@@ -27,12 +27,12 @@ public class Recipe {
 
     private String name;
 
-//    @JsonIgnore
-//    @ManyToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
-//            cascade = CascadeType.DETACH)
-    //private User user;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "favouriteRecipesIds", fetch = FetchType.LAZY,
+            cascade = CascadeType.DETACH)
+    private Set<User> usersThatLiked;
 
-//    @JsonIgnore
+// @JsonIgnore
 //    @ManyToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
 //            cascade = CascadeType.DETACH)
     //private List<Ingredient> ingredientList;
