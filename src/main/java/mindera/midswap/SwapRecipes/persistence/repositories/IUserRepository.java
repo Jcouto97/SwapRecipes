@@ -1,4 +1,4 @@
 package mindera.midswap.SwapRecipes.persistence.repositories;
 
-public class main {
+public interface IUserRepository {
 }
