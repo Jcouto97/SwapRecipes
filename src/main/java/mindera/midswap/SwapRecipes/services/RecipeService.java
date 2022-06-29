@@ -2,7 +2,9 @@ package mindera.midswap.SwapRecipes.services;
 
 
 import lombok.RequiredArgsConstructor;
+import mindera.midswap.SwapRecipes.converters.RecipeConverter;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
+import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
 import org.springframework.stereotype.Service;
 
@@ -13,18 +15,19 @@ import java.util.List;
 public class RecipeService implements RecipeServiceI {
 
     public RecipeJPARepository recipeRepository;
+    public RecipeConverter recipeConverter;
     @Override
-    public List<Recipe> getRecipes() {
-        return this.recipeRepository.findAll();
+    public List<RecipeDto> getRecipes() {
+        return this.recipeConverter.entityListToDtoList(this.recipeRepository.findAll());
     }
 
     @Override
-    public Recipe getRecipeById(Long id) {
-        return this.recipeRepository.findById(id).orElseThrow();
+    public RecipeDto getRecipeById(Long id) {
+        return this.recipeConverter.entityToDto(this.recipeRepository.findById(id).orElseThrow());
     }
 
     @Override
-    public List<Recipe> getRecipesByIngredient(String ingredient) {
+    public List<RecipeDto> getRecipesByIngredient(String ingredient) {
         return this.recipeRepository.findByIngredient(ingredient);
     }
 }
