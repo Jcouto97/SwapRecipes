@@ -25,6 +25,8 @@ public class Recipe {
     @Column(nullable = false, unique = true, updatable = false)
     private Long id;
 
+    private String name;
+
 //    @JsonIgnore
 //    @ManyToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
 //            cascade = CascadeType.DETACH)
