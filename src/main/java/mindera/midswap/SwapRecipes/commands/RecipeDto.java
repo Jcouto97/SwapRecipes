@@ -22,4 +22,6 @@ public class RecipeDto {
 
     private String description;
 
+   private Long ingredientId;
+
 }

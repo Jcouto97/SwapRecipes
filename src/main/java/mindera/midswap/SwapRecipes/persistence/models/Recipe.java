@@ -28,15 +28,26 @@ public class Recipe {
     private String name;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "favouriteRecipesIds", fetch = FetchType.LAZY,
+    @ManyToMany(mappedBy = "favouriteRecipesIds",
+            fetch = FetchType.LAZY,
             cascade = CascadeType.DETACH)
     private Set<User> usersThatLiked;
 
-// @JsonIgnore
-//    @ManyToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
-//            cascade = CascadeType.DETACH)
-    //private List<Ingredient> ingredientList;
+
+
+ //   @JsonIgnore
+ //   @Column(nullable = false, unique = false, updatable = true)
+//   @ManyToMany(cascade = CascadeType.DETACH)
+//    @JoinTable(name="ingredients",
+//           joinColumns = @JoinColumn(name = "recipeId"),
+//            inverseJoinColumns = @JoinColumn(name = "ingredientId"))
+//    private Set<Ingredient> ingredientsIds;
+
 
     private String description;
 
 }
+// @JsonIgnore
+//    @ManyToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
+//            cascade = CascadeType.DETACH)
+//private List<Ingredient> ingredientList;

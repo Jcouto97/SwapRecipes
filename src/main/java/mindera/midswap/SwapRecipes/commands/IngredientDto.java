@@ -19,4 +19,6 @@ public class IngredientDto {
     @NotEmpty
     @Size(max = 20)
     private String name;
+
+   private Long recipeId;
 }

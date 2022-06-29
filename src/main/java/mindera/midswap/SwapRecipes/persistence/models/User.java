@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.persistence.models;
 
 
 import lombok.*;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -33,11 +34,10 @@ public class User {
 
     @Column(nullable = false, unique = false, updatable = true)
     @ManyToMany(cascade = CascadeType.DETACH)
-    @JoinTable(name="favouriteRecipes",
-   joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "recipeId"))
+    @JoinTable(name = "favouriteRecipes",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "recipeId"))
     private Set<Recipe> favouriteRecipesIds;
-
-   // favouriteRecipeId
 
 
 
