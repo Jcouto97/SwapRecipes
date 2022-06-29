@@ -35,13 +35,16 @@ public class Recipe {
 
 
 
- //   @JsonIgnore
- //   @Column(nullable = false, unique = false, updatable = true)
-//   @ManyToMany(cascade = CascadeType.DETACH)
-//    @JoinTable(name="ingredients",
-//           joinColumns = @JoinColumn(name = "recipeId"),
-//            inverseJoinColumns = @JoinColumn(name = "ingredientId"))
-//    private Set<Ingredient> ingredientsIds;
+  @JsonIgnore
+  @Column(nullable = false, unique = false, updatable = true)
+   @ManyToMany(cascade = CascadeType.DETACH)
+   @JoinTable(name = "usedIngredients",
+          joinColumns = @JoinColumn(name = "recipeId"),
+           inverseJoinColumns = @JoinColumn(name = "ingredientId"))
+   private Set<Ingredient> ingredientsIds;
+
+
+
 
 
     private String description;

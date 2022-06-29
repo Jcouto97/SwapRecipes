@@ -28,11 +28,11 @@ public class Ingredient {
     private String name;
 
 
- //  @JsonIgnore
- //  @ManyToMany(mappedBy = "ingredientsIds",
- //          fetch = FetchType.LAZY,
- //          cascade = CascadeType.DETACH)
- //   private Set<Recipe> recipes;
+   @JsonIgnore
+  @ManyToMany(mappedBy = "ingredientsIds",
+         fetch = FetchType.LAZY,
+         cascade = CascadeType.DETACH)
+  private Set<Recipe> recipesSet;
 
     //PERSIST em vez de ALL, porque com PERSIST impede que a brand seja apagada se pelo menos um vehículo a esitver a usar
 
