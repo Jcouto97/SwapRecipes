@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.persistence.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
+
 import javax.persistence.*;
 import java.nio.file.LinkOption;
 import java.util.List;

@@ -1,5 +1,6 @@
 package mindera.midswap.SwapRecipes.converters;
 
+
 import java.util.List;
 
 public interface DtoConvertersI<Entity, Dto> {

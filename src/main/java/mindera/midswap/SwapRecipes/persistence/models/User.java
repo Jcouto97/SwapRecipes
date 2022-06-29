@@ -1,5 +1,6 @@
 package mindera.midswap.SwapRecipes.persistence.models;
 
+
 import lombok.*;
 import javax.persistence.*;
 

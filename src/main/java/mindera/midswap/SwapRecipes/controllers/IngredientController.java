@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.IngredientDto;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.services.IngredientServiceI;
-import org.springframework.beans.factory.annotation.Autowired;
+
+
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @AllArgsConstructor
