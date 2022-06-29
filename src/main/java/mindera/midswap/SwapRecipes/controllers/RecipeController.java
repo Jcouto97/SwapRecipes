@@ -2,12 +2,11 @@ package mindera.midswap.SwapRecipes.controllers;
 
 
 import lombok.RequiredArgsConstructor;
+import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.services.RecipeServiceI;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,10 +16,10 @@ import java.util.List;
 @RestController
 public class RecipeController {
 
-    public RecipeServiceI recipeService;
+    private final RecipeServiceI recipeService;
 
     @GetMapping
-    public List<Recipe> getRecipies() {
+    public List<RecipeDto> getRecipes() {
         return this.recipeService.getRecipes();
     }
 
@@ -41,4 +40,12 @@ public class RecipeController {
 //        return this.recipeService.getRecipesByIngredient(ingredient);
 //
 //    }
+    @PostMapping
+    public RecipeDto addRecipe(@RequestBody RecipeDto recipeDto){
+        return this.recipeService.addRecipe(recipeDto);
+    }
+
+  @DeleteMapping("{id}")
+    public void deleteRecipe(@PathVariable("id") Long id) {this.recipeService.removeRecipe(id);};
+
 }
