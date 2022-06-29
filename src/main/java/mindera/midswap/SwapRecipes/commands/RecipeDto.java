@@ -3,7 +3,6 @@ package mindera.midswap.SwapRecipes.commands;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Getter
