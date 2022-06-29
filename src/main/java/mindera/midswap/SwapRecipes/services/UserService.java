@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.services;
 
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.DtoConvertersI;
+import mindera.midswap.SwapRecipes.converters.UserConverter;
 import mindera.midswap.SwapRecipes.exceptions.UserNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.User;
 import mindera.midswap.SwapRecipes.persistence.repositories.IUserRepository;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class UserService implements IUserService {
 
     private IUserRepository iUserRepository;
-    private DtoConvertersI iUserConverter;
+    private UserConverter iUserConverter;
 
     @Autowired
     public UserService(IUserRepository iUserRepository, DtoConvertersI iUserConverter) {

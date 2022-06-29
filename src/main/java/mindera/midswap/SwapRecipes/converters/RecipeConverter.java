@@ -26,4 +26,11 @@ public class RecipeConverter implements DtoConvertersI <Recipe, RecipeDto> {
                 .map(recipe -> MODEL_MAPPER.map(recipe, RecipeDto.class))
                 .toList();
     }
+
+    @Override
+    public List<Recipe> DtoListToEntityList(List<RecipeDto> recipesDto) {
+        return recipesDto.stream()
+                .map(recipe -> MODEL_MAPPER.map(recipe, Recipe.class))
+                .toList();
+    }
 }

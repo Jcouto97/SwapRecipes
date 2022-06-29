@@ -26,8 +26,8 @@ public class RecipeService implements RecipeServiceI {
         return this.recipeConverter.entityToDto(this.recipeRepository.findById(id).orElseThrow());
     }
 
-    @Override
-    public List<RecipeDto> getRecipesByIngredient(String ingredient) {
-        return this.recipeRepository.findByIngredient(ingredient);
-    }
+ //   @Override
+//    public List<RecipeDto> getRecipesByIngredient(String ingredient) {
+ //       return this.recipeRepository.findByIngredient(ingredient);
+ //   }
 }

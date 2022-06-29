@@ -12,5 +12,5 @@ public interface RecipeServiceI {
     RecipeDto getRecipeById(Long id);
 
 
-    List<RecipeDto> getRecipesByIngredient(String ingredient);
+//    List<RecipeDto> getRecipesByIngredient(String ingredient);
 }

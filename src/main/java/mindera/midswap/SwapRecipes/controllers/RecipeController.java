@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.controllers;
 
 
 import lombok.RequiredArgsConstructor;
+import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.services.RecipeServiceI;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ public class RecipeController {
     public RecipeServiceI recipeService;
 
     @GetMapping
-    public List<Recipe> getRecipies() {
+    public List<RecipeDto> getRecipies() {
         return this.recipeService.getRecipes();
     }
 
@@ -30,14 +31,13 @@ public class RecipeController {
     // }
 
     @GetMapping("/byId/{id}")
-    public Recipe getRecipeById(@PathVariable("id") Long id) {
+    public RecipeDto getRecipeById(@PathVariable("id") Long id) {
         return this.recipeService.getRecipeById(id);
     }
 
 
-    @GetMapping("/ingredient/{ingredient}")
-    public List<Recipe> getRecipesByIngredients(@PathVariable("ingredient") String ingredient) {
-        return this.recipeService.getRecipesByIngredient(ingredient);
+ //   @GetMapping("/ingredient/{ingredient}")
+ //   public List<RecipeDto> getRecipesByIngredients(@PathVariable("ingredient") String ingredient) {
+  //
 
-    }
 }
