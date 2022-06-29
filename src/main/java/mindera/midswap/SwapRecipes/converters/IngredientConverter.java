@@ -29,4 +29,9 @@ public class IngredientConverter implements DtoConvertersI<Ingredient, Ingredien
         return ingredients.stream()
                 .map(ingredient -> this.MODEL_MAPPER.map(ingredient, IngredientDto.class)).toList();
     }
+
+    @Override
+    public List<Ingredient> DtoListToEntityList(List<IngredientDto> ingredientDtos) {
+        return null;
+    }
 }

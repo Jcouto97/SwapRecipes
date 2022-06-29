@@ -40,6 +40,11 @@ public class UserConverter implements DtoConvertersI<User, UserDto>, UpdateDtoCo
     }
 
     @Override
+    public List<User> DtoListToEntityList(List<UserDto> userDtos) {
+        return null;
+    }
+
+    @Override
     public UserUpdateDto entityToUpdateDto(User user) {
         UserUpdateDto updateDto = this.modelMapper.map(user, UserUpdateDto.class);
         return updateDto;
