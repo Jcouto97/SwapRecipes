@@ -4,10 +4,12 @@ import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
 import mindera.midswap.SwapRecipes.persistence.models.User;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class UserConverter implements DtoConvertersI<User, UserDto>, UpdateDtoConverterI<User, UserUpdateDto> {
 
     private final ModelMapper modelMapper;
@@ -16,6 +18,7 @@ public class UserConverter implements DtoConvertersI<User, UserDto>, UpdateDtoCo
         this.modelMapper = modelMapper;
         this.modelMapper.getConfiguration().setSkipNullEnabled(true);
     }
+
 
     @Override
     public UserDto entityToDto(User user) {
@@ -28,6 +31,8 @@ public class UserConverter implements DtoConvertersI<User, UserDto>, UpdateDtoCo
         User user = this.modelMapper.map(userDto, User.class);
         return user;
     }
+
+
 
     @Override
     public List<UserDto> entityListToDtoList(List<User> userList) {

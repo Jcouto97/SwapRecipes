@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.persistence.models;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.List;
 
 @Builder
 @Getter
@@ -27,7 +28,7 @@ public class User {
     private String password;
 
     @Column(nullable = false, unique = false, updatable = true)
-    private Long favouriteRecipes;
+    private List<Recipe> favouriteRecipes;
 
 
 
