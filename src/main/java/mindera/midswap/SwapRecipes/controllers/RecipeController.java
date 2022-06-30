@@ -3,7 +3,11 @@ package mindera.midswap.SwapRecipes.controllers;
 
 import lombok.RequiredArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
+import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
+import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
+import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
+import mindera.midswap.SwapRecipes.services.IngredientServiceI;
 import mindera.midswap.SwapRecipes.services.RecipeServiceI;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +20,8 @@ import java.util.List;
 public class RecipeController {
 
     private final RecipeServiceI recipeService;
+    private final IngredientJPARepository ingredientJPARepository;
+    private final RecipeConverterI recipeConverter;
 
     @GetMapping
     public List<RecipeDto> getRecipes() {
