@@ -10,5 +10,6 @@ import java.util.Optional;
 @Repository
 
 public interface UserJPARepository extends JpaRepository<User, Long> {
+//so para commit
     public Optional<User> findById(Long id);
 }
