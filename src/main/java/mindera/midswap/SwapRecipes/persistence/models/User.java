@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -42,10 +44,12 @@ public class User {
     @JoinTable(name = "favouriteRecipes",
             joinColumns = @JoinColumn(name = "userId"),
             inverseJoinColumns = @JoinColumn(name = "recipeId"))
-    private Set<Recipe> favouriteRecipesIds;
+    private Set<Recipe> favouriteRecipesIds = new HashSet<>();
 
 
-    public void setFavouriteRecipeId(Recipe recipeId) {
+
+    public void addFavouriteRecipeId(Recipe recipeId) {
         this.favouriteRecipesIds.add(recipeId);
+      //  return this;
     }
 }

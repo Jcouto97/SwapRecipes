@@ -5,11 +5,13 @@ import lombok.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @ToString
 @Builder
 @Getter
 @Setter
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserUpdateDto {
@@ -24,6 +26,6 @@ public class UserUpdateDto {
     @Pattern(regexp="^[a-zA-Z]*$",message = "Username should only have letters!") //nao pode ter espaços
     private String username;
 
-    private Long favouriteRecipeId;
+    private List<Long> favouriteRecipeId;
 
 }

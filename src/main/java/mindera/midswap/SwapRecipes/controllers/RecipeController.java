@@ -4,6 +4,7 @@ package mindera.midswap.SwapRecipes.controllers;
 import lombok.RequiredArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.commands.UserDto;
+import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
@@ -57,7 +58,7 @@ public class RecipeController {
     }
 
     @GetMapping("/{userId}/{recipeId}")
-    public UserDto addRecipeToFavourites(@PathVariable("userId") Long userId, @PathVariable("recipeId") Long recipeId) {
+    public UserUpdateDto addRecipeToFavourites(@PathVariable("userId") Long userId, @PathVariable("recipeId") Long recipeId) {
         return this.userServiceI.saveFavouriteRecipe(userId, recipeId);
     }
 
