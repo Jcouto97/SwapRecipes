@@ -61,12 +61,20 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
     }
 
-    @ExceptionHandler({IngredientNotFoundException.class, CategoryNotFoundException.class})
+    @ExceptionHandler({IngredientNotFoundException.class})
     public ResponseEntity<Object> IngredientNotFoundException(IngredientNotFoundException exception,
                                                              HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
     }
+
+    @ExceptionHandler({CategoryNotFoundException.class})
+    public ResponseEntity<Object> CategoryNotFoundException(CategoryNotFoundException exception,
+                                                              HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
+    }
+
 
     @ExceptionHandler({IngredientAlreadyExistsException.class, IllegalArgumentException.class})
     public ResponseEntity<Object> IngredientAlreadyExistsException(IngredientAlreadyExistsException exception,
@@ -75,6 +83,12 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
     }
 
+//    @ExceptionHandler({CategoryAlreadyExistsException.class})
+//    public ResponseEntity<Object> CategoryAlreadyExistsException(CategoryAlreadyExistsException exception,
+//                                                                   HttpServletRequest request) {
+//        return ResponseEntity.status(HttpStatus.CONFLICT)
+//                .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
+//    }
 
     // IngredientAlreadyExistsException.class
 //    @ExceptionHandler(RentNotFoundException.class)
