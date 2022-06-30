@@ -36,7 +36,7 @@ public class UserServiceImpI implements UserServiceI {
         return dtoList;
     }
 
-    public UserDto getUserByIdNumber(Long idNumber){
+    public UserDto getUserById(Long idNumber){
         User user = this.userJPARepository.findById(idNumber)
                 .orElseThrow( () -> new UserNotFoundException());
         return this.userConverterI.entityToDto(user);
