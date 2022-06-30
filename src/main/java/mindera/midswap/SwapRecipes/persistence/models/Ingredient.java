@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.nio.file.LinkOption;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ import java.util.Set;
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, unique = true, updatable = false)
+    @Column(name= "ingredient_id", nullable = false, unique = true, updatable = false)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -30,11 +31,38 @@ public class Ingredient {
 
    @JsonIgnore
   @ManyToMany(mappedBy = "ingredientsIds",
-         fetch = FetchType.LAZY,
+         fetch = FetchType.EAGER,
          cascade = CascadeType.DETACH)
-  private Set<Recipe> recipesSet;
+  private Set<Recipe> recipesSet = new HashSet<>();
 
     //PERSIST em vez de ALL, porque com PERSIST impede que a brand seja apagada se pelo menos um vehículo a esitver a usar
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Recipe> getRecipesSet() {
+        return recipesSet;
+    }
+
+    public void setRecipesSet(Set<Recipe> recipesSet) {
+        this.recipesSet = recipesSet;
+    }
+
+    public void addRecipe(Recipe recipeDto) {
+        this.recipesSet.add(recipeDto);
+    }
 }
