@@ -53,6 +53,13 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(buildError(exception, request, HttpStatus.NOT_FOUND.toString()));
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Object> UserAlreadyExistsException(UserNotFoundException exception,
+                                                               HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
+    }
+
 
 //    @ExceptionHandler(RentNotFoundException.class)
 //    public ResponseEntity<Object> rentNotFoundExceptionHandler(RentNotFoundException exception, HttpServletRequest request) {

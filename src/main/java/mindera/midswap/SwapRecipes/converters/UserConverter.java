@@ -12,12 +12,16 @@ import java.util.stream.Collectors;
 
 
 
-@AllArgsConstructor
+//@AllArgsConstructor
 @Component
 public class UserConverter implements DtoConvertersI<User, UserDto>, UpdateDtoConverterI<User, UserUpdateDto> {
 
     private final ModelMapper modelMapper;
 
+    public UserConverter(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+        this.modelMapper.getConfiguration().setSkipNullEnabled(true);
+    }
 
     @Override
     public UserDto entityToDto(User user) {
