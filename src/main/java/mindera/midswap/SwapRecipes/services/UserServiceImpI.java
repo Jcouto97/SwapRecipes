@@ -5,6 +5,7 @@ import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
 import mindera.midswap.SwapRecipes.converters.UserConverterI;
 import mindera.midswap.SwapRecipes.exceptions.UserAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.UserNotFoundException;
+import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.persistence.models.User;
 import mindera.midswap.SwapRecipes.persistence.repositories.UserJPARepository;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class UserServiceImpI implements UserServiceI {
 
     private UserJPARepository userJPARepository;
     private UserConverterI userConverterI;
+    private RecipeServiceI recipeServiceI;
     //private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -77,6 +79,15 @@ public class UserServiceImpI implements UserServiceI {
 
         // converto para UserDto
         return this.userConverterI.entityToDto(savedUser);
+    }
+
+    @Override
+    public UserDto saveFavouriteRecipe(Long userId, Long recipeId) {
+        UserDto userDto = findById(userId);
+        User user = userConverterI.dtoToEntity(userDto);
+        Recipe recipe = this.recipeServiceI.getRecipeById(recipeId);
+      user.setFavouriteRecipeId(recipe);
+      return userConverterI.entityToDto(user);
     }
 
 }
