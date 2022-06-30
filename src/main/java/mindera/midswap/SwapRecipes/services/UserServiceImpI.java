@@ -44,7 +44,7 @@ public class UserServiceImpI implements UserServiceI {
 
     @Override
     public UserDto addUser(UserDto userDto) {
-        this.userJPARepository.findByIdNumber(userDto.getIdNumber()) //tenho que usar uma prop unique, e não o id
+        this.userJPARepository.findByIdNumber(userDto.getCitizenNumber()) //tenho que usar uma prop unique, e não o id
                 .ifPresent( (user) -> {
                     throw new UserAlreadyExistsException();
                 });

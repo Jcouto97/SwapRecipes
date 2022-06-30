@@ -4,7 +4,6 @@ package mindera.midswap.SwapRecipes.persistence.models;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Builder
@@ -27,7 +26,7 @@ public class User {
     private String name;
 
     @Column(nullable = false, unique = true, updatable = false)
-    private Long idNumber;
+    private Long citizenNumber;
 
     @Column(nullable = false, unique = false, updatable = true)
     private String username;

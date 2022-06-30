@@ -3,7 +3,6 @@ package mindera.midswap.SwapRecipes.commands;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
-import javax.persistence.Column;
 import javax.validation.constraints.*;
 
 
@@ -23,9 +22,9 @@ public class UserDto {
     private String name;
 
     @NotNull
-    @Min(value = 10000, message = "identifcationNumber should start with 1 and be 6 characters long!")
-    @Max(value = 99999, message = "identifcationNumber max number is 99,999!")
-    private Long idNumber;
+    @Min(value = 100000000, message = "Citizen Number should start with 1 and be 9 characters long!")
+    @Max(value = 999999999, message = "Citizen Number max number is 999,999,999!")
+    private Long citizenNumber;
 
     @NotEmpty
     @Size(min = 2, message = "Username should have ate least 2 characters!")

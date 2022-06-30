@@ -48,17 +48,17 @@ public class DataLoader implements ApplicationRunner {
         //lista Users
         List<User> userList = new ArrayList<>(Arrays.asList(
                 User.builder().name("Elisa")
-                        .idNumber(10001L)
+                        .citizenNumber(100000001L)
                         .username("elisamoutinho")
                         .password("elisamoutinho")
                         .build(),
                 User.builder().name("Ala")
-                        .idNumber(10002L)
+                        .citizenNumber(100000002L)
                         .username("alakropa")
                         .password("alakropa")
                         .build(),
                 User.builder().name("Joao")
-                        .idNumber(10003L)
+                        .citizenNumber(100000003L)
                         .username("joaocouto")
                         .password("joaocouto")
                         .build()
