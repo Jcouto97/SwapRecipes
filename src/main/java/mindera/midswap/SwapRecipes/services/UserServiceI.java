@@ -5,7 +5,7 @@ import mindera.midswap.SwapRecipes.commands.UserDto;
 
 import java.util.List;
 
-public interface IUserService {
+public interface UserServiceI {
     UserDto findById(Long id);
     List<UserDto> getAllUsers();
     UserDto addUser(UserDto userDto);

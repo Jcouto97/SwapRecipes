@@ -16,11 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 public class RecipeService implements RecipeServiceI {
 
-    private final RecipeConverterI recipeConverter;
+    private final RecipeConverterI recipeConverterI;
     private final RecipeJPARepository recipeRepository;
     @Override
     public List<RecipeDto> getRecipes() {
-        return this.recipeConverter.entityListToDtoList(this.recipeRepository.findAll());
+        return this.recipeConverterI.entityListToDtoList(this.recipeRepository.findAll());
     }
 
     @Override
@@ -30,8 +30,8 @@ public class RecipeService implements RecipeServiceI {
 
     @Override
     public RecipeDto addRecipe(RecipeDto recipeDto) {
-        Recipe saved = this.recipeRepository.save(this.recipeConverter.dtoToEntity(recipeDto));
-        return this.recipeConverter.entityToDto(saved);
+        Recipe saved = this.recipeRepository.save(this.recipeConverterI.dtoToEntity(recipeDto));
+        return this.recipeConverterI.entityToDto(saved);
     }
 
     @Override
