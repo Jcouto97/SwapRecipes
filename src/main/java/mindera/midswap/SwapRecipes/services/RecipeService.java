@@ -3,7 +3,6 @@ package mindera.midswap.SwapRecipes.services;
 
 
 import lombok.AllArgsConstructor;
-import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
 import mindera.midswap.SwapRecipes.exceptions.UserAlreadyExistsException;

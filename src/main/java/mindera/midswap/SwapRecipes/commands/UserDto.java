@@ -5,12 +5,14 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.validation.constraints.*;
+import java.util.List;
 
 
 @ToString
 @Builder
 @Getter
 @Setter
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
@@ -39,6 +41,6 @@ public class UserDto {
     private String password;
 
 
-    private Long favouriteRecipeId;
+    private List<Long> favouriteRecipeId;
 
 }

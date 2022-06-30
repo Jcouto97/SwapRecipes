@@ -12,5 +12,5 @@ public interface UserServiceI {
     UserDto addUser(UserDto userDto);
     UserDto updateUser(Long id, UserUpdateDto userUpdateDto);
 
-    UserDto saveFavouriteRecipe(Long userId, Long recipeId);
+    UserUpdateDto saveFavouriteRecipe(Long userId, Long recipeId);
 }
