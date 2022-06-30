@@ -95,21 +95,6 @@ public class UserServiceImpI implements UserServiceI {
         return this.userConverterI.entityToDto(user);
     }
 
-
- /*   @Override
-    public UserUpdateDto saveFavouriteRecipe(Long userId, Long recipeId) {
-        UserDto userDto = findById(userId);
-        User user = userConverterI.dtoToEntity(userDto);
-
-        RecipeDto recipeDto = this.recipeServiceI.getRecipeById(recipeId);
-        Recipe recipe = recipeConverterI.dtoToEntity(recipeDto);
-
-      /* if (this.recipeJPARepository.findById(recipeId).isPresent()) {
-          User userToSave = user.addFavouriteRecipeId(recipe);
-        }
-        User userSaved = this.userJPARepository.save(user.addFavouriteRecipeId(recipe));
-        return userConverterI.entityToUpdateDto(userSaved);
-        }*/
     }
 
 
