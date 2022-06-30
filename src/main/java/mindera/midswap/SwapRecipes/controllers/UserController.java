@@ -1,6 +1,7 @@
 package mindera.midswap.SwapRecipes.controllers;
 
 import mindera.midswap.SwapRecipes.commands.UserDto;
+import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
 import mindera.midswap.SwapRecipes.services.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,5 +38,10 @@ public class UserController {
     @PostMapping
     public UserDto addUser(@Valid @RequestBody UserDto userDto) {
         return this.userServiceI.addUser(userDto);
+    }
+
+    @PutMapping("{id}")
+    public UserDto updateUser(@PathVariable("id") Long id, @Valid @RequestBody UserUpdateDto userUpdateDto){
+        return this.userServiceI.updateUser(id, userUpdateDto);
     }
 }

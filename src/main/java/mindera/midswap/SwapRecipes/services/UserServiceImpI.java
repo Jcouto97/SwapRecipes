@@ -1,6 +1,7 @@
 package mindera.midswap.SwapRecipes.services;
 import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.UserDto;
+import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
 import mindera.midswap.SwapRecipes.converters.UserConverterI;
 import mindera.midswap.SwapRecipes.exceptions.UserAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.UserNotFoundException;
@@ -44,7 +45,9 @@ public class UserServiceImpI implements UserServiceI {
 
     @Override
     public UserDto addUser(UserDto userDto) {
-        this.userJPARepository.findById(userDto.getId()) //tenho que usar uma prop unique, e não o id
+        //@JsonProperty(access = JsonProperty.Access.READ_ONLY) //não deixa repetir o id, mesmo que no postman usemos um id repetido
+        //procurar sempre por uma propriedade única SEM SER O ID que é gerado automaticamente
+        this.userJPARepository.findByCitizenNumber(userDto.getCitizenNumber()) //tenho que usar uma prop unique, e não o id
                 .ifPresent( (user) -> {
                     throw new UserAlreadyExistsException();
                 });
@@ -59,5 +62,21 @@ public class UserServiceImpI implements UserServiceI {
         UserDto savedUserDto = this.userConverterI.entityToDto(savedUser);
         return savedUserDto;
         }
+
+    @Override
+    public UserDto updateUser(Long id, UserUpdateDto userUpdateDto) {
+        // procuro o ID do "userUpdateDto" e guardo numa variável do tipo "User"
+        User oldUser = this.userJPARepository.findById(id)
+                .orElseThrow( () -> new UserNotFoundException());
+
+        // "fromUserUpdateDtoToUser" passa tudo o que está no userUpdateDto para o oldUser
+        User newUser = this.userConverterI.updateDtoToEntity(userUpdateDto, oldUser);
+
+        // guardo na DB esse novo user
+        User savedUser = this.userJPARepository.save(newUser);
+
+        // converto para UserDto
+        return this.userConverterI.entityToDto(savedUser);
+    }
 
 }

@@ -15,6 +15,7 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 public class UserDto {
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY) //não deixa repetir o id, mesmo que no postman usemos um id repetido
     private Long id;
 
     @NotEmpty
