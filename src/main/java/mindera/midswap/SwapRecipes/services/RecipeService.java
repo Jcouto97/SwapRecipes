@@ -51,7 +51,7 @@ public class RecipeService implements RecipeServiceI {
                             ingredient = this.ingredientJPARepository.findById(ingredient.getId())
                                     .orElseThrow();
                         }
-                        ingredient.addRecipe(this.recipeConverter.dtoToEntity(recipeDto));
+                        ingredient.addRecipe(this.recipeConverterI.dtoToEntity(recipeDto));
                         return ingredient;
 
                     })
