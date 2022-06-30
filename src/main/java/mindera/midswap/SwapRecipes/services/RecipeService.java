@@ -10,7 +10,6 @@ import mindera.midswap.SwapRecipes.exceptions.UserAlreadyExistsException;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
-import mindera.midswap.SwapRecipes.persistence.models.User;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
 import org.springframework.stereotype.Service;
