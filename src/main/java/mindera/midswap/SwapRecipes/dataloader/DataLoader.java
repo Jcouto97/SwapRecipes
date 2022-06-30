@@ -1,6 +1,9 @@
 package mindera.midswap.SwapRecipes.dataloader;
 
+import lombok.AllArgsConstructor;
+import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
+import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.persistence.models.User;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
@@ -14,19 +17,13 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class DataLoader implements ApplicationRunner {
 
     private UserJPARepository userJPARepository;
     private IngredientJPARepository ingredientJPARepository;
-    private RecipeJPARepository repository;
+    private RecipeJPARepository recipeRepository;
 
-    public DataLoader(UserJPARepository userJPARepository,
-                      IngredientJPARepository ingredientJPARepository,
-                      RecipeJPARepository repository) {
-        this.userJPARepository = userJPARepository;
-        this.ingredientJPARepository = ingredientJPARepository;
-        this.repository = repository;
-    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -68,10 +65,24 @@ public class DataLoader implements ApplicationRunner {
         //lista Ingredients
         List<Ingredient> ingredientList = new ArrayList<>(Arrays.asList(
                 Ingredient.builder().name("Banana").build(),
-                Ingredient.builder().name("Ovo").build(),
-                Ingredient.builder().name("Cenoura").build(),
-                Ingredient.builder().name("Pimento").build()
+                Ingredient.builder().name("Egg").build(),
+                Ingredient.builder().name("Carrot").build(),
+                Ingredient.builder().name("Pepper").build(),
+                Ingredient.builder().name("Milk").build(),
+                Ingredient.builder().name("Chocolate").build(),
+                Ingredient.builder().name("Sugar").build(),
+                Ingredient.builder().name("Water").build()
         ));
         this.ingredientJPARepository.saveAll(ingredientList);
+
+        List<Recipe> recipeList = new ArrayList<>(Arrays.asList(
+                Recipe.builder().name("Pizza")
+                        .build(),
+                Recipe.builder().name("Tea")
+                        .build(),
+                Recipe.builder().name("Cappuccino")
+                        .build()
+        ));
+        this.recipeRepository.saveAll(recipeList);
     }
 }
