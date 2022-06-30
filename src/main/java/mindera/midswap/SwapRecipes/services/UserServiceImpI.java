@@ -1,8 +1,10 @@
 package mindera.midswap.SwapRecipes.services;
 
 import lombok.AllArgsConstructor;
+import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
+import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
 import mindera.midswap.SwapRecipes.converters.UserConverterI;
 import mindera.midswap.SwapRecipes.exceptions.UserAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.UserNotFoundException;
@@ -23,9 +25,6 @@ public class UserServiceImpI implements UserServiceI {
 
     private UserJPARepository userJPARepository;
     private UserConverterI userConverterI;
-    private RecipeServiceI recipeServiceI;
-
-    private RecipeJPARepository recipeJPARepository;
     //private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -89,15 +88,28 @@ public class UserServiceImpI implements UserServiceI {
     }
 
     @Override
+    public UserDto saveFavouriteRecipe(Long userId, Recipe recipe) {
+        User user = this.userJPARepository.findById(userId).orElseThrow();
+        user.addFavouriteRecipeId(recipe);
+        this.userJPARepository.save(user);
+        return this.userConverterI.entityToDto(user);
+    }
+
+
+ /*   @Override
     public UserUpdateDto saveFavouriteRecipe(Long userId, Long recipeId) {
         UserDto userDto = findById(userId);
         User user = userConverterI.dtoToEntity(userDto);
-        Recipe recipe = this.recipeServiceI.getRecipeById(recipeId);
 
-        if (this.recipeJPARepository.findById(recipeId).isPresent()) {
-            user.addFavouriteRecipeId(recipe);
+        RecipeDto recipeDto = this.recipeServiceI.getRecipeById(recipeId);
+        Recipe recipe = recipeConverterI.dtoToEntity(recipeDto);
+
+      /* if (this.recipeJPARepository.findById(recipeId).isPresent()) {
+          User userToSave = user.addFavouriteRecipeId(recipe);
         }
-        return userConverterI.entityToUpdateDto(this.userJPARepository.save(user));
+        User userSaved = this.userJPARepository.save(user.addFavouriteRecipeId(recipe));
+        return userConverterI.entityToUpdateDto(userSaved);
+        }*/
     }
 
-}
+

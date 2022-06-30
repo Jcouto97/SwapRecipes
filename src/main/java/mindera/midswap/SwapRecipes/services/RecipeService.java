@@ -3,19 +3,16 @@ package mindera.midswap.SwapRecipes.services;
 
 
 import lombok.AllArgsConstructor;
+import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
+import mindera.midswap.SwapRecipes.converters.UserConverterI;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
-import mindera.midswap.SwapRecipes.exceptions.UserAlreadyExistsException;
-import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
-import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -23,8 +20,8 @@ public class RecipeService implements RecipeServiceI {
 
     private final RecipeConverterI recipeConverterI;
     private final RecipeJPARepository recipeRepository;
+    private final UserServiceI userServiceI;
 
-    private final IngredientJPARepository ingredientJPARepository;
 
     @Override
     public List<RecipeDto> getRecipes() {
@@ -32,39 +29,25 @@ public class RecipeService implements RecipeServiceI {
     }
 
     @Override
-    public Recipe getRecipeById(Long id) {
-        return this.recipeRepository.findById(id).orElseThrow(RecipeNotFoundException::new);
+    public RecipeDto getRecipeById(Long id) {
+        Recipe recipe = this.recipeRepository.findById(id).orElseThrow(RecipeNotFoundException::new);
+        return this.recipeConverterI.entityToDto(recipe);
     }
 
     @Override
     public RecipeDto addRecipe(RecipeDto recipeDto) {
-  Recipe newRecipe = new Recipe();
-        newRecipe.setId(recipeDto.getId());
-        newRecipe.setDescription(recipeDto.getDescription());
-        newRecipe.setName(recipeDto.getName());
-        Set<Ingredient> ingredientSet = recipeDto.getIngredients();
-        if(ingredientSet != null) {
-            newRecipe.setIngredientsIds(recipeDto.getIngredients()
-                    .stream()
-                    .map(ing -> {
-                        Ingredient ingredient = ing;
-                        if (this.ingredientJPARepository.findById(ingredient.getId()).isPresent()) {
-                            ingredient = this.ingredientJPARepository.findById(ingredient.getId())
-                                    .orElseThrow();
-                        }
-                     ingredient.addRecipe(this.recipeConverterI.dtoToEntity(recipeDto));
-                        return ingredient;
+        Recipe recipe = recipeConverterI.dtoToEntity(recipeDto);
 
-                    })
-                    .collect(Collectors.toList()));
-        }
-        return this.recipeConverterI.entityToDto(this.recipeRepository.save(newRecipe));
+      recipe.addIngredients(recipeDto.getIngredients());
 
-                }
+        return this.recipeConverterI.entityToDto(this.recipeRepository.save(recipe));
+
+    }
 
     @Override
     public void removeRecipe(Long id) {
-        this.recipeRepository.delete(getRecipeById(id));
+        RecipeDto recipeToRemove = getRecipeById(id);
+        this.recipeRepository.delete(this.recipeConverterI.dtoToEntity(recipeToRemove));
     }
 
 
@@ -72,4 +55,10 @@ public class RecipeService implements RecipeServiceI {
     public List<Recipe> getRecipesByIngredient(String ingredient) {
        return this.recipeRepository.findByIngredient(ingredient);
    }
+
+    @Override
+    public UserDto saveFavouriteRecipe(Long userId, Long recipeId) {
+        Recipe recipe = recipeConverterI.dtoToEntity(getRecipeById(recipeId));
+        return this.userServiceI.saveFavouriteRecipe(userId, recipe);
+    }
 }

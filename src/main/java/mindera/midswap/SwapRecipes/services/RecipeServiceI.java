@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.services;
 
 
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
+import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface RecipeServiceI {
 
     List<RecipeDto> getRecipes();
 
-    Recipe getRecipeById(Long id);
+    RecipeDto getRecipeById(Long id);
 
     RecipeDto addRecipe(RecipeDto recipeDto);
 
@@ -20,4 +21,5 @@ public interface RecipeServiceI {
 List<Recipe> getRecipesByIngredient(String ingredient);
 
 
+    UserDto saveFavouriteRecipe(Long userId, Long recipeId);
 }
