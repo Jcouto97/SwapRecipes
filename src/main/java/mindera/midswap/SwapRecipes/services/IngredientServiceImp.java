@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.IngredientDto;
 import mindera.midswap.SwapRecipes.converters.IngredientConverterImp;
 import mindera.midswap.SwapRecipes.converters.IngrendientConverterI;
+import mindera.midswap.SwapRecipes.exceptions.IngredientAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.IngredientNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
@@ -36,7 +37,14 @@ public class IngredientServiceImp implements IngredientServiceI{
     public IngredientDto addIngredient(Ingredient ingredient) {
         //exceçao se ja existir
 
+//        if(this.ingredientJPARepository.findById(ingredient.getId()).isPresent()) {
+//            throw new IngredientAlreadyExistsException();
+//        }
+//        COMO SE APANHA RECURSO QUE JA EXISTE? (n atira exceçao como no mysql)
+
         Ingredient ingredientSaved = this.ingredientJPARepository.save(ingredient);
+
+
 
         return this.ingredientConverter.entityToDto(ingredientSaved);
     }

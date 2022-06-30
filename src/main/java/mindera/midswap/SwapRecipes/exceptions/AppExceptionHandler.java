@@ -60,7 +60,22 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
     }
 
+    @ExceptionHandler({IngredientNotFoundException.class})
+    public ResponseEntity<Object> IngredientNotFoundException(IngredientNotFoundException exception,
+                                                             HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
+    }
 
+    @ExceptionHandler({IngredientAlreadyExistsException.class})
+    public ResponseEntity<Object> IngredientAlreadyExistsException(IngredientAlreadyExistsException exception,
+                                                              HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
+    }
+
+
+    // IngredientAlreadyExistsException.class
 //    @ExceptionHandler(RentNotFoundException.class)
 //    public ResponseEntity<Object> rentNotFoundExceptionHandler(RentNotFoundException exception, HttpServletRequest request) {
 //        return ResponseEntity.status(HttpStatus.NOT_FOUND)
