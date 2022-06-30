@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 
 @Getter
@@ -20,5 +21,5 @@ public class IngredientDto {
     @Size(max = 20)
     private String name;
 
-   private Long recipeId;
+   private Set<Long> recipeId;
 }

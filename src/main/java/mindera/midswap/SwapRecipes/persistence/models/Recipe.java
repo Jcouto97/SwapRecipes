@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,17 +33,17 @@ public class Recipe {
     @ManyToMany(mappedBy = "favouriteRecipesIds",
             fetch = FetchType.EAGER,
             cascade = CascadeType.DETACH)
-    private Set<User> usersThatLiked = new HashSet<User>();;
+    private List<User> usersThatLiked = new ArrayList<User>();;
 
 
 
- // @JsonIgnore
+  @JsonIgnore
   @Column(nullable = false, unique = false, updatable = true)
    @ManyToMany(cascade = CascadeType.DETACH)
    @JoinTable(name = "usedIngredients",
           joinColumns = @JoinColumn(name = "recipe_id"),
            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-   private Set<Ingredient> ingredientsIds = new HashSet<>();
+   private List<Ingredient> ingredientsIds = new ArrayList<>();
 
   private String description;
 
@@ -64,19 +65,19 @@ public class Recipe {
         this.name = name;
     }
 
-    public Set<User> getUsersThatLiked() {
+    public List<User> getUsersThatLiked() {
         return usersThatLiked;
     }
 
-    public void setUsersThatLiked(Set<User> usersThatLiked) {
+    public void setUsersThatLiked(List<User> usersThatLiked) {
         this.usersThatLiked = usersThatLiked;
     }
 
-    public Set<Ingredient> getIngredientsIds() {
+    public List<Ingredient> getIngredientsIds() {
         return ingredientsIds;
     }
 
-    public void setIngredientsIds(Set<Ingredient> ingredientsIds) {
+    public void setIngredientsIds(List<Ingredient> ingredientsIds) {
         this.ingredientsIds = ingredientsIds;
     }
 
