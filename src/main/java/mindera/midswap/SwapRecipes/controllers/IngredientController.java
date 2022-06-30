@@ -37,4 +37,5 @@ public class IngredientController {
     public IngredientDto deleteIngredient(@PathVariable("id") Long id){
         return this.ingredientServiceI.deleteIngredient(id);
     }
+
 }
