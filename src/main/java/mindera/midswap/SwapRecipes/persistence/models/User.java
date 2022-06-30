@@ -45,4 +45,7 @@ public class User {
     private Set<Recipe> favouriteRecipesIds;
 
 
+    public void setFavouriteRecipeId(Recipe recipeId) {
+        this.favouriteRecipesIds.add(recipeId);
+    }
 }

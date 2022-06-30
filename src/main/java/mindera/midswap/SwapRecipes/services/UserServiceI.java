@@ -11,4 +11,6 @@ public interface UserServiceI {
     List<UserDto> getAllUsers();
     UserDto addUser(UserDto userDto);
     UserDto updateUser(Long id, UserUpdateDto userUpdateDto);
+
+    UserDto saveFavouriteRecipe(Long userId, Long recipeId);
 }
