@@ -16,4 +16,5 @@ public interface UserServiceI {
 
     UserDto saveFavouriteRecipe(Long userId, Recipe recipe);
 
+    void deleteUserById(Long id);
 }

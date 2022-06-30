@@ -1,16 +1,13 @@
 package mindera.midswap.SwapRecipes.services;
 
 import lombok.AllArgsConstructor;
-import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
-import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
 import mindera.midswap.SwapRecipes.converters.UserConverterI;
 import mindera.midswap.SwapRecipes.exceptions.UserAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.UserNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.persistence.models.User;
-import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.UserJPARepository;
 import org.springframework.stereotype.Service;
 
@@ -93,7 +90,7 @@ public class UserServiceImpI implements UserServiceI {
         return this.userConverterI.entityToDto(user);
     }
 
-    }
+
 
 
     @Override
