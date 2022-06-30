@@ -3,6 +3,7 @@ package mindera.midswap.SwapRecipes.services;
 
 
 import lombok.AllArgsConstructor;
+import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
 import mindera.midswap.SwapRecipes.exceptions.UserAlreadyExistsException;
@@ -31,6 +32,7 @@ public class RecipeService implements RecipeServiceI {
         return this.recipeConverterI.entityListToDtoList(this.recipeRepository.findAll());
     }
 
+
     @Override
     public Recipe getRecipeById(Long id) {
         return this.recipeRepository.findById(id).orElseThrow(RecipeNotFoundException::new);
@@ -38,7 +40,7 @@ public class RecipeService implements RecipeServiceI {
 
     @Override
     public RecipeDto addRecipe(RecipeDto recipeDto) {
-  Recipe newRecipe = new Recipe();
+    Recipe newRecipe = new Recipe();
         newRecipe.setId(recipeDto.getId());
         newRecipe.setDescription(recipeDto.getDescription());
         newRecipe.setName(recipeDto.getName());
@@ -72,4 +74,6 @@ public class RecipeService implements RecipeServiceI {
     public List<Recipe> getRecipesByIngredient(String ingredient) {
        return this.recipeRepository.findByIngredient(ingredient);
    }
+
+
 }

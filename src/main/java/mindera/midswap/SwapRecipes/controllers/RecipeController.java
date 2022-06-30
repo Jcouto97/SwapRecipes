@@ -59,7 +59,7 @@ public class RecipeController {
 
     @GetMapping("/{userId}/{recipeId}")
     public UserUpdateDto addRecipeToFavourites(@PathVariable("userId") Long userId, @PathVariable("recipeId") Long recipeId) {
-        return this.userServiceI.saveFavouriteRecipe(userId, recipeId);
+        return null;// this.userServiceI.saveFavouriteRecipe(userId, recipeId);
     }
 
 }

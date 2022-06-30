@@ -1,6 +1,7 @@
 package mindera.midswap.SwapRecipes.services;
 
 import lombok.AllArgsConstructor;
+import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
 import mindera.midswap.SwapRecipes.converters.UserConverterI;
@@ -24,7 +25,6 @@ public class UserServiceImpI implements UserServiceI {
     private UserJPARepository userJPARepository;
     private UserConverterI userConverterI;
     private RecipeServiceI recipeServiceI;
-
     private RecipeJPARepository recipeJPARepository;
     //private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -81,6 +81,11 @@ public class UserServiceImpI implements UserServiceI {
         // "fromUserUpdateDtoToUser" passa tudo o que está no userUpdateDto para o oldUser
         User newUser = this.userConverterI.updateDtoToEntity(userUpdateDto, oldUser);
 
+        //dar as coisas da lista
+//        List<Long> userRecipeList = this.recipeJPARepository.findByIdLong(userUpdateDto.getFavouriteRecipeId());
+//        newUser.setFavouriteRecipesIds(userRecipeList);
+
+
         // guardo na DB esse novo user
         User savedUser = this.userJPARepository.save(newUser);
 
@@ -89,7 +94,22 @@ public class UserServiceImpI implements UserServiceI {
     }
 
     @Override
-    public UserUpdateDto saveFavouriteRecipe(Long userId, Long recipeId) {
+    public UserDto saveFavouriteRecipe(Long userId, UserUpdateDto newUpdateDto) {
+        UserDto userDto = findById(userId);
+        User user = userConverterI.dtoToEntity(userDto);
+        User newUser = userConverterI.updateDtoToEntity(newUpdateDto, user);
+
+
+        User savedUser = this.userJPARepository.save(newUser);
+        UserDto savedUserDto = this.userConverterI.entityToDto(savedUser);
+        return savedUserDto;
+
+    }
+
+
+/*
+    @Override
+    public UserDto saveFavouriteRecipe(Long userId, Long recipeId) {
         UserDto userDto = findById(userId);
         User user = userConverterI.dtoToEntity(userDto);
         Recipe recipe = this.recipeServiceI.getRecipeById(recipeId);
@@ -97,7 +117,12 @@ public class UserServiceImpI implements UserServiceI {
         if (this.recipeJPARepository.findById(recipeId).isPresent()) {
             user.addFavouriteRecipeId(recipe);
         }
-        return userConverterI.entityToUpdateDto(this.userJPARepository.save(user));
-    }
+
+        User savedUser = this.userJPARepository.save(user);
+        UserDto savedUserDto = this.userConverterI.entityToDto(savedUser);
+        return savedUserDto;
+*/
+
+
 
 }

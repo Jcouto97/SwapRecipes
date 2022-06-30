@@ -44,4 +44,9 @@ public class UserController {
     public UserDto updateUser(@PathVariable("id") Long id, @Valid @RequestBody UserUpdateDto userUpdateDto){
         return this.userServiceI.updateUser(id, userUpdateDto);
     }
+
+    @PutMapping("/addrecipe/{userId}")//                       id user que quer receita      userNovo, id receita
+    public UserDto saveFavouriteRecipe(@PathVariable("userId") Long userId, @RequestBody UserUpdateDto newUpdateDto){
+        return this.userServiceI.saveFavouriteRecipe(userId, newUpdateDto);
+    }
 }

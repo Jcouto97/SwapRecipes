@@ -1,7 +1,6 @@
 package mindera.midswap.SwapRecipes.persistence.repositories;
 
 
-import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,4 +16,9 @@ public interface RecipeJPARepository extends JpaRepository <Recipe, Long> {
    List<Recipe> findByIngredient(String ingredient);
 
    public Optional<Recipe> findById(Long id);
+
+   //elisa
+   @Query("FROM Recipe")
+   List<Long> findByIdLong(List<Long> recipeList);
+
 }
