@@ -38,9 +38,9 @@ public class IngredientServiceImp implements IngredientServiceI{
     public IngredientDto addIngredient(Ingredient ingredient) {
         //exceçao se ja existir
 
-//        if(this.ingredientJPARepository.findById(ingredient.getId()).isPresent()) {
-//            throw new IngredientAlreadyExistsException();
-//        }
+        if(this.ingredientJPARepository.findByName(ingredient.getName()).isPresent()) {
+            throw new IngredientAlreadyExistsException();
+        }
 //        COMO SE APANHA RECURSO QUE JA EXISTE? (n atira exceçao como no mysql)
 
         Ingredient ingredientSaved = this.ingredientJPARepository.save(ingredient);
