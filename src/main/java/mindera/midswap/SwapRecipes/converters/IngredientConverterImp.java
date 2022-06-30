@@ -11,7 +11,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Component
-public class IngredientConverter implements DtoConvertersI<Ingredient, IngredientDto>{
+public class IngredientConverterImp implements IngrendientConverterI{
 
     private ModelMapper MODEL_MAPPER;
 

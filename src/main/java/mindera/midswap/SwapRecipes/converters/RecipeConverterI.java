@@ -10,7 +10,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Component
-public class RecipeConverter implements DtoConvertersI <Recipe, RecipeDto> {
+public class RecipeConverterI implements ConverterI<Recipe, RecipeDto> {
 
     private final ModelMapper MODEL_MAPPER;
 

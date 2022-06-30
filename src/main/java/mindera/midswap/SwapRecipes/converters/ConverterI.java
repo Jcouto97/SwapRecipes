@@ -3,7 +3,7 @@ package mindera.midswap.SwapRecipes.converters;
 
 import java.util.List;
 
-public interface DtoConvertersI<Entity, Dto> {
+public interface ConverterI<Entity, Dto> {
 
     Dto entityToDto(Entity entity);
     Entity dtoToEntity(Dto dto);

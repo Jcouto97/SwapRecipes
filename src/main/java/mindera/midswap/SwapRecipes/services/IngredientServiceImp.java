@@ -3,11 +3,11 @@ package mindera.midswap.SwapRecipes.services;
 
 import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.IngredientDto;
-import mindera.midswap.SwapRecipes.converters.IngredientConverter;
+import mindera.midswap.SwapRecipes.converters.IngredientConverterImp;
+import mindera.midswap.SwapRecipes.converters.IngrendientConverterI;
 import mindera.midswap.SwapRecipes.exceptions.IngredientNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
 public class IngredientServiceImp implements IngredientServiceI{
 
     private IngredientJPARepository ingredientJPARepository;
-    private IngredientConverter ingredientConverter;
+    private IngrendientConverterI ingredientConverter;
 
     @Override
     public List<IngredientDto> getIngredientsList() {

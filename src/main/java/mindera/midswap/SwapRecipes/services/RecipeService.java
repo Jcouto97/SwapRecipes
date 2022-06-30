@@ -3,8 +3,7 @@ package mindera.midswap.SwapRecipes.services;
 
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import mindera.midswap.SwapRecipes.converters.RecipeConverter;
+import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
@@ -17,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class RecipeService implements RecipeServiceI {
 
-    private final RecipeConverter recipeConverter;
+    private final RecipeConverterI recipeConverter;
     private final RecipeJPARepository recipeRepository;
     @Override
     public List<RecipeDto> getRecipes() {

@@ -1,6 +1,5 @@
 package mindera.midswap.SwapRecipes.converters;
 
-import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
 import mindera.midswap.SwapRecipes.persistence.models.User;
@@ -14,11 +13,11 @@ import java.util.stream.Collectors;
 
 //@AllArgsConstructor
 @Component
-public class UserConverter implements DtoConvertersI<User, UserDto>, UpdateDtoConverterI<User, UserUpdateDto> {
+public class UserConverterI implements ConverterI<User, UserDto>, UpdateDtoConverterI<User, UserUpdateDto> {
 
     private final ModelMapper modelMapper;
 
-    public UserConverter(ModelMapper modelMapper) {
+    public UserConverterI(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
         this.modelMapper.getConfiguration().setSkipNullEnabled(true);
     }
