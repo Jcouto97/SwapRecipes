@@ -1,7 +1,10 @@
 package mindera.midswap.SwapRecipes.converters;
 
 import lombok.AllArgsConstructor;
+import mindera.midswap.SwapRecipes.commands.IngredientUpdateDto;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
+import mindera.midswap.SwapRecipes.commands.RecipeUpdateDto;
+import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -36,5 +39,12 @@ public class RecipeConverterImp implements RecipeConverterI {
         return recipeDtos.stream()
                 .map(recipeDto -> MODEL_MAPPER.map(recipeDto, Recipe.class))
                 .toList();
+    }
+
+    @Override
+    public Recipe updateDtoToEntity(RecipeUpdateDto recipeUpdateDto, Recipe recipe) {
+        this.MODEL_MAPPER.getConfiguration().setSkipNullEnabled(true);
+        MODEL_MAPPER.map(recipeUpdateDto, recipe);
+        return recipe;
     }
 }
