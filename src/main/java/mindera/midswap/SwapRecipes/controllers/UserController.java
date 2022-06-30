@@ -4,6 +4,7 @@ import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
 import mindera.midswap.SwapRecipes.services.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @Cacheable(value = "users", key = "#id")
     public UserDto getUserById(@PathVariable("id") Long id) {
+        System.out.println("getting userById from DB");
         return this.userServiceI.findById(id);
     }
 
@@ -41,7 +44,10 @@ public class UserController {
     }
 
     @PutMapping("{id}")
+    @Cacheable(value = "users", key = "#id")
     public UserDto updateUser(@PathVariable("id") Long id, @Valid @RequestBody UserUpdateDto userUpdateDto){
         return this.userServiceI.updateUser(id, userUpdateDto);
     }
+
+
 }
