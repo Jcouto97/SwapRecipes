@@ -48,8 +48,8 @@ public class User {
 
 
 
-    public void addFavouriteRecipeId(Recipe recipeId) {
-        this.favouriteRecipesIds.add(recipeId);
+    public void addFavouriteRecipeId(Recipe recipe) {
+        this.favouriteRecipesIds.add(recipe);
       //  return this;
     }
 }

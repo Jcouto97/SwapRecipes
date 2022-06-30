@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.commands;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 
 import javax.persistence.Column;
 import javax.validation.constraints.*;
@@ -41,6 +42,6 @@ public class UserDto {
     private String password;
 
 
-    private List<Long> favouriteRecipeId;
+    private List<Recipe> favouriteRecipes;
 
 }
