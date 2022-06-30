@@ -27,21 +27,6 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        //um User
-//        User user1 = User.builder()
-//                .name("Elisa")
-//                .idNumber(10001L)
-//                .username("elisamoutinho")
-//                .password("elisamoutinho")
-//                .build();
-//        this.userJPARepository.save(user1);
-
-        //um Ingredient
-//        Ingredient ingredient1 = Ingredient.builder()
-//                .name("banana")
-//                .build();
-//        this.ingredientJPARepository.save(ingredient1);
-
         //lista Users
         List<User> userList = new ArrayList<>(Arrays.asList(
                 User.builder().name("Elisa")
