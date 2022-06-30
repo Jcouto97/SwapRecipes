@@ -68,7 +68,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
     }
 
-    @ExceptionHandler({IngredientAlreadyExistsException.class})
+    @ExceptionHandler({IngredientAlreadyExistsException.class, IllegalArgumentException.class})
     public ResponseEntity<Object> IngredientAlreadyExistsException(IngredientAlreadyExistsException exception,
                                                               HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.CONFLICT)

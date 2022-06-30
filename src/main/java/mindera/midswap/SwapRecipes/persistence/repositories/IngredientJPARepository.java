@@ -11,4 +11,7 @@ import java.util.Optional;
 public interface IngredientJPARepository extends JpaRepository<Ingredient, Long> {
 
     public Optional<Ingredient> findById(Long id);
+
+    Optional<Object> findByName(String name);
+    //aseguir ao findBy -> é a propriedade que tenho no ingredient
 }
