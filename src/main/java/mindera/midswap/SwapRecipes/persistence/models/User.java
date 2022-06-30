@@ -29,7 +29,8 @@ public class User {
     @Column(nullable = false, unique = false, updatable = true)
     private String name;
 
-    @Column(nullable = false, unique = true, updatable = false)
+    //@Column(nullable = false, unique = true, updatable = false)
+    @Column(nullable = false, unique = false, updatable = true)
     private Long citizenNumber;
 
     @Column(nullable = false, unique = false, updatable = true)
@@ -44,12 +45,16 @@ public class User {
     @JoinTable(name = "favouriteRecipes",
             joinColumns = @JoinColumn(name = "userId"),
             inverseJoinColumns = @JoinColumn(name = "recipeId"))
-    private Set<Recipe> favouriteRecipesIds = new HashSet<>();
+    private List<Recipe> favouriteRecipesIds = new ArrayList<>();
 
 
 
     public void addFavouriteRecipeId(Recipe recipe) {
         this.favouriteRecipesIds.add(recipe);
       //  return this;
+    }
+
+    public void addFavouriteRecipeList(List<Recipe> recipeList){
+        this.favouriteRecipesIds.addAll(recipeList);
     }
 }

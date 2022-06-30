@@ -44,4 +44,6 @@ public class UserController {
     public UserDto updateUser(@PathVariable("id") Long id, @Valid @RequestBody UserUpdateDto userUpdateDto){
         return this.userServiceI.updateUser(id, userUpdateDto);
     }
+
+
 }

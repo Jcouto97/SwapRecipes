@@ -10,6 +10,7 @@ public interface UserConverterI extends ConverterI<User, UserDto>{
 
     User updateDtoToEntity(UserUpdateDto userUpdateDto, User user);
 
+    User updateDtoToEntity2(UserUpdateDto userUpdateDto);
 
 
 }

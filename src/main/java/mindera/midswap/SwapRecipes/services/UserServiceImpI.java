@@ -72,14 +72,44 @@ public class UserServiceImpI implements UserServiceI {
         return savedUserDto;
     }
 
-    @Override
-    public UserDto updateUser(Long id, UserUpdateDto userUpdateDto) {
-        // procuro o ID do "userUpdateDto" e guardo numa variável do tipo "User"
+    @Override //                não está a receber....!!!!
+    public UserDto updateUser(Long id, UserUpdateDto newUpdateDto) {
+        // tenho 1º q converter o UpdateDto to entity
+        User oldUser2 = this.userConverterI.updateDtoToEntity2(newUpdateDto);
+
         User oldUser = this.userJPARepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException());
 
+        // tenho 1º q converter o UpdateDto to entity
+        //newUpdateDto.getFavouriteRecipes();
         // "fromUserUpdateDtoToUser" passa tudo o que está no userUpdateDto para o oldUser
-        User newUser = this.userConverterI.updateDtoToEntity(userUpdateDto, oldUser);
+        User newUser = this.userConverterI.updateDtoToEntity(newUpdateDto, oldUser2);
+
+        List<Recipe> recipeList = newUser.getFavouriteRecipesIds();
+        newUser.addFavouriteRecipeList(recipeList);
+        newUser.setCitizenNumber(oldUser.getCitizenNumber());
+        newUser.setPassword(oldUser.getPassword());
+
+
+        //newUser.addFavouriteRecipeList(newUpdateDto.getFavouriteRecipes());
+        //lista vazia...
+//        List<Recipe> recipeList = newUpdateDto.getFavouriteRecipes();
+//        newUser.setFavouriteRecipesIds(recipeList);
+//
+////        for (Recipe recipe : recipeList) {
+////            if (this.recipeJPARepository.findById(recipe.getId()).isPresent()) {
+////                //newUser.addFavouriteRecipeId(recipe);
+////            }
+////        }
+//
+//        //newUser.getFavouriteRecipesIds().addAll(recipeList);
+//        newUser.setFavouriteRecipesIds(recipeList);
+
+
+        //Cannot invoke "java.util.Collection.size()" because "values" is null
+        //newUser.addFavouriteRecipeList(newUpdateDto.getFavouriteRecipes());
+
+
 
         // guardo na DB esse novo user
         User savedUser = this.userJPARepository.save(newUser);

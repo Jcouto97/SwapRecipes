@@ -60,5 +60,11 @@ public class UserConverterImp implements UserConverterI{
         return user; //a entity é que está a fazer o update
     }
 
+    @Override
+    public User updateDtoToEntity2(UserUpdateDto userUpdateDto) {
+        User user = this.modelMapper.map(userUpdateDto, User.class);
+        return user;
+    }
+
 
 }
