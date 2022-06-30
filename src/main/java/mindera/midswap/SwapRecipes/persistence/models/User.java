@@ -40,16 +40,63 @@ public class User {
 
     @JsonIgnore
     @Column(nullable = false, unique = false, updatable = true)
-    @ManyToMany(cascade = CascadeType.DETACH)
-    @JoinTable(name = "favouriteRecipes",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "recipeId"))
-    private Set<Recipe> favouriteRecipesIds = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinTable(name = "favouritesRecipes",
+            joinColumns = @JoinColumn(name = "user_Id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_Id"))
+    private List<Recipe> favouriteRecipesIds = new ArrayList<>();
 
 
-
-    public void addFavouriteRecipeId(Recipe recipe) {
+    public User addFavouriteRecipeId(Recipe recipe) {
         this.favouriteRecipesIds.add(recipe);
-      //  return this;
+        return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getCitizenNumber() {
+        return citizenNumber;
+    }
+
+    public void setCitizenNumber(Long citizenNumber) {
+        this.citizenNumber = citizenNumber;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Recipe> getFavouriteRecipesIds() {
+        return favouriteRecipesIds;
+    }
+
+    public void setFavouriteRecipesIds(List<Recipe> favouriteRecipesIds) {
+        this.favouriteRecipesIds = favouriteRecipesIds;
     }
 }

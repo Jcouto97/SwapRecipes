@@ -1,6 +1,7 @@
 package mindera.midswap.SwapRecipes.persistence.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.Generated;
 
@@ -30,16 +31,17 @@ public class Recipe {
     private String name;
 
     @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "favouriteRecipesIds",
             fetch = FetchType.EAGER,
             cascade = CascadeType.DETACH)
-    private List<User> usersThatLiked = new ArrayList<User>();;
+    private List<User> usersThatLiked = new ArrayList<>();;
 
 
 
   @JsonIgnore
   @Column(nullable = false, unique = false, updatable = true)
-   @ManyToMany(cascade = CascadeType.DETACH)
+   @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
    @JoinTable(name = "usedIngredients",
           joinColumns = @JoinColumn(name = "recipe_id"),
            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
@@ -47,7 +49,7 @@ public class Recipe {
 
   private String description;
 
-  //  private Long ingredientId;
+
 
     public Long getId() {
         return id;
@@ -65,31 +67,7 @@ public class Recipe {
         this.name = name;
     }
 
-    public List<User> getUsersThatLiked() {
-        return usersThatLiked;
-    }
-
-    public void setUsersThatLiked(List<User> usersThatLiked) {
-        this.usersThatLiked = usersThatLiked;
-    }
-
-    public List<Ingredient> getIngredientsIds() {
-        return ingredientsIds;
-    }
-
-    public void setIngredientsIds(List<Ingredient> ingredientsIds) {
-        this.ingredientsIds = ingredientsIds;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void addIngredients(List<Ingredient> ingredientsIds) {
+        this.ingredientsIds.addAll(ingredientsIds);
     }
 }
-// @JsonIgnore
-//    @ManyToMany(mappedBy = "recipe", fetch = FetchType.LAZY,
-//            cascade = CascadeType.DETACH)
-//private List<Ingredient> ingredientList;

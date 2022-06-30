@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.converters;
 
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
+import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.persistence.models.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,13 @@ public class UserConverterImp implements UserConverterI{
 
     @Override
     public UserUpdateDto entityToUpdateDto(User user) {
+        UserUpdateDto updateDto = this.modelMapper.map(user, UserUpdateDto.class);
+        return updateDto;
+    }
+
+    @Override
+    public UserUpdateDto entityToUpdateFavouritesDto(User user, Recipe recipe) {
+        user.addFavouriteRecipeId(recipe);
         UserUpdateDto updateDto = this.modelMapper.map(user, UserUpdateDto.class);
         return updateDto;
     }

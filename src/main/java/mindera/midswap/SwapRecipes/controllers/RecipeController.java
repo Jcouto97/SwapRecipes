@@ -25,9 +25,6 @@ import java.util.List;
 public class RecipeController {
 
     private final RecipeServiceI recipeService;
-    private final IngredientJPARepository ingredientJPARepository;
-    private final RecipeConverterI recipeConverter;
-   private final UserServiceI userServiceI;
 
     @GetMapping
     public List<RecipeDto> getRecipes() {
@@ -36,7 +33,7 @@ public class RecipeController {
 
 
     @GetMapping("/byId/{id}")
-    public Recipe getRecipeById(@PathVariable("id") Long id) {
+    public RecipeDto getRecipeById(@PathVariable("id") Long id) {
         return this.recipeService.getRecipeById(id);
     }
 
@@ -57,9 +54,10 @@ public class RecipeController {
 
     }
 
-    @GetMapping("/{userId}/{recipeId}")
-    public UserUpdateDto addRecipeToFavourites(@PathVariable("userId") Long userId, @PathVariable("recipeId") Long recipeId) {
-        return this.userServiceI.saveFavouriteRecipe(userId, recipeId);
+    @PutMapping("/{userId}/{recipeId}")
+    public UserDto addRecipeToFavourites(@PathVariable("userId") Long userId, @PathVariable("recipeId") Long recipeId) {
+        //return this.userServiceI.saveFavouriteRecipe(userId, recipeId);
+       return this.recipeService.saveFavouriteRecipe(userId, recipeId);
     }
 
 }
