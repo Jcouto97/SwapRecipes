@@ -18,14 +18,14 @@ public class DataLoader implements ApplicationRunner {
 
     private UserJPARepository userJPARepository;
     private IngredientJPARepository ingredientJPARepository;
-    private RecipeJPARepository repository;
+    private RecipeJPARepository recipeJPARepository;
 
     public DataLoader(UserJPARepository userJPARepository,
                       IngredientJPARepository ingredientJPARepository,
-                      RecipeJPARepository repository) {
+                      RecipeJPARepository recipeJPARepository) {
         this.userJPARepository = userJPARepository;
         this.ingredientJPARepository = ingredientJPARepository;
-        this.repository = repository;
+        this.recipeJPARepository = recipeJPARepository;
     }
 
     @Override
