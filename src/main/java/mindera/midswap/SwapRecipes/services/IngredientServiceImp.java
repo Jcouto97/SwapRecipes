@@ -3,6 +3,7 @@ package mindera.midswap.SwapRecipes.services;
 
 import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.IngredientDto;
+import mindera.midswap.SwapRecipes.commands.IngredientUpdateDto;
 import mindera.midswap.SwapRecipes.converters.IngredientConverterImp;
 import mindera.midswap.SwapRecipes.converters.IngrendientConverterI;
 import mindera.midswap.SwapRecipes.exceptions.IngredientAlreadyExistsException;
@@ -57,5 +58,15 @@ public class IngredientServiceImp implements IngredientServiceI{
         this.ingredientJPARepository.delete(ingredientToDelete);
 
         return this.ingredientConverter.entityToDto(ingredientToDelete);
+    }
+
+    @Override
+    public IngredientDto updateIngredient(Long id, IngredientUpdateDto ingredientUpdateDto) {
+        Ingredient originalIngredient = this.ingredientJPARepository.findById(id)
+                .orElseThrow(() -> new IngredientNotFoundException());
+        Ingredient updatedIngredient = this.ingredientConverter.updateDtoToEntity(ingredientUpdateDto, originalIngredient);
+        this.ingredientJPARepository.save(updatedIngredient);
+
+        return this.ingredientConverter.entityToDto(updatedIngredient);
     }
 }

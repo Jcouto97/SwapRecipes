@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.controllers;
 
 import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.IngredientDto;
+import mindera.midswap.SwapRecipes.commands.IngredientUpdateDto;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.services.IngredientServiceI;
 
@@ -36,6 +37,11 @@ public class IngredientController {
     @DeleteMapping(path = "/{id}")
     public IngredientDto deleteIngredient(@PathVariable("id") Long id){
         return this.ingredientServiceI.deleteIngredient(id);
+    }
+
+    @PutMapping(path = "/{id}")
+    public IngredientDto updateIngredient(@PathVariable("id") Long id, @RequestBody IngredientUpdateDto ingredientUpdateDto){
+        return this.ingredientServiceI.updateIngredient(id, ingredientUpdateDto);
     }
 
 }

@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.converters;
 
 import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.IngredientDto;
+import mindera.midswap.SwapRecipes.commands.IngredientUpdateDto;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -34,5 +35,12 @@ public class IngredientConverterImp implements IngrendientConverterI{
     @Override
     public List<Ingredient> DtoListToEntityList(List<IngredientDto> ingredientDtos) {
         return null;
+    }
+
+    @Override
+    public Ingredient updateDtoToEntity(IngredientUpdateDto ingredientUpdateDto, Ingredient ingredient) {
+        this.MODEL_MAPPER.getConfiguration().setSkipNullEnabled(true);
+        MODEL_MAPPER.map(ingredientUpdateDto, ingredient);
+        return ingredient;
     }
 }
