@@ -53,7 +53,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(buildError(exception, request, HttpStatus.NOT_FOUND.toString()));
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
+    @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<Object> UserAlreadyExistsException(UserNotFoundException exception,
                                                                HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.CONFLICT)

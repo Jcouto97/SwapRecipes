@@ -1,4 +1,5 @@
 package mindera.midswap.SwapRecipes.services;
+import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.UserConverter;
 import mindera.midswap.SwapRecipes.exceptions.UserAlreadyExistsException;
@@ -11,17 +12,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-//@AllArgsConstructor
+@AllArgsConstructor
 public class UserService implements IUserService {
 
     private IUserRepository iUserRepository;
     private UserConverter iUserConverter; //classe
 
-    @Autowired
-    public UserService(IUserRepository iUserRepository, UserConverter iUserConverter) {
-        this.iUserRepository = iUserRepository;
-        this.iUserConverter = iUserConverter;
-    }
 
     @Override
     public UserDto findById(Long id) {
