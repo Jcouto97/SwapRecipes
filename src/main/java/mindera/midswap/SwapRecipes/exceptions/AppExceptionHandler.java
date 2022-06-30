@@ -54,7 +54,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(buildError(exception, request, HttpStatus.NOT_FOUND.toString()));
     }
 
-    @ExceptionHandler(UserAlreadyExistsException.class)
+    @ExceptionHandler({UserAlreadyExistsException.class, CategoryAlreadyExistsException.class})
     public ResponseEntity<Object> userAlreadyExistsException(UserAlreadyExistsException exception,
                                                                HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -68,6 +68,14 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
     }
 
+    @ExceptionHandler({CategoryNotFoundException.class})
+    public ResponseEntity<Object> CategoryNotFoundException(CategoryNotFoundException exception,
+                                                              HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
+    }
+
+
     @ExceptionHandler({IngredientAlreadyExistsException.class, IllegalArgumentException.class})
     public ResponseEntity<Object> IngredientAlreadyExistsException(IngredientAlreadyExistsException exception,
                                                               HttpServletRequest request) {
@@ -75,6 +83,12 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
     }
 
+//    @ExceptionHandler({CategoryAlreadyExistsException.class})
+//    public ResponseEntity<Object> CategoryAlreadyExistsException(CategoryAlreadyExistsException exception,
+//                                                                   HttpServletRequest request) {
+//        return ResponseEntity.status(HttpStatus.CONFLICT)
+//                .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
+//    }
 
     // IngredientAlreadyExistsException.class
 //    @ExceptionHandler(RentNotFoundException.class)

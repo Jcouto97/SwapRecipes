@@ -25,6 +25,7 @@ public class Category {
     private String name;
 
 
+
 //    @JsonIgnore
 //    @ManyToMany(mappedBy = "recepiesIds",
 //            fetch = FetchType.EAGER,
