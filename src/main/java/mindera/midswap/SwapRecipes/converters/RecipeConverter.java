@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class RecipeConverter implements DtoConvertersI <Recipe, RecipeDto> {
 
-    public ModelMapper MODEL_MAPPER;
+    private final ModelMapper MODEL_MAPPER;
 
     @Override
     public RecipeDto entityToDto(Recipe recipe) {
@@ -33,6 +33,8 @@ public class RecipeConverter implements DtoConvertersI <Recipe, RecipeDto> {
 
     @Override
     public List<Recipe> DtoListToEntityList(List<RecipeDto> recipeDtos) {
-        return null;
+        return recipeDtos.stream()
+                .map(recipeDto -> MODEL_MAPPER.map(recipeDto, Recipe.class))
+                .toList();
     }
 }
