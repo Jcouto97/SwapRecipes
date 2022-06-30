@@ -1,13 +1,7 @@
 package mindera.midswap.SwapRecipes.services;
-
-
-import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.UserDto;
-import mindera.midswap.SwapRecipes.converters.DtoConvertersI;
 import mindera.midswap.SwapRecipes.converters.UserConverter;
 import mindera.midswap.SwapRecipes.exceptions.UserAlreadyExistsException;
-
-import mindera.midswap.SwapRecipes.converters.UserConverter;
 import mindera.midswap.SwapRecipes.exceptions.UserNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.User;
 import mindera.midswap.SwapRecipes.persistence.repositories.IUserRepository;
@@ -17,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+//@AllArgsConstructor
 public class UserService implements IUserService {
 
     private IUserRepository iUserRepository;
@@ -51,12 +45,13 @@ public class UserService implements IUserService {
                 .ifPresent( (user -> {
                     throw new UserAlreadyExistsException();
                 }));
+        return userDto;
         }
 
 //        User user = this.iUserConverter.dtoToEntity(userDto);
 //        this.iUserRepository.save(user);
 //        return userDto;
-    }
+
 
 
 }
