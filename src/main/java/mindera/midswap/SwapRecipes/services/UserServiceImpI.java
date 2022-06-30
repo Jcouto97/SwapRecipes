@@ -42,23 +42,23 @@ public class UserServiceImpI implements UserServiceI {
         return this.userConverterI.entityToDto(user);
     }
 
-    @Override
-    public UserDto addUser(UserDto userDto) {
-        this.userJPARepository.findById(userDto.getId()) //tenho que usar uma prop unique, e não o id
-                .ifPresent( (user) -> {
-                    throw new UserAlreadyExistsException();
-                });
-
-        User user = this.userConverterI.dtoToEntity(userDto);
-
-        //set password
-        //user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
-
-        User savedUser = this.userJPARepository.save(user);
-        //mandar o Dto do savedUser que gravei, para ir com Id no Postman
-        UserDto savedUserDto = this.userConverterI.entityToDto(savedUser);
-        return savedUserDto;
-        }
+//    @Override
+//    public UserDto addUser(UserDto userDto) {
+//        this.userJPARepository.findById(userDto.getId()) //tenho que usar uma prop unique, e não o id
+//                .ifPresent( (user) -> {
+//                    throw new UserAlreadyExistsException();
+//                });
+//
+//        User user = this.userConverterI.dtoToEntity(userDto);
+//
+//        //set password
+//        //user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+//
+//        User savedUser = this.userJPARepository.save(user);
+//        //mandar o Dto do savedUser que gravei, para ir com Id no Postman
+//        UserDto savedUserDto = this.userConverterI.entityToDto(savedUser);
+//        return savedUserDto;
+//        }
 
 
 
