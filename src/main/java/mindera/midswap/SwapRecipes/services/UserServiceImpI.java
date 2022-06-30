@@ -37,14 +37,14 @@ public class UserServiceImpI implements UserServiceI {
     }
 
     public UserDto getUserByIdNumber(Long idNumber){
-        User user = this.userJPARepository.findByIdNumber(idNumber)
+        User user = this.userJPARepository.findById(idNumber)
                 .orElseThrow( () -> new UserNotFoundException());
         return this.userConverterI.entityToDto(user);
     }
 
     @Override
     public UserDto addUser(UserDto userDto) {
-        this.userJPARepository.findByIdNumber(userDto.getCitizenNumber()) //tenho que usar uma prop unique, e não o id
+        this.userJPARepository.findById(userDto.getId()) //tenho que usar uma prop unique, e não o id
                 .ifPresent( (user) -> {
                     throw new UserAlreadyExistsException();
                 });
