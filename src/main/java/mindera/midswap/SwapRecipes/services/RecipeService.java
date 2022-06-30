@@ -13,6 +13,7 @@ import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,19 +41,22 @@ public class RecipeService implements RecipeServiceI {
         newRecipe.setId(recipeDto.getId());
         newRecipe.setDescription(recipeDto.getDescription());
         newRecipe.setName(recipeDto.getName());
-        newRecipe.setIngredientsIds(recipeDto.getIngredients()
-                .stream()
-                .map(ing -> {
-                            Ingredient ingredient = ing;
-                            if (this.ingredientJPARepository.findById(ingredient.getId()).isPresent()) {
-                                ingredient = this.ingredientJPARepository.findById(ingredient.getId())
-                                        .orElseThrow();
-                            }
-                    ingredient.addRecipe(this.recipeConverter.dtoToEntity(recipeDto));
-                            return ingredient;
+        Set<Ingredient> ingredientSet = recipeDto.getIngredients();
+        if(ingredientSet != null) {
+            newRecipe.setIngredientsIds(recipeDto.getIngredients()
+                    .stream()
+                    .map(ing -> {
+                        Ingredient ingredient = ing;
+                        if (this.ingredientJPARepository.findById(ingredient.getId()).isPresent()) {
+                            ingredient = this.ingredientJPARepository.findById(ingredient.getId())
+                                    .orElseThrow();
+                        }
+                        ingredient.addRecipe(this.recipeConverter.dtoToEntity(recipeDto));
+                        return ingredient;
 
-                        })
-                .collect(Collectors.toSet()));
+                    })
+                    .collect(Collectors.toSet()));
+        }
         return this.recipeConverter.entityToDto(this.recipeRepository.save(newRecipe));
                 }
 

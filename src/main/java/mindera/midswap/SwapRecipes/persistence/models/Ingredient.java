@@ -33,7 +33,7 @@ public class Ingredient {
   @ManyToMany(mappedBy = "ingredientsIds",
          fetch = FetchType.EAGER,
          cascade = CascadeType.DETACH)
-  private Set<Recipe> recipesSet = new HashSet<Recipe>();
+  private Set<Recipe> recipesSet = new HashSet<>();
 
     //PERSIST em vez de ALL, porque com PERSIST impede que a brand seja apagada se pelo menos um vehículo a esitver a usar
 

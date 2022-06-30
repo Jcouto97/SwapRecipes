@@ -42,7 +42,7 @@ public class Recipe {
    @JoinTable(name = "usedIngredients",
           joinColumns = @JoinColumn(name = "recipe_id"),
            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-   private Set<Ingredient> ingredientsIds = new HashSet<Ingredient>();
+   private Set<Ingredient> ingredientsIds = new HashSet<>();
 
   private String description;
 
