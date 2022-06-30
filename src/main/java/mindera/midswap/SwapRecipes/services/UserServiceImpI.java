@@ -26,7 +26,8 @@ public class UserServiceImpI implements UserServiceI {
     private RecipeServiceI recipeServiceI;
 
     private RecipeJPARepository recipeJPARepository;
-    //private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
 
     @Override
     public UserDto findById(Long id) {
