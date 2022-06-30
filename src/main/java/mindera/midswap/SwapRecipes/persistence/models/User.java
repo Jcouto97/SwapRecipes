@@ -1,6 +1,7 @@
 package mindera.midswap.SwapRecipes.persistence.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -35,6 +36,7 @@ public class User {
     @Column(nullable = false, unique = false, updatable = true)
     private String password;
 
+    @JsonIgnore
     @Column(nullable = false, unique = false, updatable = true)
     @ManyToMany(cascade = CascadeType.DETACH)
     @JoinTable(name = "favouriteRecipes",
