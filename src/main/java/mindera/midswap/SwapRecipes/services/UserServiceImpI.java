@@ -16,7 +16,7 @@ public class UserServiceImpI implements UserServiceI {
 
     private UserJPARepository userJPARepository;
     private UserConverterI userConverterI;
-
+    //private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public UserDto findById(Long id) {
@@ -29,23 +29,36 @@ public class UserServiceImpI implements UserServiceI {
     @Override
     public List<UserDto> getAllUsers() {
         List<User> userList = this.userJPARepository.findAll();
+        if(userList.isEmpty()) {
+            throw new UserNotFoundException();
+        }
         List<UserDto> dtoList = this.userConverterI.entityListToDtoList(userList);
         return dtoList;
     }
 
+    public UserDto getUserByIdNumber(Long idNumber){
+        User user = this.userJPARepository.findByIdNumber(idNumber)
+                .orElseThrow( () -> new UserNotFoundException());
+        return this.userConverterI.entityToDto(user);
+    }
+
     @Override
     public UserDto addUser(UserDto userDto) {
-//        User user = this.iUserConverter.dtoToEntity(userDto);
-        this.userJPARepository.findById(userDto.getId())
-                .ifPresent( (user -> {
+        this.userJPARepository.findByIdNumber(userDto.getIdNumber()) //tenho que usar uma prop unique, e não o id
+                .ifPresent( (user) -> {
                     throw new UserAlreadyExistsException();
-                }));
-        return userDto;
-        }
+                });
 
-//        User user = this.iUserConverter.dtoToEntity(userDto);
-//        this.iUserRepository.save(user);
-//        return userDto;
+        User user = this.userConverterI.dtoToEntity(userDto);
+
+        //set password
+        //user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+
+        User savedUser = this.userJPARepository.save(user);
+        //mandar o Dto do savedUser que gravei, para ir com Id no Postman
+        UserDto savedUserDto = this.userConverterI.entityToDto(savedUser);
+        return savedUserDto;
+        }
 
 
 

@@ -55,7 +55,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(UserAlreadyExistsException.class)
-    public ResponseEntity<Object> UserAlreadyExistsException(UserNotFoundException exception,
+    public ResponseEntity<Object> userAlreadyExistsException(UserAlreadyExistsException exception,
                                                                HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));

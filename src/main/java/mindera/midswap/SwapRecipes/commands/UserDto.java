@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.Column;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 
 @ToString
@@ -23,6 +21,11 @@ public class UserDto {
     @Size(min = 2, message = "Name should have at least 2 characters!")
     @Pattern(regexp="^[a-zA-Z]*$",message = "Name should only contain letters!")
     private String name;
+
+    @NotNull
+    @Min(value = 10000, message = "identifcationNumber should start with 1 and be 6 characters long!")
+    @Max(value = 99999, message = "identifcationNumber max number is 99,999!")
+    private Long idNumber;
 
     @NotEmpty
     @Size(min = 2, message = "Username should have ate least 2 characters!")

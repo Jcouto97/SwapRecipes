@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,6 +25,9 @@ public class User {
 
     @Column(nullable = false, unique = false, updatable = true)
     private String name;
+
+    @Column(nullable = false, unique = true, updatable = false)
+    private Long idNumber;
 
     @Column(nullable = false, unique = false, updatable = true)
     private String username;
