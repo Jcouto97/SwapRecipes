@@ -1,4 +1,4 @@
-package mindera.midswap.SwapRecipes.controllers;
+package mindera.midswap.SwapRecipes.externalApi;
 
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import org.springframework.http.ResponseEntity;
@@ -14,21 +14,22 @@ import java.util.Arrays;
 @RequestMapping("/api/v1")
 
 public class ExternalAPIController {
-    String uri = "http://www.omdbapi.com/";
-    String apikey = "PUT_HERE_YOUR_API_KEY";
+    String uri = "https://www.themealdb.com/api/json/v1/";
+    String apikey = "1";
+    String search = "search.php";
 
-
-    @GetMapping(path = "recipe/{name}")
+    //recriar : www.themealdb.com/api/json/v1/1/search.php?s=chicken
+    @GetMapping(path = "/desiredRecipe/{name}")
     public ResponseEntity<Recipe> getRecipe(@PathVariable String name) {
-        String finalUri = uri + "?t=" + name + "&apikey=" + apikey;
+        String finalUri = uri + apikey + search + "?s=" + name;
         System.out.println("finalUri = " + finalUri);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Recipe> result = restTemplate.getForEntity(finalUri, Recipe.class);
         return ResponseEntity.ok(result.getBody());
     }
 
-    @GetMapping(path = "recipe/{search}")
-    public ResponseEntity<FilmList> getFilms(@PathVariable String search) {
+    @GetMapping(path = "recipes/{search}")
+    public ResponseEntity<FilmList> getRecipes(@PathVariable String search) {
         String finalUri = uri + "?s=" + search + "&apikey=" + apikey;
         System.out.println("finalUri = " + finalUri);
         RestTemplate restTemplate = new RestTemplate();
@@ -65,4 +66,7 @@ public class ExternalAPIController {
         }
     }
 
+    /*
+
+     */
 }
