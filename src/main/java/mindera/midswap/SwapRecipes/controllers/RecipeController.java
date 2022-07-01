@@ -53,7 +53,7 @@ public class RecipeController {
 
     }
 
-    @PutMapping("/{userId}/{recipeId}")
+    @PutMapping("/{userId}/favourites/{recipeId}")
     public UserDto addRecipeToFavourites(@PathVariable("userId") Long userId, @PathVariable("recipeId") Long recipeId) {
         //return this.userServiceI.saveFavouriteRecipe(userId, recipeId);
        return this.recipeService.saveFavouriteRecipe(userId, recipeId);
