@@ -47,7 +47,7 @@ public class UserServiceTest {
     }
 
     @Nested
-    class getStudentByIdTest {
+    class getUserByIdTest {
 
         @Test
         void testGetUserByIdSuccess() { //mesmo comentando tudo relacionado com favouriteRecipes parte
@@ -63,7 +63,7 @@ public class UserServiceTest {
         }
 
         @Test
-        void testGetStudentByIdNotFound() {
+        void testGetUserByIdNotFound() {
             // arrange
             when(userJPARepository.findById(1L))
                     .thenReturn(Optional.empty());
@@ -75,4 +75,15 @@ public class UserServiceTest {
             assertThrows(UserNotFoundException.class, action);
         }
     }
+
+
+    /*
+    adicionar receita
+    procurar a receita (ela existe?)
+    adiciono 2 ingredientes a receita tem tamanho 2?
+    apago ingrediente que nao existe la, tem igual?
+    ver se ela existe depois de dar delete
+     */
+
+
 }
