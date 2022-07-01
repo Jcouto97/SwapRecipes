@@ -2,7 +2,9 @@ package mindera.midswap.SwapRecipes.config;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.persistence.models.User;
+import mindera.midswap.SwapRecipes.services.RecipeService;
 import mindera.midswap.SwapRecipes.services.UserServiceImpI;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
@@ -21,8 +23,10 @@ public class BeansInnit {
         return new ModelMapper();
     }
 
+    //quero que este Bean corra quando um User adiciona receitas
+
     @Bean
-    CommandLineRunner runner(UserServiceImpI userServiceImpI) { //chama mesmo a classe
+    CommandLineRunner runnerUser(UserServiceImpI userServiceImpI) { //chama mesmo a classe
         return args -> {
             //read json and write to db
             ObjectMapper mapper = new ObjectMapper();
@@ -35,6 +39,23 @@ public class BeansInnit {
                 System.out.println("Users saved!");
             } catch (IOException e) {
                 System.out.println("Unable to save users: " + e.getMessage());
+            }
+        };
+    }
+    @Bean
+    CommandLineRunner runnerRecipe(RecipeService recipeService) { //chama mesmo a classe
+        return args -> {
+            //read json and write to db
+            ObjectMapper mapper = new ObjectMapper();
+            TypeReference<List<Recipe>> typeReference = new TypeReference<List<Recipe>>() {
+            };
+            InputStream inputStream = TypeReference.class.getResourceAsStream("/json/recipes.json");
+            try {
+                List<Recipe> recipes = mapper.readValue(inputStream, typeReference);
+                recipeService.save(recipes);
+                System.out.println("Recipes saved!");
+            } catch (IOException e) {
+                System.out.println("Unable to save recupes: " + e.getMessage());
             }
         };
     }

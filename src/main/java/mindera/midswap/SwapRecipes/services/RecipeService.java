@@ -6,6 +6,7 @@ import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
 import mindera.midswap.SwapRecipes.exceptions.RecipeAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
+import mindera.midswap.SwapRecipes.exceptions.UserNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
@@ -87,4 +88,28 @@ public class RecipeService implements RecipeServiceI {
         Recipe recipe = recipeConverterI.dtoToEntity(getRecipeById(recipeId));
         return this.userServiceI.saveFavouriteRecipe(userId, recipe);
     }
+
+
+    //testing adding JSON file to DB
+    @Override
+    public Iterable<Recipe> list() {
+        List<Recipe> recipeList = this.recipeRepository.findAll();
+        if (recipeList.isEmpty()) {
+            throw new UserNotFoundException(USER_NOT_FOUND);
+        }
+        return recipeList;
+    }
+
+    @Override
+    public Recipe save(Recipe recipe){
+        return this.recipeRepository.save(recipe);
+    }
+
+    @Override
+    public Iterable<Recipe> save(List<Recipe> recipeList) {
+        return this.recipeRepository.saveAll(recipeList);
+    }
+
+
+
 }

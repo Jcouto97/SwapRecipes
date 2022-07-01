@@ -91,15 +91,15 @@ public class UserServiceImpI implements UserServiceI {
 
 
 
-    //testing
-    @Override
-    public Iterable<User> list() {
-        List<User> userList = this.userJPARepository.findAll();
-        if (userList.isEmpty()) {
-            throw new UserNotFoundException(USER_NOT_FOUND);
-        }
-       return userList;
-    }
+    //testing adding JSON file to DB
+//    @Override
+//    public Iterable<User> list() {
+//        List<User> userList = this.userJPARepository.findAll();
+//        if (userList.isEmpty()) {
+//            throw new UserNotFoundException(USER_NOT_FOUND);
+//        }
+//       return userList;
+//    }
 
     @Override
     public User save(User user){

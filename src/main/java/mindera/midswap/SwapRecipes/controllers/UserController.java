@@ -87,10 +87,10 @@ public class UserController {
         return this.userServiceI.addUser(userDto);
     }
 
-
-    @GetMapping("/list")
-    public Iterable<User> list() {
-        return this.userServiceI.list();
-    }
+//
+//    @GetMapping("/list")
+//    public Iterable<User> list() {
+//        return this.userServiceI.list();
+//    }
 
 }

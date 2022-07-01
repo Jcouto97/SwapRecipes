@@ -22,4 +22,11 @@ List<Recipe> getRecipesByIngredient(Long ingredientId);
 
 
     UserDto saveFavouriteRecipe(Long userId, Long recipeId);
+
+    //testing adding JSON file to DB
+    Iterable<Recipe> list();
+
+    Recipe save(Recipe recipe);
+
+    Iterable<Recipe> save(List<Recipe> recipeList);
 }

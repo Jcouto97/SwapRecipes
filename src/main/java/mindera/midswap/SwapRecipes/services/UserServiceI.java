@@ -18,7 +18,7 @@ public interface UserServiceI {
 
     void deleteUserById(Long id);
 
-    Iterable<User> list();
+    //Iterable<User> list();
 
     User save(User user);
 
