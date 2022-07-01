@@ -30,7 +30,7 @@ public class UserController {
     @Cacheable(value = "users", key = "#id")
     public UserDto getUserById(@PathVariable("id") Long id) {
         System.out.println("getting userById from DB");
-        return this.userServiceI.findById(id);
+        return this.userServiceI.getUserById(id);
     }
 
     @GetMapping

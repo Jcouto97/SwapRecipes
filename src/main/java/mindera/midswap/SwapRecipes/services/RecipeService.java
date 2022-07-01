@@ -1,11 +1,12 @@
 package mindera.midswap.SwapRecipes.services;
 
 
-
 import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
 import mindera.midswap.SwapRecipes.converters.UserConverterI;
+import mindera.midswap.SwapRecipes.exceptions.IngredientAlreadyExistsException;
+import mindera.midswap.SwapRecipes.exceptions.RecipeAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
@@ -13,6 +14,8 @@ import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static mindera.midswap.SwapRecipes.exceptions.exceptionMessages.ExceptionMessages.*;
 
 @Service
 @AllArgsConstructor
@@ -30,18 +33,18 @@ public class RecipeService implements RecipeServiceI {
 
     @Override
     public RecipeDto getRecipeById(Long id) {
-        Recipe recipe = this.recipeRepository.findById(id).orElseThrow(RecipeNotFoundException::new);
+        Recipe recipe = this.recipeRepository.findById(id).orElseThrow(() -> new RecipeNotFoundException(RECIPE_NOT_FOUND));
         return this.recipeConverterI.entityToDto(recipe);
     }
 
     @Override
     public RecipeDto addRecipe(RecipeDto recipeDto) {
+        if(this.recipeRepository.findByName(recipeDto.getName()).isPresent()) {
+            throw new RecipeAlreadyExistsException(RECIPE_ALREADY_EXISTS);
+        }
         Recipe recipe = recipeConverterI.dtoToEntity(recipeDto);
-
-      recipe.addIngredients(recipeDto.getIngredients());
-
+        recipe.addIngredients(recipeDto.getIngredients());
         return this.recipeConverterI.entityToDto(this.recipeRepository.save(recipe));
-
     }
 
     @Override
@@ -51,10 +54,10 @@ public class RecipeService implements RecipeServiceI {
     }
 
 
-   @Override
+    @Override
     public List<Recipe> getRecipesByIngredient(String ingredient) {
-       return this.recipeRepository.findByIngredient(ingredient);
-   }
+        return this.recipeRepository.findByIngredient(ingredient);
+    }
 
     @Override
     public UserDto saveFavouriteRecipe(Long userId, Long recipeId) {

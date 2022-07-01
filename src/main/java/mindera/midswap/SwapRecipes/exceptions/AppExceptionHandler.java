@@ -33,6 +33,13 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(value = {UserNotFoundException.class, CategoryNotFoundException.class,
+           IngredientNotFoundException.class, IngredientAlreadyExistsException.class,
+            RecipeAlreadyExistsException.class, RecipeNotFoundException.class, UserAlreadyExistsException.class})
+    protected ResponseEntity<Object> notFoundHandler(RuntimeException ex, WebRequest request) {
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
+
 //    @ExceptionHandler(AlreadyExistsException.class)
 //    public ResponseEntity<Object> carAlreadyExistsExceptionHandler(AlreadyExistsException exception, HttpServletRequest request){
 //        return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -47,7 +54,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 //                .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
 //    }
 
-    @ExceptionHandler(UserNotFoundException.class)
+ /*   @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Object> userNotFoundExceptionHandler(UserNotFoundException exception,
                                                                HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -81,7 +88,7 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
                                                               HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(buildError(exception, request, HttpStatus.CONFLICT.toString()));
-    }
+    } */
 
 //    @ExceptionHandler({CategoryAlreadyExistsException.class})
 //    public ResponseEntity<Object> CategoryAlreadyExistsException(CategoryAlreadyExistsException exception,
