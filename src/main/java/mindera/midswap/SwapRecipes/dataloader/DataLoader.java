@@ -2,9 +2,11 @@ package mindera.midswap.SwapRecipes.dataloader;
 
 import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
+import mindera.midswap.SwapRecipes.persistence.models.Category;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.persistence.models.User;
+import mindera.midswap.SwapRecipes.persistence.repositories.CategoryJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.UserJPARepository;
@@ -12,9 +14,8 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import javax.xml.catalog.CatalogException;
+import java.util.*;
 
 @Component
 @AllArgsConstructor
@@ -23,6 +24,8 @@ public class DataLoader implements ApplicationRunner {
     private UserJPARepository userJPARepository;
     private IngredientJPARepository ingredientJPARepository;
     private RecipeJPARepository recipeRepository;
+
+    private CategoryJPARepository categoryJPARepository;
 
 
     @Override
@@ -61,13 +64,59 @@ public class DataLoader implements ApplicationRunner {
         this.ingredientJPARepository.saveAll(ingredientList);
 
         List<Recipe> recipeList = new ArrayList<>(Arrays.asList(
-                Recipe.builder().name("Pizza")
+                Recipe.builder()
+                        .name("Pizza")
                         .build(),
-                Recipe.builder().name("Tea")
+                Recipe.builder()
+                        .name("Tea")
                         .build(),
-                Recipe.builder().name("Cappuccino")
+                Recipe.builder()
+                        .name("Cappuccino")
+                        .build(),
+                Recipe.builder()
+                        .name("Feijoada")
+                        .build(),
+                Recipe.builder()
+                        .name("Hamburger")
+                        .build(),
+                Recipe.builder()
+                        .name("Pizza")
+                        .build(),
+                Recipe.builder()
+                        .name("Piri-piri chicken")
+                        .build(),
+                Recipe.builder()
+                        .name("Hummus")
                         .build()
         ));
         this.recipeRepository.saveAll(recipeList);
+
+        List<Category> categoryList = new ArrayList<>(Arrays.asList(
+                Category.builder()
+                        .name("HotDrinks")
+                        .build(),
+                Category.builder()
+                        .name("Desserts")
+                        .build(),
+                Category.builder()
+                        .name("Breakfasts")
+                        .build(),
+                Category.builder()
+                        .name("MainDishes")
+                        .build(),
+                Category.builder()
+                        .name("Starters")
+                        .build(),
+               Category.builder()
+                        .name("Vegetarian")
+                        .build(),
+                Category.builder()
+                        .name("Vegan")
+                        .build(),
+                Category.builder()
+                        .name("GlutenFree")
+                        .build()
+        ));
+        this.categoryJPARepository.saveAll(categoryList);
     }
 }
