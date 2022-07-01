@@ -4,6 +4,7 @@ package mindera.midswap.SwapRecipes.services;
 import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
+import mindera.midswap.SwapRecipes.exceptions.RecipeAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
@@ -40,40 +41,11 @@ public class RecipeService implements RecipeServiceI {
         Recipe recipe = this.recipeRepository.findById(id).orElseThrow(() -> new RecipeNotFoundException(RECIPE_NOT_FOUND));
         return this.recipeConverterI.entityToDto(recipe);
     }
-
-   /* @Override
-    public RecipeDto addRecipe(RecipeDto recipeDto) {
-       if(this.recipeRepository.findByName(recipeDto.getName()).isPresent()) {
-            throw new RecipeAlreadyExistsException(RECIPE_ALREADY_EXISTS);
-        }
-        Recipe recipe = recipeConverterI.dtoToEntity(recipeDto);
-        recipe.addIngredients(recipeDto.getIngredient_id());
-        return this.recipeConverterI.entityToDto(this.recipeRepository.save(recipe));
-
-        Recipe newRecipe = new Recipe();
-        newRecipe.setId(recipeDto.getId());
-        newRecipe.setDescription(recipeDto.getDescription());
-        newRecipe.setName(recipeDto.getName());
-        List<Ingredient> ingredientSet = recipeDto.getIngredient_id();
-        if (ingredientSet != null) {
-            newRecipe.setIngredientsIds(recipeDto.getIngredient_id()
-                    .stream()
-                    .map(ing -> {
-                        Ingredient ingredient = ing;
-                        if (this.ingredientServiceI.isIngredientPresent(ingredient.getId())) {
-                            ingredient = this.ingredientServiceI.getIngredientById(ingredient.getId());
-                        }
-                        ingredient.addRecipe(this.recipeConverterI.dtoToEntity(recipeDto));
-                        return ingredient;
-
-                    })
-                    .collect(Collectors.toList()));
-
-        } return this.recipeConverterI.entityToDto(this.recipeRepository.save(newRecipe));
-    } */
-
     @Override
     public RecipeDto addRecipe(RecipeDto recipeDto) {
+        if(this.recipeRepository.findByName(recipeDto.getName()).isPresent()) {
+            throw new RecipeAlreadyExistsException(RECIPE_ALREADY_EXISTS);
+        }
         Recipe newRecipe = new Recipe();
         newRecipe.setId(recipeDto.getId());
         newRecipe.setDescription(recipeDto.getDescription());
