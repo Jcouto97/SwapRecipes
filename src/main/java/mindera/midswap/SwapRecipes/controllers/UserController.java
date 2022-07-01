@@ -35,6 +35,7 @@ public class UserController {
 
     @GetMapping
     public List<UserDto> getAllUsers() {
+        System.out.println("getting allUsers from DB");
         return this.userServiceI.getAllUsers();
     }
 
