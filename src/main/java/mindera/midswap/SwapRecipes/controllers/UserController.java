@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.controllers;
 
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
+import mindera.midswap.SwapRecipes.persistence.models.User;
 import mindera.midswap.SwapRecipes.services.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -86,5 +87,10 @@ public class UserController {
         return this.userServiceI.addUser(userDto);
     }
 
+
+    @GetMapping("/list")
+    public Iterable<User> list() {
+        return this.userServiceI.list();
+    }
 
 }

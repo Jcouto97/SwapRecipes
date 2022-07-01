@@ -1,8 +1,17 @@
 package mindera.midswap.SwapRecipes.config;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import mindera.midswap.SwapRecipes.persistence.models.User;
+import mindera.midswap.SwapRecipes.services.UserServiceImpI;
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
 
 @Configuration
@@ -12,44 +21,48 @@ public class BeansInnit {
         return new ModelMapper();
     }
 
+    @Bean
+    CommandLineRunner runner(UserServiceImpI userServiceImpI) { //chama mesmo a classe
+        return args -> {
+            //read json and write to db
+            ObjectMapper mapper = new ObjectMapper();
+            TypeReference<List<User>> typeReference = new TypeReference<List<User>>() {
+            };
+            InputStream inputStream = TypeReference.class.getResourceAsStream("/json/users.json");
+            try {
+                List<User> users = mapper.readValue(inputStream, typeReference);
+                userServiceImpI.save(users);
+                System.out.println("Users saved!");
+            } catch (IOException e) {
+                System.out.println("Unable to save users: " + e.getMessage());
+            }
+        };
+    }
 
+
+
+
+
+
+//for single user
 //    @Bean
-//    public RedisCacheConfiguration cacheConfiguration() {
-//        return RedisCacheConfiguration.defaultCacheConfig()
-//                .entryTtl(Duration.ofMinutes(60))
-//                .disableCachingNullValues()
-//                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
-//    }
+//    CommandLineRunner runner(UserServiceImpI userService) {
+//        return args -> {
+//            //read json and write to db
+//            ObjectMapper mapper = new ObjectMapper();
+//            TypeReference<User> typeReference = new TypeReference<User>(){};
+//            InputStream inputStream = TypeReference.class.getResourceAsStream("/json/users.json");
+//            try {
+//                User user = mapper.readValue(inputStream, typeReference);
+//                userService.saveSingleUser(user);
+//                System.out.println("User saved!");
+//            }
+//            catch (IOException e) {
+//                System.out.println("Unable to save user: " + e.getMessage());
+//            }
 //
-//    @Bean
-//    public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
-//        return (builder) -> builder
-//                .withCacheConfiguration("itemCache",
-//                        RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(10)))
-//                .withCacheConfiguration("customerCache",
-//                        RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(5)));
+//        };
 //    }
 
-//    @Bean
-//    JedisConnectionFactory jedisConnectionFactory() {
-//        return new JedisConnectionFactory();
-//    }
-
-//    @Bean
-//    JedisConnectionFactory jedisConnectionFactory() {
-//        JedisConnectionFactory jedisConFactory
-//                = new JedisConnectionFactory();
-//        jedisConFactory.setHostName("localhost");
-//        jedisConFactory.setPort(6379);
-//        return jedisConFactory;
-//    }
-//
-//
-//    @Bean
-//    public RedisTemplate<String, Object> redisTemplate() {
-//        RedisTemplate<String, Object> template = new RedisTemplate<>();
-//        template.setConnectionFactory(jedisConnectionFactory());
-//        return template;
-//    }
 
 }

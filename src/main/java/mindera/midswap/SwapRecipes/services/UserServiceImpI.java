@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
 import mindera.midswap.SwapRecipes.converters.UserConverterI;
-import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
 import mindera.midswap.SwapRecipes.exceptions.UserAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.UserNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
@@ -89,4 +88,31 @@ public class UserServiceImpI implements UserServiceI {
                 .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
         this.userJPARepository.delete(user);
     }
+
+
+
+    //testing
+    @Override
+    public Iterable<User> list() {
+        List<User> userList = this.userJPARepository.findAll();
+        if (userList.isEmpty()) {
+            throw new UserNotFoundException(USER_NOT_FOUND);
+        }
+       return userList;
+    }
+
+    @Override
+    public User save(User user){
+        return this.userJPARepository.save(user);
+    }
+
+    @Override
+    public Iterable<User> save(List<User> users) {
+        return this.userJPARepository.saveAll(users);
+    }
+
+
+
+
+
 }
