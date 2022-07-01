@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Builder
 @Getter
@@ -41,7 +43,7 @@ public class User {
     @JoinTable(name = "favouritesRecipes",
             joinColumns = @JoinColumn(name = "user_Id"),
             inverseJoinColumns = @JoinColumn(name = "recipe_Id"))
-    private List<Recipe> favouriteRecipesIds = new ArrayList<>();
+    private Set<Recipe> favouriteRecipesIds = new HashSet<>();
 
 
     public User addFavouriteRecipeId(Recipe recipe) {
@@ -89,11 +91,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Recipe> getFavouriteRecipesIds() {
+    public Set<Recipe> getFavouriteRecipesIds() {
         return favouriteRecipesIds;
     }
 
-    public void setFavouriteRecipesIds(List<Recipe> favouriteRecipesIds) {
+    public void setFavouriteRecipesIds(Set<Recipe> favouriteRecipesIds) {
         this.favouriteRecipesIds = favouriteRecipesIds;
     }
 }

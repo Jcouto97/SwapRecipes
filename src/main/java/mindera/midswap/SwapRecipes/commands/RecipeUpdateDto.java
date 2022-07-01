@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.commands;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import mindera.midswap.SwapRecipes.persistence.models.Category;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.User;
 
@@ -27,8 +28,10 @@ public class RecipeUpdateDto {
 
     private String description;
 
-    private List<Ingredient> ingredients;
+    private Set<Ingredient> ingredients;
 
-  //  private Set<User> usersThatLiked;
+    private Set<Category> category;  //tabem para ligar nos dtos
+
+    private Set<UserDto> usersThatLiked;
 
 }

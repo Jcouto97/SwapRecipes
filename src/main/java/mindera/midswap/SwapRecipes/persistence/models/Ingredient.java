@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.nio.file.LinkOption;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @ToString
-@EqualsAndHashCode
+//@EqualsAndHashCode
 @Entity
 @Table(name = "ingredients")
 public class Ingredient {

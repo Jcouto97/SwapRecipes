@@ -2,8 +2,11 @@ package mindera.midswap.SwapRecipes.services;
 
 
 import lombok.AllArgsConstructor;
+import mindera.midswap.SwapRecipes.commands.RecipeUpdateDto;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
+import mindera.midswap.SwapRecipes.converters.UserConverterI;
+import mindera.midswap.SwapRecipes.exceptions.CategoryNotFoundException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Category;
@@ -13,6 +16,7 @@ import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.persistence.repositories.CategoryJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
+import mindera.midswap.SwapRecipes.persistence.repositories.UserJPARepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +39,8 @@ public class RecipeService implements RecipeServiceI {
     private IngredientJPARepository ingredientJPARepository;
 
     private CategoryJPARepository categoryJPARepository;
+
+    private UserConverterI userConverterI;
 
 
     @Override
@@ -77,7 +83,7 @@ public class RecipeService implements RecipeServiceI {
                         return ingredient;
 
                     })
-                    .collect(Collectors.toList()));
+                    .collect(Collectors.toSet()));
         }
         return this.recipeConverterI.entityToDto(this.recipeRepository.save(newRecipe));
     }
@@ -108,5 +114,25 @@ public class RecipeService implements RecipeServiceI {
         recipe.addCategory(category);
         this.recipeRepository.save(recipe);
         return recipeConverterI.entityToDto(recipe);
+    }
+
+    @Override
+    public List<RecipeDto> getRecipesByCategory(String category) {
+        return this.recipeRepository.findByCategory(category);
+    }
+
+    @Override
+    public RecipeDto updateRecipe(Long recipeId, RecipeUpdateDto recipeUpdate) {
+        Recipe recipeToBeUpdated = this.recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new RecipeNotFoundException(RECIPE_NOT_FOUND));
+        Recipe updatedRecipe = this.recipeConverterI.updateDtoToEntity(recipeUpdate, recipeToBeUpdated);
+        updatedRecipe.setCategoryIds(recipeUpdate.getCategory());
+        updatedRecipe.setIngredientsIds(recipeUpdate.getIngredients());
+        updatedRecipe.setUsersThatLiked(recipeUpdate.getUsersThatLiked()
+                .stream()
+                .map(userDto -> this.userConverterI.dtoToEntity(userDto))
+                .collect(Collectors.toSet()));
+        this.recipeRepository.save(updatedRecipe);
+        return this.recipeConverterI.entityToDto(updatedRecipe);
     }
 }

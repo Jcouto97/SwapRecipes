@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.services;
 
 
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
+import mindera.midswap.SwapRecipes.commands.RecipeUpdateDto;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 
@@ -26,4 +27,8 @@ List<Recipe> getRecipesByIngredient(Long ingredientId);
     UserDto saveFavouriteRecipe(Long userId, Long recipeId);
 
     RecipeDto addCategoryToRecipe(Long categoryId, Long recipeId);
+
+    List<RecipeDto> getRecipesByCategory(String category);
+
+    RecipeDto updateRecipe(Long recipeId, RecipeUpdateDto recipeUpdate);
 }

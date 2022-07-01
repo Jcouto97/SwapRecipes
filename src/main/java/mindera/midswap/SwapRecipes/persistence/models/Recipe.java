@@ -3,6 +3,7 @@ package mindera.midswap.SwapRecipes.persistence.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import mindera.midswap.SwapRecipes.commands.UserDto;
 import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @ToString
-@EqualsAndHashCode
+//@EqualsAndHashCode
 @Entity
 @Table(name = "recipes")
 public class Recipe {
@@ -35,7 +36,7 @@ public class Recipe {
     @ManyToMany(mappedBy = "favouriteRecipesIds",
             fetch = FetchType.EAGER,
             cascade = CascadeType.DETACH)
-    private List<User> usersThatLiked = new ArrayList<>();;
+    private Set<User> usersThatLiked = new HashSet<>();;
 
 
     @JsonIgnore
@@ -44,7 +45,7 @@ public class Recipe {
     @JoinTable(name = "usedIngredients",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-    private List<Ingredient> ingredientsIds = new ArrayList<>();
+    private Set<Ingredient> ingredientsIds = new HashSet<>();
 
     @JsonIgnore
     @Column(nullable = false, unique = false, updatable = true)
@@ -52,15 +53,15 @@ public class Recipe {
     @JoinTable(name = "recipeCategory",                                 //nome da tabela que junta as duas
             joinColumns = @JoinColumn(name = "recipe_id"),              //nome das colunas da nova tabela
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<Category> categoryIds = new ArrayList<>();
+    private Set<Category> categoryIds = new HashSet<>();
 
   private String description;
 
-    public List<Ingredient> getIngredientsIds() {
+    public Set<Ingredient> getIngredientsIds() {
         return ingredientsIds;
     }
 
-    public void setIngredientsIds(List<Ingredient> ingredientsIds) {
+    public void setIngredientsIds(Set<Ingredient> ingredientsIds) {
         this.ingredientsIds = ingredientsIds;
     }
 
@@ -80,11 +81,11 @@ public class Recipe {
         this.name = name;
     }
 
-    public void addIngredients(List<Ingredient> ingredientsIds) {
+    public void addIngredients(Set<Ingredient> ingredientsIds) {
         this.ingredientsIds.addAll(ingredientsIds);
     }
 
-    public void setCategoryIds(List<Category> categoryIds) {
+    public void setCategoryIds(Set<Category> categoryIds) {
         this.categoryIds = categoryIds;
     }
 

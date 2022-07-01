@@ -3,6 +3,7 @@ package mindera.midswap.SwapRecipes.controllers;
 
 import lombok.RequiredArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
+import mindera.midswap.SwapRecipes.commands.RecipeUpdateDto;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.persistence.models.User;
@@ -34,20 +35,21 @@ public class RecipeController {
         return this.recipeService.getRecipeDtoById(id);
     }
 
-    @PostMapping
-    public RecipeDto addRecipe(@RequestBody RecipeDto recipeDto) {
-        return this.recipeService.addRecipe(recipeDto);
-    }
+    @GetMapping("/category/{category}")
+    public List<RecipeDto> getRecipesByCategory (@PathVariable("category") String category) {
+        this.recipeService.getRecipesByCategory(category);
 
-    @DeleteMapping("{id}")
-    public void deleteRecipe(@PathVariable("id") Long id) {
-        this.recipeService.removeRecipe(id);
+        return this.recipeService.getRecipes();
     }
 
     @GetMapping("/byIngredient/{ingredientId}")
     public List<Recipe> getRecipesByIngredients(@PathVariable("ingredientId") Long ingredientId) {
         return this.recipeService.getRecipesByIngredient(ingredientId);
 
+    }
+    @PostMapping
+    public RecipeDto addRecipe(@RequestBody RecipeDto recipeDto) {
+        return this.recipeService.addRecipe(recipeDto);
     }
 
     @PutMapping("/{userId}/favourites/{recipeId}")
@@ -62,12 +64,19 @@ public class RecipeController {
        return updatedRecipe;
     }
 
+    @PutMapping("/{recipeId}")
+    public RecipeDto updateRecipe(@PathVariable("recipeId") Long recipeId, @RequestBody RecipeUpdateDto recipeUpdate) {
+        RecipeDto updatedRecipe = this.recipeService.updateRecipe(recipeId, recipeUpdate);
+        return updatedRecipe;
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteRecipe(@PathVariable("id") Long id) {
+        this.recipeService.removeRecipe(id);
+    }
+
+
 }
 
-//Not done yet
-// @GetMapping("/category/{category}")
-// public List<Recipe> getRecipesByCategory (@PathVariable("category") String category) {
-//     return this.recipeService.getRecipes();
-// }
 
 
