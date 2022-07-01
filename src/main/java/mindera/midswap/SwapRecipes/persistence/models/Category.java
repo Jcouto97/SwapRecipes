@@ -33,6 +33,17 @@ public class Category {
             cascade = CascadeType.DETACH)
     private Set<Recipe> recipesSet = new HashSet<>();
 
+    public Set<Recipe> getRecipesSet() {
+        return recipesSet;
+    }
+
+    public void setRecipesSet(Set<Recipe> recipesSet) {
+        this.recipesSet = recipesSet;
+    }
+
+    public void addRecipe(Recipe recipe) {
+        this.recipesSet.add(recipe);
+    }
 
 //    @JsonIgnore
 //    @ManyToMany(mappedBy = "recepiesIds",

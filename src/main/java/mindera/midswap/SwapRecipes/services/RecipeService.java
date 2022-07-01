@@ -4,12 +4,14 @@ package mindera.midswap.SwapRecipes.services;
 import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
+import mindera.midswap.SwapRecipes.exceptions.CategoryNotFoundException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Category;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
+import mindera.midswap.SwapRecipes.persistence.repositories.CategoryJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,8 @@ public class RecipeService implements RecipeServiceI {
     private final IngredientServiceI ingredientServiceI;
     private IngredientJPARepository ingredientJPARepository;
 
+    private CategoryJPARepository categoryJPARepository;
+
 
     @Override
     public List<RecipeDto> getRecipes() {
@@ -53,6 +57,7 @@ public class RecipeService implements RecipeServiceI {
         newRecipe.setId(recipeDto.getId());
         newRecipe.setDescription(recipeDto.getDescription());
         newRecipe.setName(recipeDto.getName());
+        newRecipe.setCategoryIds(recipeDto.getCategory());
         Set<Ingredient> ingredientSet = recipeDto.getIngredients();
         if (ingredientSet != null) {
             newRecipe.setIngredientsIds(recipeDto.getIngredients()
@@ -93,9 +98,12 @@ public class RecipeService implements RecipeServiceI {
 
     @Override
     public RecipeDto addCategoryToRecipe(Long categoryId, Long recipeId) {
-        Recipe recipe = recipeConverterI.dtoToEntity(getRecipeById(recipeId));
-        Category category = this.categoryServiceI.getCategoryById(categoryId);
+       // Recipe recipe = this.recipeRepository.findById(recipeId).orElseThrow(()-> new RecipeNotFoundException(RECIPE_NOT_FOUND));
+     Recipe recipe = recipeConverterI.dtoToEntity(getRecipeById(recipeId));
+     Category category = this.categoryServiceI.getCategoryById(categoryId);
+      //  Category category = this.categoryJPARepository.findById(categoryId).orElseThrow(()-> new CategoryNotFoundException(CATEGORY_NOT_FOUND));
         recipe.addCategory(category);
+        this.recipeRepository.save(recipe);
         return recipeConverterI.entityToDto(recipe);
     }
 }

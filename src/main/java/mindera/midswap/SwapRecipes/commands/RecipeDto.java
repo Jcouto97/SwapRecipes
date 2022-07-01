@@ -8,11 +8,13 @@ import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
 @Getter
 @Setter
 @Builder
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -28,7 +30,7 @@ public class RecipeDto {
 
     private Set<Ingredient> ingredients;
 
-    private Set<Category> categoryId;  //tabem para ligar nos dtos
+    private List<Category> category;  //tabem para ligar nos dtos
 
 
     //  private Set<UserDto> usersThatLiked;

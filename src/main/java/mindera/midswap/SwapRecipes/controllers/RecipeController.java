@@ -61,7 +61,8 @@ public class RecipeController {
 
     @PutMapping("/{categoryId}/{recipeId}")
     public RecipeDto addCategoryToRecipe(@PathVariable("categoryId") Long categoryId, @PathVariable("recipeId") Long recipeId) {
-        return this.recipeService.addCategoryToRecipe(categoryId, recipeId);
+      RecipeDto updatedRecipe = this.recipeService.addCategoryToRecipe(categoryId, recipeId);
+       return updatedRecipe;
     }
 
 }
