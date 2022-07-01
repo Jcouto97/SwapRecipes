@@ -10,16 +10,24 @@ import java.util.Set;
 public class MockedPojos {
 
     public static final User USER_ENTITY_1 = User.builder()
+            .name("Elisa")
             .id(1L)
-            .name("Joaquim Almeida")
-            .citizenNumber(100000000L)
-            .username("joaquimalmeida")
-            .password("password")
-            .favouriteRecipesIds(Set.of(new Recipe(1L, "bacalhau", new ArrayList<>(3), new ArrayList<>(1) , "very good")))
-            .build();
+            .citizenNumber(100000001L)
+                        .username("elisamoutinho")
+                        .password("elisamoutinho")
+                        .build();
 
 
 
+
+
+//           .id(1L)
+//            .name("Joaquim Almeida")
+//            .citizenNumber(100000000L)
+//            .username("joaquimalmeida")
+//            .password("password")
+//            .favouriteRecipesIds(Set.of(new Recipe(1L, "bacalhau", new ArrayList<>(3), new ArrayList<>(1) , "very good")))
+//            .build();
 
 
     //    private Long id;
