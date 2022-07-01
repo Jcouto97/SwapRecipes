@@ -1,10 +1,8 @@
 package mindera.midswap.SwapRecipes.converters;
 
 import lombok.AllArgsConstructor;
-import mindera.midswap.SwapRecipes.commands.IngredientUpdateDto;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.commands.RecipeUpdateDto;
-import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
