@@ -47,9 +47,9 @@ public class RecipeController {
         this.recipeService.removeRecipe(id);
     }
 
-    @GetMapping("/byIngredient/{ingredient}")
-    public List<Recipe> getRecipesByIngredients(@PathVariable("ingredient") String ingredient) {
-        return this.recipeService.getRecipesByIngredient(ingredient);
+    @GetMapping("/byIngredient/{ingredientId}")
+    public List<Recipe> getRecipesByIngredients(@PathVariable("ingredientId") Long ingredientId) {
+        return this.recipeService.getRecipesByIngredient(ingredientId);
 
     }
 

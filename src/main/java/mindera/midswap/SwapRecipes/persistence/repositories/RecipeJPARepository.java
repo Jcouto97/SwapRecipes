@@ -13,8 +13,8 @@ import java.util.Optional;
 @Repository
 public interface RecipeJPARepository extends JpaRepository <Recipe, Long> {
 
-   @Query("FROM Recipe WHERE ingredientId LIKE %?1%")
-   List<Recipe> findByIngredient(String ingredient);
+    @Query("Select r FROM Recipe r JOIN r.ingredientsIds i WHERE i.id = ?1")
+   List<Recipe> findByIngredient(Long ingredientId);
 
   Optional<Recipe> findById(Long id);
 

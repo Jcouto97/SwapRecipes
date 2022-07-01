@@ -106,8 +106,8 @@ public class RecipeService implements RecipeServiceI {
 
 
     @Override
-    public List<Recipe> getRecipesByIngredient(String ingredient) {
-        return this.recipeRepository.findByIngredient(ingredient);
+    public List<Recipe> getRecipesByIngredient(Long ingredientId) {
+        return this.recipeRepository.findByIngredient(ingredientId);
     }
 
     @Override
