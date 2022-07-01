@@ -32,6 +32,6 @@ public class RecipeUpdateDto {
 
     private Set<Category> category;  //tabem para ligar nos dtos
 
-    private Set<UserDto> usersThatLiked;
+ //   private Set<UserDto> usersThatLiked;
 
 }

@@ -97,8 +97,9 @@ public class RecipeService implements RecipeServiceI {
 
 
     @Override
-    public List<Recipe> getRecipesByIngredient(Long ingredientId) {
-        return this.recipeRepository.findByIngredient(ingredientId);
+    public List<RecipeDto> getRecipesByIngredient(Long ingredientId) {
+        List<Recipe> recipes = this.recipeRepository.findByIngredient(ingredientId);
+        return this.recipeConverterI.entityListToDtoList(recipes);
     }
 
     @Override
@@ -117,8 +118,9 @@ public class RecipeService implements RecipeServiceI {
     }
 
     @Override
-    public List<RecipeDto> getRecipesByCategory(String category) {
-        return this.recipeRepository.findByCategory(category);
+    public List<RecipeDto> getRecipesByCategory(Long categoryId) {
+        List<Recipe> recipes = this.recipeRepository.findByCategory(categoryId);
+        return this.recipeConverterI.entityListToDtoList(recipes);
     }
 
     @Override
@@ -128,10 +130,7 @@ public class RecipeService implements RecipeServiceI {
         Recipe updatedRecipe = this.recipeConverterI.updateDtoToEntity(recipeUpdate, recipeToBeUpdated);
         updatedRecipe.setCategoryIds(recipeUpdate.getCategory());
         updatedRecipe.setIngredientsIds(recipeUpdate.getIngredients());
-        updatedRecipe.setUsersThatLiked(recipeUpdate.getUsersThatLiked()
-                .stream()
-                .map(userDto -> this.userConverterI.dtoToEntity(userDto))
-                .collect(Collectors.toSet()));
+
         this.recipeRepository.save(updatedRecipe);
         return this.recipeConverterI.entityToDto(updatedRecipe);
     }

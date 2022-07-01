@@ -21,6 +21,6 @@ public interface RecipeJPARepository extends JpaRepository <Recipe, Long> {
 
   Optional<Object> findByName(String name);
 
-    @Query("Select r FROM Recipe r JOIN r.categoryIds i WHERE i.name LIKE %?1%")
-    List<RecipeDto> findByCategory(String category);
+    @Query("Select r FROM Recipe r JOIN r.categoryIds i WHERE i.id = ?1")
+    List<Recipe> findByCategory(Long category);
 }

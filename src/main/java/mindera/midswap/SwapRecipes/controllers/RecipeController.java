@@ -35,15 +35,15 @@ public class RecipeController {
         return this.recipeService.getRecipeDtoById(id);
     }
 
-    @GetMapping("/category/{category}")
-    public List<RecipeDto> getRecipesByCategory (@PathVariable("category") String category) {
-        this.recipeService.getRecipesByCategory(category);
+    @GetMapping("/byCategory/{categoryId}")
+    public List<RecipeDto> getRecipesByCategory (@PathVariable("categoryId") Long categoryId) {
+        this.recipeService.getRecipesByCategory(categoryId);
 
         return this.recipeService.getRecipes();
     }
 
     @GetMapping("/byIngredient/{ingredientId}")
-    public List<Recipe> getRecipesByIngredients(@PathVariable("ingredientId") Long ingredientId) {
+    public List<RecipeDto> getRecipesByIngredients(@PathVariable("ingredientId") Long ingredientId) {
         return this.recipeService.getRecipesByIngredient(ingredientId);
 
     }

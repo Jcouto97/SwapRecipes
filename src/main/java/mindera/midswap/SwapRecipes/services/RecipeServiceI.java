@@ -21,14 +21,14 @@ public interface RecipeServiceI {
     void removeRecipe(Long id);
 
 
-List<Recipe> getRecipesByIngredient(Long ingredientId);
+List<RecipeDto> getRecipesByIngredient(Long ingredientId);
 
 
     UserDto saveFavouriteRecipe(Long userId, Long recipeId);
 
     RecipeDto addCategoryToRecipe(Long categoryId, Long recipeId);
 
-    List<RecipeDto> getRecipesByCategory(String category);
+    List<RecipeDto> getRecipesByCategory(Long categoryId);
 
     RecipeDto updateRecipe(Long recipeId, RecipeUpdateDto recipeUpdate);
 }

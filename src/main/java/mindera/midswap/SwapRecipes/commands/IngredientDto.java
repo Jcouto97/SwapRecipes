@@ -20,7 +20,7 @@ public class IngredientDto {
     private Long id;
 
     @NotEmpty
-    @Size(max = 20)
+    @Size(min = 2, max = 50, message = "Name should have at least 2 characters")
     private String name;
 
    private Set<Recipe> recipeId;
