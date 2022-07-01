@@ -11,7 +11,9 @@ public interface RecipeServiceI {
 
     List<RecipeDto> getRecipes();
 
-    RecipeDto getRecipeById(Long id);
+    RecipeDto getRecipeDtoById(Long id);
+
+    Recipe getRecipeById(Long id);
 
     RecipeDto addRecipe(RecipeDto recipeDto);
 

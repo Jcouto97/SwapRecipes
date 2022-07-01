@@ -34,7 +34,7 @@ public class RecipeController {
 
     @GetMapping("/byId/{id}")
     public RecipeDto getRecipeById(@PathVariable("id") Long id) {
-        return this.recipeService.getRecipeById(id);
+        return this.recipeService.getRecipeDtoById(id);
     }
 
     @PostMapping

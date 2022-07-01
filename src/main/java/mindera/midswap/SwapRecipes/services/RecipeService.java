@@ -4,7 +4,6 @@ package mindera.midswap.SwapRecipes.services;
 import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
-import mindera.midswap.SwapRecipes.exceptions.CategoryNotFoundException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Category;
@@ -44,13 +43,19 @@ public class RecipeService implements RecipeServiceI {
     }
 
     @Override
-    public RecipeDto getRecipeById(Long id) {
+    public RecipeDto getRecipeDtoById(Long id) {
         Recipe recipe = this.recipeRepository.findById(id).orElseThrow(() -> new RecipeNotFoundException(RECIPE_NOT_FOUND));
         return this.recipeConverterI.entityToDto(recipe);
     }
+
+    @Override
+    public Recipe getRecipeById(Long id) {
+        return this.recipeRepository.findById(id).orElseThrow(() -> new RecipeNotFoundException(RECIPE_NOT_FOUND));
+    }
+
     @Override
     public RecipeDto addRecipe(RecipeDto recipeDto) {
-        if(this.recipeRepository.findByName(recipeDto.getName()).isPresent()) {
+        if (this.recipeRepository.findByName(recipeDto.getName()).isPresent()) {
             throw new RecipeAlreadyExistsException(RECIPE_ALREADY_EXISTS);
         }
         Recipe newRecipe = new Recipe();
@@ -80,7 +85,7 @@ public class RecipeService implements RecipeServiceI {
     @Override
     public void removeRecipe(Long id) {
         Recipe recipe = this.recipeRepository.findById(id)
-                .orElseThrow(()-> new RecipeNotFoundException(RECIPE_NOT_FOUND));
+                .orElseThrow(() -> new RecipeNotFoundException(RECIPE_NOT_FOUND));
         this.recipeRepository.delete(recipe);
     }
 
@@ -92,16 +97,14 @@ public class RecipeService implements RecipeServiceI {
 
     @Override
     public UserDto saveFavouriteRecipe(Long userId, Long recipeId) {
-        Recipe recipe = recipeConverterI.dtoToEntity(getRecipeById(recipeId));
+        Recipe recipe = getRecipeById(recipeId);
         return this.userServiceI.saveFavouriteRecipe(userId, recipe);
     }
 
     @Override
     public RecipeDto addCategoryToRecipe(Long categoryId, Long recipeId) {
-       // Recipe recipe = this.recipeRepository.findById(recipeId).orElseThrow(()-> new RecipeNotFoundException(RECIPE_NOT_FOUND));
-     Recipe recipe = recipeConverterI.dtoToEntity(getRecipeById(recipeId));
-     Category category = this.categoryServiceI.getCategoryById(categoryId);
-      //  Category category = this.categoryJPARepository.findById(categoryId).orElseThrow(()-> new CategoryNotFoundException(CATEGORY_NOT_FOUND));
+        Recipe recipe = getRecipeById(recipeId);
+        Category category = this.categoryServiceI.getCategoryById(categoryId);
         recipe.addCategory(category);
         this.recipeRepository.save(recipe);
         return recipeConverterI.entityToDto(recipe);
