@@ -77,13 +77,4 @@ public class UserServiceTest {
     }
 
 
-    /*
-    adicionar receita
-    procurar a receita (ela existe?)
-    adiciono 2 ingredientes a receita tem tamanho 2?
-    apago ingrediente que nao existe la, tem igual?
-    ver se ela existe depois de dar delete
-     */
-
-//
 }
