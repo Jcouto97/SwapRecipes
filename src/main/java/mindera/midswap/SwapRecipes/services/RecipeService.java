@@ -6,6 +6,7 @@ import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
 import mindera.midswap.SwapRecipes.exceptions.RecipeAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
+import mindera.midswap.SwapRecipes.persistence.models.Category;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
@@ -26,6 +27,8 @@ public class RecipeService implements RecipeServiceI {
     private final RecipeConverterI recipeConverterI;
     private final RecipeJPARepository recipeRepository;
     private final UserServiceI userServiceI;
+
+    private final CategoryServiceI categoryServiceI;
 
     private final IngredientServiceI ingredientServiceI;
     private IngredientJPARepository ingredientJPARepository;
@@ -86,5 +89,13 @@ public class RecipeService implements RecipeServiceI {
     public UserDto saveFavouriteRecipe(Long userId, Long recipeId) {
         Recipe recipe = recipeConverterI.dtoToEntity(getRecipeById(recipeId));
         return this.userServiceI.saveFavouriteRecipe(userId, recipe);
+    }
+
+    @Override
+    public RecipeDto addCategoryToRecipe(Long categoryId, Long recipeId) {
+        Recipe recipe = recipeConverterI.dtoToEntity(getRecipeById(recipeId));
+        Category category = this.categoryServiceI.getCategoryById(categoryId);
+        recipe.addCategory(category);
+        return recipeConverterI.entityToDto(recipe);
     }
 }

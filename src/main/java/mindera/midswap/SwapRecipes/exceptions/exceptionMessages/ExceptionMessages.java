@@ -8,7 +8,6 @@ public class ExceptionMessages {
     public static final String INGREDIENT_NOT_FOUND = "Ingredient not found";
     public static final String INGREDIENT_ALREADY_EXISTS = "Ingredient already exists";
     public static final String RECIPE_ALREADY_EXISTS = "Recipe with this name already exists";
-
     public static final String CATEGORY_NOT_FOUND = "Category not found";
     public static final String CATEGORY_ALREADY_EXISTS = "Category already exists";
 }

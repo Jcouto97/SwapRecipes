@@ -7,10 +7,7 @@ import mindera.midswap.SwapRecipes.commands.CategoryUpdateDto;
 import mindera.midswap.SwapRecipes.converters.CategoryConverterI;
 import mindera.midswap.SwapRecipes.exceptions.CategoryAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.CategoryNotFoundException;
-import mindera.midswap.SwapRecipes.exceptions.IngredientAlreadyExistsException;
-import mindera.midswap.SwapRecipes.exceptions.IngredientNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Category;
-import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.repositories.CategoryJPARepository;
 import org.springframework.stereotype.Service;
 
@@ -32,12 +29,17 @@ public class CategoryServiceImp implements CategoryServiceI{
     }
 
     @Override
-    public CategoryDto getCategoryById(Long id) {
+    public CategoryDto getCategoryDtoById(Long id) {
         Category savedCategory = this.categoryJPARepository.findById(id)
                 .orElseThrow(() -> new CategoryNotFoundException(CATEGORY_NOT_FOUND));
         return this.categoryConverterI.entityToDto(savedCategory);
     }
 
+    @Override
+    public Category getCategoryById(Long id) {
+      return this.categoryJPARepository.findById(id)
+                .orElseThrow(() -> new CategoryNotFoundException(CATEGORY_NOT_FOUND));
+    }
     @Override
     public CategoryDto addCategory(CategoryDto categoryDto) {
         if(this.categoryJPARepository.findByName(categoryDto.getName()).isPresent()) {

@@ -22,4 +22,6 @@ List<Recipe> getRecipesByIngredient(Long ingredientId);
 
 
     UserDto saveFavouriteRecipe(Long userId, Long recipeId);
+
+    RecipeDto addCategoryToRecipe(Long categoryId, Long recipeId);
 }

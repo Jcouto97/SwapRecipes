@@ -83,4 +83,12 @@ public class Recipe {
     public void addIngredients(List<Ingredient> ingredientsIds) {
         this.ingredientsIds.addAll(ingredientsIds);
     }
+
+    public void setCategoryIds(List<Category> categoryIds) {
+        this.categoryIds = categoryIds;
+    }
+
+    public void addCategory(Category category) {
+        this.categoryIds.add(category);
+    }
 }
