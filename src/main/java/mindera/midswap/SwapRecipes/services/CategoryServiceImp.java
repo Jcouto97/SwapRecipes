@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static mindera.midswap.SwapRecipes.exceptions.exceptionMessages.ExceptionMessages.CATEGORY_ALREADY_EXISTS;
+import static mindera.midswap.SwapRecipes.exceptions.exceptionMessages.ExceptionMessages.CATEGORY_NOT_FOUND;
+
 @AllArgsConstructor
 @Service
 public class CategoryServiceImp implements CategoryServiceI{
@@ -31,33 +34,26 @@ public class CategoryServiceImp implements CategoryServiceI{
     @Override
     public CategoryDto getCategoryById(Long id) {
         Category savedCategory = this.categoryJPARepository.findById(id)
-                .orElseThrow(() -> new CategoryNotFoundException());
-
+                .orElseThrow(() -> new CategoryNotFoundException(CATEGORY_NOT_FOUND));
         return this.categoryConverterI.entityToDto(savedCategory);
     }
 
     @Override
     public CategoryDto addCategory(CategoryDto categoryDto) {
         if(this.categoryJPARepository.findByName(categoryDto.getName()).isPresent()) {
-            throw new CategoryAlreadyExistsException();
+            throw new CategoryAlreadyExistsException(CATEGORY_ALREADY_EXISTS);
         }
 //        COMO SE APANHA RECURSO QUE JA EXISTE? (n atira exceçao como no mysql)
 
         Category categorySaved = this.categoryJPARepository.save(this.categoryConverterI.dtoToEntity(categoryDto));
-
-
-
         return this.categoryConverterI.entityToDto(categorySaved);
     }
 
     @Override
     public CategoryDto deleteCategory(Long id) {
         Category categoryToDelete = this.categoryJPARepository.findById(id)
-                .orElseThrow(() -> new CategoryNotFoundException());
-
-
+                .orElseThrow(() -> new CategoryNotFoundException(CATEGORY_NOT_FOUND));
         this.categoryJPARepository.delete(categoryToDelete);
-
         return this.categoryConverterI.entityToDto(categoryToDelete);
     }
 
@@ -66,10 +62,9 @@ public class CategoryServiceImp implements CategoryServiceI{
     @Override
     public CategoryDto updateCategory(Long id, CategoryUpdateDto categoryUpdateDtoDto) {
         Category categoryToDelete = this.categoryJPARepository.findById(id)
-                .orElseThrow(() -> new CategoryNotFoundException());
+                .orElseThrow(() -> new CategoryNotFoundException(CATEGORY_NOT_FOUND));
         Category updatedCategory = this.categoryConverterI.updateDtoToEntity(categoryUpdateDtoDto, categoryToDelete);
         this.categoryJPARepository.save(updatedCategory);
-
         return this.categoryConverterI.entityToDto(updatedCategory);
     }
 }
