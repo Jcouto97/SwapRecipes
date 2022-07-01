@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -24,6 +26,12 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categoryIds",       //igual ao nome da lista de categories na Receita
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.DETACH)
+    private Set<Recipe> recipesSet = new HashSet<>();
 
 
 //    @JsonIgnore

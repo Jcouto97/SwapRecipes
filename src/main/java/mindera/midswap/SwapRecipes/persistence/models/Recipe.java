@@ -45,7 +45,14 @@ public class Recipe {
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     private List<Ingredient> ingredientsIds = new ArrayList<>();
-    
+
+    @JsonIgnore
+    @Column(nullable = false, unique = false, updatable = true)
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinTable(name = "recipeCategory",                                 //nome da tabela que junta as duas
+            joinColumns = @JoinColumn(name = "recipe_id"),              //nome das colunas da nova tabela
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<Category> categoryIds = new ArrayList<>();
 
   private String description;
 
