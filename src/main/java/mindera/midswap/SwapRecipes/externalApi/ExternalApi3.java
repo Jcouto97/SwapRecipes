@@ -19,8 +19,8 @@ import java.util.Arrays;
 
 public class ExternalApi3 {
     private final RecipeService recipeService;
-    String uri = "http://www.themealdb.com/api/json/v1";
-    String apikey = "1";
+    String uri = "https://api.spoonacular.com/recipes/complexSearch";
+    String apikey = "75f535603fa8415f8ce7778ca86ae7d1";
 
     @GetMapping(path = "/mealbyid/{mealId}")
     public String getMeal(@PathVariable String mealId) {
