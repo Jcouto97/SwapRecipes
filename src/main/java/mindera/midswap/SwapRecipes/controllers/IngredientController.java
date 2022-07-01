@@ -26,7 +26,7 @@ public class IngredientController {
 
     @GetMapping(path = "/{IngredientId}")
     public IngredientDto getIngredientById(@PathVariable("IngredientId") Long ingredientId){
-        return this.ingredientServiceI.getIngredientById(ingredientId);
+        return this.ingredientServiceI.getIngredientDtoById(ingredientId);
     }
 
     @PostMapping

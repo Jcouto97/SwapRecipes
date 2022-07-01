@@ -26,8 +26,9 @@ public class RecipeDto {
 
     private String description;
 
-   private List<Ingredient> ingredients;
+   private Set<Ingredient> ingredients;
 
- //  private Set<UserDto> usersThatLiked;
+
+    //  private Set<UserDto> usersThatLiked;
 
 }

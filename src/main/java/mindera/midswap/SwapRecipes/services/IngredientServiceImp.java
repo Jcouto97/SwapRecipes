@@ -29,10 +29,16 @@ public class IngredientServiceImp implements IngredientServiceI{
     }
 
     @Override
-    public IngredientDto getIngredientById(Long ingredientId) {
+    public IngredientDto getIngredientDtoById(Long ingredientId) {
         Ingredient savedIngredient = this.ingredientJPARepository.findById(ingredientId)
                 .orElseThrow(() -> new IngredientNotFoundException(INGREDIENT_NOT_FOUND));
         return this.ingredientConverter.entityToDto(savedIngredient);
+    }
+
+    @Override
+    public Ingredient getIngredientById(Long ingredientId) {
+        return this.ingredientJPARepository.findById(ingredientId)
+                .orElseThrow(() -> new IngredientNotFoundException(INGREDIENT_NOT_FOUND));
     }
 
     @Override
@@ -61,5 +67,10 @@ public class IngredientServiceImp implements IngredientServiceI{
         Ingredient updatedIngredient = this.ingredientConverter.updateDtoToEntity(ingredientUpdateDto, originalIngredient);
         this.ingredientJPARepository.save(updatedIngredient);
         return this.ingredientConverter.entityToDto(updatedIngredient);
+    }
+
+    @Override
+    public boolean isIngredientPresent(Long id) {
+        return this.ingredientJPARepository.findById(id).isPresent();
     }
 }
