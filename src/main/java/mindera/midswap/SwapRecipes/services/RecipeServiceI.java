@@ -18,7 +18,7 @@ public interface RecipeServiceI {
     void removeRecipe(Long id);
 
 
-List<Recipe> getRecipesByIngredient(String ingredient);
+List<Recipe> getRecipesByIngredient(Long ingredientId);
 
 
     UserDto saveFavouriteRecipe(Long userId, Long recipeId);

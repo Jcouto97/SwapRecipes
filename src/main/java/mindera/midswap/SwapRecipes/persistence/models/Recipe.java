@@ -38,18 +38,24 @@ public class Recipe {
     private List<User> usersThatLiked = new ArrayList<>();;
 
 
-
-  @JsonIgnore
-  @Column(nullable = false, unique = false, updatable = true)
-   @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-   @JoinTable(name = "usedIngredients",
-          joinColumns = @JoinColumn(name = "recipe_id"),
-           inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-   private List<Ingredient> ingredientsIds = new ArrayList<>();
+    @JsonIgnore
+    @Column(nullable = false, unique = false, updatable = true)
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinTable(name = "usedIngredients",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private List<Ingredient> ingredientsIds = new ArrayList<>();
+    
 
   private String description;
 
+    public List<Ingredient> getIngredientsIds() {
+        return ingredientsIds;
+    }
 
+    public void setIngredientsIds(List<Ingredient> ingredientsIds) {
+        this.ingredientsIds = ingredientsIds;
+    }
 
     public Long getId() {
         return id;

@@ -37,7 +37,6 @@ public class RecipeController {
         return this.recipeService.getRecipeById(id);
     }
 
-
     @PostMapping
     public RecipeDto addRecipe(@RequestBody RecipeDto recipeDto) {
         return this.recipeService.addRecipe(recipeDto);
@@ -48,9 +47,9 @@ public class RecipeController {
         this.recipeService.removeRecipe(id);
     }
 
-    @GetMapping("/byIngredient/{ingredient}")
-    public List<Recipe> getRecipesByIngredients(@PathVariable("ingredient") String ingredient) {
-        return this.recipeService.getRecipesByIngredient(ingredient);
+    @GetMapping("/byIngredient/{ingredientId}")
+    public List<Recipe> getRecipesByIngredients(@PathVariable("ingredientId") Long ingredientId) {
+        return this.recipeService.getRecipesByIngredient(ingredientId);
 
     }
 

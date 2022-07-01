@@ -31,7 +31,7 @@ public class Ingredient {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "ingredientsIds",
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             cascade = CascadeType.DETACH)
     private Set<Recipe> recipesSet = new HashSet<>();
 

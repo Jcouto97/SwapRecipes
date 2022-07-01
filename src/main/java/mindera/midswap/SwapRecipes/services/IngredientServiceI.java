@@ -10,11 +10,15 @@ import java.util.List;
 public interface IngredientServiceI {
     List<IngredientDto> getIngredientsList();
 
-    IngredientDto getIngredientById(Long ingredientId);
+    IngredientDto getIngredientDtoById(Long ingredientId);
+
+    Ingredient getIngredientById(Long ingredientId);
 
     IngredientDto addIngredient(Ingredient ingredient);
 
     IngredientDto deleteIngredient(Long id);
 
     IngredientDto updateIngredient(Long id, IngredientUpdateDto ingredientUpdateDto);
+
+    boolean isIngredientPresent(Long id);
 }
