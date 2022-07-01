@@ -9,6 +9,10 @@ import mindera.midswap.SwapRecipes.exceptions.UserNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.persistence.models.User;
 import mindera.midswap.SwapRecipes.persistence.repositories.UserJPARepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +20,11 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class UserServiceImpI implements UserServiceI {
+public class UserServiceImpI implements UserServiceI, UserDetailsService {
 
     private UserJPARepository userJPARepository;
     private UserConverterI userConverterI;
-    //private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDto findById(Long id) {
@@ -58,7 +62,7 @@ public class UserServiceImpI implements UserServiceI {
         User user = this.userConverterI.dtoToEntity(userDto);
 
         //set password
-        //user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         User savedUser = this.userJPARepository.save(user);
         //mandar o Dto do savedUser que gravei, para ir com Id no Postman
@@ -74,6 +78,8 @@ public class UserServiceImpI implements UserServiceI {
 
         // "fromUserUpdateDtoToUser" passa tudo o que está no userUpdateDto para o oldUser
         User newUser = this.userConverterI.updateDtoToEntity(userUpdateDto, oldUser);
+
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
 
         // guardo na DB esse novo user
         User savedUser = this.userJPARepository.save(newUser);
@@ -101,4 +107,11 @@ public class UserServiceImpI implements UserServiceI {
         //return this.userConverterI.entityToDto(user);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return this.userJPARepository.findByUsername(username)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(String.format("Username %s not found", username))
+                );
+    }
 }
