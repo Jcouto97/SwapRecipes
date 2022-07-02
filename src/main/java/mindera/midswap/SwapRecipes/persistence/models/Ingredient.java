@@ -70,3 +70,27 @@ public class Ingredient {
         this.recipesSet.add(recipeDto);
     }
 }
+
+
+/*
+1º guardamos chaves primarias e depois as secundarias
+
+
+Fazer service + converter + interface + dto da api externa
+
+DTO das receitas de fora
+
+Metodo para guardar favorites?
+
+Tabela para guardar favorites (ja temos), falta fazer as querys para ir buscar os favoritos
+
+
+classe nova que so recebe lista de recipes(json) (lista de apirecipes) para receber os jsons atraves do rest template
+
+qd fizermos deploy, como se tivessemos a iniciar
+
+Bloqueio que o nuno fez para os ingredients temos que fazer para as recipes estoura se tivermos o update e dermos deploy 2x à app
+
+getById por ingredient
+queries se quisermos receitas por ingrediente
+ */
