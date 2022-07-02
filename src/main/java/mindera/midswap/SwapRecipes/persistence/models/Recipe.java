@@ -31,31 +31,50 @@ public class Recipe {
 
     private String name;
 
+    private String description;
+
     @JsonIgnore
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "favouriteRecipesIds",
             fetch = FetchType.EAGER,
             cascade = CascadeType.DETACH)
-    private Set<User> usersThatLiked = new HashSet<>();;
+    private Set<User> usersThatLiked = new HashSet<>();
 
 
     @JsonIgnore
     @Column(nullable = false, unique = false, updatable = true)
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinTable(name = "usedIngredients",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    @JoinTable(name = "usedIngredients", //nome tabela q vai ser criada na DB
+            joinColumns = @JoinColumn(name = "recipe_id"), //colunas dessa nova tabela
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id")) //colunas dessa nova tabela
     private Set<Ingredient> ingredientsIds = new HashSet<>();
 
     @JsonIgnore
     @Column(nullable = false, unique = false, updatable = true)
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinTable(name = "recipeCategory",                                 //nome da tabela que junta as duas
-            joinColumns = @JoinColumn(name = "recipe_id"),              //nome das colunas da nova tabela
+    @JoinTable(name = "recipeCategory", //nome da tabela que junta as duas
+            joinColumns = @JoinColumn(name = "recipe_id"), //nome das colunas da nova tabela
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categoryIds = new HashSet<>();
 
-  private String description;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public Set<Ingredient> getIngredientsIds() {
         return ingredientsIds;

@@ -33,6 +33,16 @@ public class Category {
             cascade = CascadeType.DETACH)
     private Set<Recipe> recipesSet = new HashSet<>();
 
+
+
+
+
+
+
+
+
+
+
     public Set<Recipe> getRecipesSet() {
         return recipesSet;
     }

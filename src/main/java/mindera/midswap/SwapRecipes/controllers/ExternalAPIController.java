@@ -25,6 +25,31 @@ public class ExternalAPIController {
     String apikey = "b028691f707a4dd48a1222aeef34bd81";
 //https://api.spoonacular.com/food/products/search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
 
+    //  https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2&apiKey=b028691f707a4dd48a1222aeef34bd81 //auth
+
+
+
+    @GetMapping(path = "/byrecipe/{ingredient}")
+    public ResponseEntity<Ingredient> getMeal(@PathVariable String ingredient) {
+        //https://api.spoonacular.com/food/products/search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
+
+        //https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=b028691f707a4dd48a1222aeef34bd81
+
+        String finalUri = uri + "recipes/complexSearch?query=" + ingredient + "&apiKey=" + apikey;
+        System.out.println("finalUri = " + finalUri);
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Ingredient> result = restTemplate.getForEntity(finalUri, Ingredient.class);
+        return ResponseEntity.ok(result.getBody());
+    }
+
+    //https://api.spoonacular.com/recipes/{id}/ingredientWidget.json
+
+/*
+*    private final RecipeService recipeService;
+    String uri = "https://api.spoonacular.com/";
+    String apikey = "b028691f707a4dd48a1222aeef34bd81";
+//https://api.spoonacular.com/food/products/search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
+
     @GetMapping(path = "/ingredientsdb/{ingredient}")
     public ResponseEntity<Ingredient> getMeal(@PathVariable String ingredient) {
         //https://api.spoonacular.com/food/products/ search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
@@ -35,9 +60,7 @@ public class ExternalAPIController {
         return ResponseEntity.ok(result.getBody());
     }
 
-    //https://api.spoonacular.com/recipes/{id}/ingredientWidget.json
-
-
+    //https://api.spoonacular.com/recipes/{id}/ingredientWidget.json*/
 //    @GetMapping(path = "recipe/{name}")
 //    public ResponseEntity<Recipe> getRecipe(@PathVariable String name) {
 //        String finalUri = uri + "?t=" + name + "&apikey=" + apikey;

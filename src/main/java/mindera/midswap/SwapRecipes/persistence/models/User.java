@@ -40,7 +40,7 @@ public class User {
     @JsonIgnore
     @Column(nullable = false, unique = false, updatable = true)
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinTable(name = "favouritesRecipes",
+    @JoinTable(name = "favouritesRecipes", //nome tabela q vai ser criada na DB
             joinColumns = @JoinColumn(name = "user_Id"),
             inverseJoinColumns = @JoinColumn(name = "recipe_Id"))
     private Set<Recipe> favouriteRecipesIds = new HashSet<>();
