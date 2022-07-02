@@ -29,7 +29,6 @@ public class DataLoader implements ApplicationRunner {
     private CategoryJPARepository categoryJPARepository;
     private ModelMapper modelMapper;
 
-
     //controllerEXT API VER
 
     @Override
