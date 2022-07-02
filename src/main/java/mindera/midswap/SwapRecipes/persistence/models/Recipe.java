@@ -28,7 +28,7 @@ public class Recipe {
     @Column(length = 5000)
     private String description;
 
-    private String name;
+    //private String name;
     private String title;
     private int readyInMinutes;
     private String sourceUrl;
@@ -38,7 +38,7 @@ public class Recipe {
     private boolean dairyFree;
     private boolean cheap;
     //private List<Ingredient> extendedIngredients;
-    private String[] dishTypes;
+    //private String[] dishTypes;
     @Column(length = 5000)
     private String summary;
 
@@ -86,13 +86,13 @@ public class Recipe {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public void addIngredients(Set<Ingredient> ingredientsIds) {
         this.extendedIngredients.addAll(ingredientsIds);
@@ -105,4 +105,6 @@ public class Recipe {
     public void addCategory(Category category) {
         this.categoryIds.add(category);
     }
+
+
 }

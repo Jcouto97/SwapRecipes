@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 //para ir buscar do JSON
 //como se fosse um DTO
 
@@ -21,8 +22,8 @@ public class ApiRecipe {
     private boolean glutenFree;
     private boolean dairyFree;
     private boolean cheap;
-    private List<ApiIngredients> extendedIngredients;//n posso mudar o nome aqui
-    private String[] dishTypes;
+    private Set<ApiIngredients> extendedIngredients;//n posso mudar o nome aqui
+    //private String[] dishTypes;
     private String summary;
 
 
@@ -35,13 +36,13 @@ public class ApiRecipe {
         this.summary = summary;
     }
 
-    public String[] getDishTypes() {
-        return dishTypes;
-    }
-
-    public void setDishTypes(String[] dishTypes) {
-        this.dishTypes = dishTypes;
-    }
+//    public String[] getDishTypes() {
+//        return dishTypes;
+//    }
+//
+//    public void setDishTypes(String[] dishTypes) {
+//        this.dishTypes = dishTypes;
+//    }
 
     public int getReadyInMinutes() {
         return readyInMinutes;
@@ -69,14 +70,13 @@ public class ApiRecipe {
     }
 
 
-    public List<ApiIngredients> getExtendedIngredients() {
+    public Set<ApiIngredients> getExtendedIngredients() {
         return extendedIngredients;
     }
 
-    public void setExtendedIngredients(List<ApiIngredients> extendedIngredients) {
+    public void setExtendedIngredients(Set<ApiIngredients> extendedIngredients) {
         this.extendedIngredients = extendedIngredients;
     }
-
 
     public boolean isVegetarian() {
         return vegetarian;

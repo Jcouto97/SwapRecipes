@@ -4,6 +4,7 @@ package mindera.midswap.SwapRecipes.services;
 import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.RecipeUpdateDto;
 import mindera.midswap.SwapRecipes.commands.UserDto;
+import mindera.midswap.SwapRecipes.converters.IngrendientConverterI;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
 import mindera.midswap.SwapRecipes.converters.UserConverterI;
 import mindera.midswap.SwapRecipes.exceptions.RecipeAlreadyExistsException;
@@ -15,6 +16,7 @@ import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.persistence.repositories.CategoryJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,6 +41,9 @@ public class RecipeService implements RecipeServiceI {
     private CategoryJPARepository categoryJPARepository;
 
     private UserConverterI userConverterI;
+    private ModelMapper modelMapper;
+
+    private IngrendientConverterI ingrendientConverterI;
 
 
     @Override
@@ -59,20 +64,34 @@ public class RecipeService implements RecipeServiceI {
 
     @Override
     public RecipeDto addRecipe(RecipeDto recipeDto) {
-        if (this.recipeRepository.findByName(recipeDto.getName()).isPresent()) {
+        if (this.recipeRepository.findByTitle(recipeDto.getTitle()).isPresent()) {
             throw new RecipeAlreadyExistsException(RECIPE_ALREADY_EXISTS);
         }
         Recipe newRecipe = new Recipe();
         newRecipe.setId(recipeDto.getId());
-        newRecipe.setDescription(recipeDto.getDescription());
-        newRecipe.setName(recipeDto.getName());
+        //newRecipe.setDescription(recipeDto.getDescription());
+        newRecipe.setTitle(recipeDto.getTitle());
         newRecipe.setCategoryIds(recipeDto.getCategory());
-        Set<Ingredient> ingredientSet = recipeDto.getIngredients();
+
+
+
+        Set<Ingredient> ingredientSet = this.ingrendientConverterI.apiEntityToEntity(recipeDto.getExtendedIngredients());
+
+//        Set<Ingredient> ingredientSet = recipeDto.getExtendedIngredients()
+//                .stream()
+//                    .map(apiIngredients -> this.modelMapper.map(apiIngredients, Ingredient.class)).collect(Collectors.toSet());
+
+//objetivo passar de apiIngredient -> Ingredient
+
+
+
+
+
         if (ingredientSet != null) {
-            newRecipe.setExtendedIngredients(recipeDto.getIngredients()
+            newRecipe.setExtendedIngredients(recipeDto.getExtendedIngredients()
                     .stream()
                     .map(ing -> {
-                        Ingredient ingredient = ing;
+                        Ingredient ingredient = this.ingrendientConverterI.apiEntityToEntity(ing);
                         if (this.ingredientJPARepository.findById(ingredient.getId()).isPresent()) {
                             ingredient = this.ingredientJPARepository.findById(ingredient.getId())
                                     .orElseThrow();

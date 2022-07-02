@@ -30,18 +30,18 @@ public class RecipeDto {
     private boolean glutenFree;
     private boolean dairyFree;
     private boolean cheap;
-    private List<ApiIngredients> extendedIngredients;
-    private String[] dishTypes;
+    private Set<ApiIngredients> extendedIngredients;
+    //private String[] dishTypes;
     private String summary;
 
 
     @NotEmpty
     @Size(min = 2, max = 100, message = "Name should have at least 2 characters")
-    private String name;
+    private String title;     //tirar
 
-    private String description;
-
-    private Set<Ingredient> ingredients;
+//    private String description;   //tirar
+//
+//    private Set<Ingredient> ingredients;   //tirar
 
     private Set<Category> category;  //tabem para ligar nos dtos
 

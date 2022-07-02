@@ -37,21 +37,23 @@ public class DataLoader implements ApplicationRunner {
 
         //sempre que chamarmos este Get, vamos ter a recipe -> "apiRecipe"
         //receber a chamada da API, e transforma num obj ApiRecipeLit
+        //Guarda as receitas que recebemos numa lista
         ApiRecipeList apiRecipeList = restTemplate.getForObject("https://api.spoonacular.com/recipes/random?number=50&apiKey=75f535603fa8415f8ce7778ca86ae7d1", ApiRecipeList.class);
 
         //popular a nossa DB, um por um!
         for (int i = 0; i < apiRecipeList.getRecipes().size(); i++) {
-            Set<Ingredient> newIngridientList = new HashSet<>();
-            Recipe newRecipe = modelMapper.map(apiRecipeList.getRecipes().get(i), Recipe.class);
+            Set<Ingredient> newIngredientList = new HashSet<>(); //novo set para cada receita
+            Recipe newRecipe = modelMapper.map(apiRecipeList.getRecipes().get(i), Recipe.class); //para poder gravar na DB
+            Ingredient ingredients = modelMapper.map(apiRecipeList.getRecipes().get(i).getExtendedIngredients(), Ingredient.class);
             newRecipe.getExtendedIngredients().stream()
                     .forEach(ingredient -> {
                         //bloqueio ingredients
-                        if (!this.ingredientJPARepository.findByName(ingredient.getName()).isPresent()) {
-                            newIngridientList.add(this.ingredientJPARepository.saveAndFlush(ingredient));
-                        //fim bloqueio
+                        if (!this.ingredientJPARepository.findByName(ingredient.getName()).isPresent()) {  //adiciona os ingredientes a DB
+                            newIngredientList.add(this.ingredientJPARepository.saveAndFlush(ingredient));
+                            //fim bloqueio
                         }
                     });
-            newRecipe.setExtendedIngredients(newIngridientList);
+            newRecipe.setExtendedIngredients(newIngredientList); //adiciona os ingredientes à receita
             //esta linha estoura se fizermos deploy 2x
             this.recipeJPARepository.saveAndFlush(newRecipe);
 //                this.ingredientJPARepository.saveAll(newRecipe.getExtendedIngredients());
@@ -81,74 +83,75 @@ public class DataLoader implements ApplicationRunner {
                         .build()
         ));
         this.userJPARepository.saveAll(userList);
-
-        //lista Ingredients
-        List<Ingredient> ingredientList = new ArrayList<>(Arrays.asList(
-                Ingredient.builder().name("Banana").build(),
-                Ingredient.builder().name("Egg").build(),
-                Ingredient.builder().name("Carrot").build(),
-                Ingredient.builder().name("Pepper").build(),
-                Ingredient.builder().name("Milk").build(),
-                Ingredient.builder().name("Chocolate").build(),
-                Ingredient.builder().name("Sugar").build(),
-                Ingredient.builder().name("Water").build()
-        ));
-        this.ingredientJPARepository.saveAll(ingredientList);
-
-        List<Recipe> recipeList = new ArrayList<>(Arrays.asList(
-                Recipe.builder()
-                        .name("Pizza")
-                        .build(),
-                Recipe.builder()
-                        .name("Tea")
-                        .build(),
-                Recipe.builder()
-                        .name("Cappuccino")
-                        .build(),
-                Recipe.builder()
-                        .name("Feijoada")
-                        .build(),
-                Recipe.builder()
-                        .name("Hamburger")
-                        .build(),
-                Recipe.builder()
-                        .name("Pizza")
-                        .build(),
-                Recipe.builder()
-                        .name("Piri-piri chicken")
-                        .build(),
-                Recipe.builder()
-                        .name("Hummus")
-                        .build()
-        ));
-        this.recipeJPARepository.saveAll(recipeList);
-
-        List<Category> categoryList = new ArrayList<>(Arrays.asList(
-                Category.builder()
-                        .name("HotDrinks")
-                        .build(),
-                Category.builder()
-                        .name("Desserts")
-                        .build(),
-                Category.builder()
-                        .name("Breakfasts")
-                        .build(),
-                Category.builder()
-                        .name("MainDishes")
-                        .build(),
-                Category.builder()
-                        .name("Starters")
-                        .build(),
-                Category.builder()
-                        .name("Vegetarian")
-                        .build(),
-                Category.builder()
-                        .name("Vegan")
-                        .build(),
-                Category.builder()
-                        .name("GlutenFree")
-                        .build()
-        ));
-        this.categoryJPARepository.saveAll(categoryList);
+//
+//        //lista Ingredients
+//        List<Ingredient> ingredientList = new ArrayList<>(Arrays.asList(
+//                Ingredient.builder().name("Banana").build(),
+//                Ingredient.builder().name("Egg").build(),
+//                Ingredient.builder().name("Carrot").build(),
+//                Ingredient.builder().name("Pepper").build(),
+//                Ingredient.builder().name("Milk").build(),
+//                Ingredient.builder().name("Chocolate").build(),
+//                Ingredient.builder().name("Sugar").build(),
+//                Ingredient.builder().name("Water").build()
+//        ));
+//        this.ingredientJPARepository.saveAll(ingredientList);
+//
+//        List<Recipe> recipeList = new ArrayList<>(Arrays.asList(
+//                Recipe.builder()
+//                        .name("Pizza")
+//                        .build(),
+//                Recipe.builder()
+//                        .name("Tea")
+//                        .build(),
+//                Recipe.builder()
+//                        .name("Cappuccino")
+//                        .build(),
+//                Recipe.builder()
+//                        .name("Feijoada")
+//                        .build(),
+//                Recipe.builder()
+//                        .name("Hamburger")
+//                        .build(),
+//                Recipe.builder()
+//                        .name("Pizza")
+//                        .build(),
+//                Recipe.builder()
+//                        .name("Piri-piri chicken")
+//                        .build(),
+//                Recipe.builder()
+//                        .name("Hummus")
+//                        .build()
+//        ));
+//        this.recipeJPARepository.saveAll(recipeList);
+//
+//        List<Category> categoryList = new ArrayList<>(Arrays.asList(
+//                Category.builder()
+//                        .name("HotDrinks")
+//                        .build(),
+//                Category.builder()
+//                        .name("Desserts")
+//                        .build(),
+//                Category.builder()
+//                        .name("Breakfasts")
+//                        .build(),
+//                Category.builder()
+//                        .name("MainDishes")
+//                        .build(),
+//                Category.builder()
+//                        .name("Starters")
+//                        .build(),
+//                Category.builder()
+//                        .name("Vegetarian")
+//                        .build(),
+//                Category.builder()
+//                        .name("Vegan")
+//                        .build(),
+//                Category.builder()
+//                        .name("GlutenFree")
+//                        .build()
+//        ));
+//        this.categoryJPARepository.saveAll(categoryList);
+//
     }
 }
