@@ -22,6 +22,10 @@ public class ExternalApi3 {
     String uri = "https://api.spoonacular.com/recipes/complexSearch";
     String apikey = "75f535603fa8415f8ce7778ca86ae7d1";
 
+    String uri2 = "https://www.themealdb.com/api/json/v1/";
+    String apikey2 = "1";
+
+
     @GetMapping(path = "/mealbyid/{mealId}")
     public String getMeal(@PathVariable String mealId) {
         //www.themealdb.com/api/json/v1 /1/ lookup.php?i=52772
@@ -37,7 +41,7 @@ public class ExternalApi3 {
     @GetMapping(path = "/mealbyid2/{mealId}")
     public ResponseEntity<RecipeMapped> getMeal2(@PathVariable String mealId) {
         //www.themealdb.com/api/json/v1 /1/ lookup.php?i=52772
-        String finalUri = uri + "/" + apikey + "/lookup.php?i=" + mealId;
+        String finalUri = uri2 + "/" + apikey2 + "/lookup.php?i=" + mealId;
         //String finalUri = uri + "?t=" + mealId + "&apikey=" + apikey;
         System.out.println("finalUri = " + finalUri);
         RestTemplate restTemplate = new RestTemplate();
