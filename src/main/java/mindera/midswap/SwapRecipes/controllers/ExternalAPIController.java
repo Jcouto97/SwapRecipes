@@ -24,15 +24,11 @@ public class ExternalAPIController {
     private final RecipeService recipeService;
     String uri = "https://api.spoonacular.com/";
     String apikey = "b028691f707a4dd48a1222aeef34bd81";
-//https://api.spoonacular.com/food/products/search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
 
     //  https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2&apiKey=b028691f707a4dd48a1222aeef34bd81 //auth
 
-
-
     @GetMapping(path = "/byrecipe/{ingredient}")
-    public ResponseEntity<Type> getMeal(@PathVariable String ingredient) {
-        //https://api.spoonacular.com/food/products/search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
+    public ResponseEntity<Type> getRecipeByIngredientName(@PathVariable String ingredient) {
 
         //https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=b028691f707a4dd48a1222aeef34bd81
 
@@ -41,30 +37,11 @@ public class ExternalAPIController {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Type> result = restTemplate.getForEntity(finalUri, Type.class);
         return ResponseEntity.ok(result.getBody());
+        //resposta do JSON
+        //https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=b028691f707a4dd48a1222aeef34bd81
     }
 
 
-//    @GetMapping(path = "/apirecipe/{ingredient}")
-//    public ResponseEntity<Type> getMeal(@PathVariable String ingredient) {
-//        //https://api.spoonacular.com/food/products/ search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
-//        String finalUri = uri + "food/products/search?query=" + ingredient + "&apiKey=" + apikey;
-//        System.out.println("finalUri = " + finalUri);
-//        RestTemplate restTemplate = new RestTemplate();
-//        ResponseEntity<Type> result = restTemplate.getForEntity(finalUri, Type.class);
-//        return ResponseEntity.ok(result.getBody());
-//    }
-
-/*
-*  @GetMapping(path = "/ingredientsdb/{ingredient}")
-    public ResponseEntity<Ingredient> getMeal(@PathVariable String ingredient) {
-        //https://api.spoonacular.com/food/products/ search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
-        String finalUri = uri + "food/products/search?query=" + ingredient + "&apiKey=" + apikey;
-        System.out.println("finalUri = " + finalUri);
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Ingredient> result = restTemplate.getForEntity(finalUri, Ingredient.class);
-        return ResponseEntity.ok(result.getBody());
-    }
-*/
 
 
 
@@ -73,26 +50,15 @@ public class ExternalAPIController {
 
 
 
-    //https://api.spoonacular.com/recipes/{id}/ingredientWidget.json
 
 
-//    @GetMapping(path = "recipe/{name}")
-//    public ResponseEntity<Recipe> getRecipe(@PathVariable String name) {
-//        String finalUri = uri + "?t=" + name + "&apikey=" + apikey;
-//        System.out.println("finalUri = " + finalUri);
-//        RestTemplate restTemplate = new RestTemplate();
-//        ResponseEntity<Recipe> result = restTemplate.getForEntity(finalUri, Recipe.class);
-//        return ResponseEntity.ok(result.getBody());
-//    }
-//
-//    @GetMapping(path = "recipe/{search}")
-//    public ResponseEntity<FilmList> getFilms(@PathVariable String search) {
-//        String finalUri = uri + "?s=" + search + "&apikey=" + apikey;
-//        System.out.println("finalUri = " + finalUri);
-//        RestTemplate restTemplate = new RestTemplate();
-//        ResponseEntity<FilmList> result = restTemplate.getForEntity(finalUri, FilmList.class);
-//        return ResponseEntity.ok(result.getBody());
-//    }
+
+
+
+
+
+
+
 
     // Move these classes to a separate file! Only here for demonstration purposes.
     public static class Film {
