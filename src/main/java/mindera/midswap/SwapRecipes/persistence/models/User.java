@@ -46,6 +46,13 @@ public class User {
     private Set<Recipe> favouriteRecipesIds = new HashSet<>();
 
 
+
+
+
+
+
+
+
     public User addFavouriteRecipeId(Recipe recipe) {
         this.favouriteRecipesIds.add(recipe);
         return this;

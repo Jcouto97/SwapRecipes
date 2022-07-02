@@ -3,11 +3,8 @@ package mindera.midswap.SwapRecipes.persistence.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import mindera.midswap.SwapRecipes.commands.UserDto;
-import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,15 +25,29 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "recipe_id", nullable = false, unique = true, updatable = false)
     private Long id;
+    @Column(length = 5000)
+    private String description;
 
     private String name;
+    private String title;
+    private int readyInMinutes;
+    private String sourceUrl;
+    private boolean vegetarian;
+    private boolean vegan;
+    private boolean glutenFree;
+    private boolean dairyFree;
+    private boolean cheap;
+    //private List<Ingredient> extendedIngredients;
+    private String[] dishTypes;
+    @Column(length = 5000)
+    private String summary;
 
     @JsonIgnore
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(mappedBy = "favouriteRecipesIds",
             fetch = FetchType.EAGER,
             cascade = CascadeType.DETACH)
-    private Set<User> usersThatLiked = new HashSet<>();;
+    private Set<User> usersThatLiked = new HashSet<>();
 
 
     @JsonIgnore
@@ -45,7 +56,9 @@ public class Recipe {
     @JoinTable(name = "usedIngredients",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-    private Set<Ingredient> ingredientsIds = new HashSet<>();
+    private Set<Ingredient> extendedIngredients = new HashSet<>();
+    //vai ter q ser mudado para extendedingredients
+    //para usar o modelmappter tem q ter o mesmo nome q na api externa
 
     @JsonIgnore
     @Column(nullable = false, unique = false, updatable = true)
@@ -55,14 +68,14 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categoryIds = new HashSet<>();
 
-  private String description;
 
-    public Set<Ingredient> getIngredientsIds() {
-        return ingredientsIds;
+
+    public Set<Ingredient> getExtendedIngredients() {
+        return extendedIngredients;
     }
 
-    public void setIngredientsIds(Set<Ingredient> ingredientsIds) {
-        this.ingredientsIds = ingredientsIds;
+    public void setExtendedIngredients(Set<Ingredient> extendedIngredients) {
+        this.extendedIngredients = extendedIngredients;
     }
 
     public Long getId() {
@@ -82,7 +95,7 @@ public class Recipe {
     }
 
     public void addIngredients(Set<Ingredient> ingredientsIds) {
-        this.ingredientsIds.addAll(ingredientsIds);
+        this.extendedIngredients.addAll(ingredientsIds);
     }
 
     public void setCategoryIds(Set<Category> categoryIds) {

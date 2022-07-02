@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.commands;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import mindera.midswap.SwapRecipes.externalApi.byid.ApiIngredients;
 import mindera.midswap.SwapRecipes.persistence.models.Category;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
@@ -22,6 +23,16 @@ import java.util.Set;
 public class RecipeDto {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
+    private int readyInMinutes;
+    private String sourceUrl;
+    private boolean vegetarian;
+    private boolean vegan;
+    private boolean glutenFree;
+    private boolean dairyFree;
+    private boolean cheap;
+    private List<ApiIngredients> extendedIngredients;
+    private String[] dishTypes;
+    private String summary;
 
 
     @NotEmpty

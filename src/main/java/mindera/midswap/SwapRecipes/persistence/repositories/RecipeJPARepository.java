@@ -12,14 +12,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RecipeJPARepository extends JpaRepository <Recipe, Long> {
+public interface RecipeJPARepository extends JpaRepository<Recipe, Long> {
 
-    @Query("Select r FROM Recipe r JOIN r.ingredientsIds i WHERE i.id = ?1")
-   List<Recipe> findByIngredient(Long ingredientId);
+    //@Query("Select r FROM Recipe r JOIN r.ingredientsIds i WHERE i.id = ?1")
+    @Query("Select r FROM Recipe r JOIN r.extendedIngredients i WHERE i.id = ?1")
+    List<Recipe> findByIngredient(Long ingredientId);
 
-  Optional<Recipe> findById(Long id);
+    Optional<Recipe> findById(Long id);
 
-  Optional<Object> findByName(String name);
+    Optional<Object> findByName(String name);
 
     @Query("Select r FROM Recipe r JOIN r.categoryIds i WHERE i.id = ?1")
     List<Recipe> findByCategory(Long category);

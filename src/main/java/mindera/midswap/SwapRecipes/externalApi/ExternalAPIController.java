@@ -2,7 +2,7 @@ package mindera.midswap.SwapRecipes.externalApi;
 
 import lombok.RequiredArgsConstructor;
 import mindera.midswap.SwapRecipes.externalApi.byingredient.Type;
-import mindera.midswap.SwapRecipes.externalApi.byid.TypeTwo;
+import mindera.midswap.SwapRecipes.externalApi.byid.ApiRecipe;
 import mindera.midswap.SwapRecipes.services.RecipeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +17,11 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/api/v1")
 public class ExternalAPIController {
 
+
+
+
+
+    private final ExternalApiService externalApiService;
     private final RecipeService recipeService;
     String uri = "https://api.spoonacular.com/";
     //String apikey = "b028691f707a4dd48a1222aeef34bd81"; //elisa
@@ -31,7 +36,10 @@ public class ExternalAPIController {
 
         String finalUri = uri + "recipes/complexSearch?query=" + ingredient + "&apiKey=" + apikey;
         System.out.println("finalUri = " + finalUri);
+        //e preciso para transformar o JSON para aquilo que quero
         RestTemplate restTemplate = new RestTemplate();
+        //sempre que chamarmos este Get, vamos ter a recipe -> "apiRecipe"
+        ApiRecipe apiRecipe = restTemplate.getForObject(uri + "recipes/complexSearch?query=" + ingredient + "&apiKey=" + apikey, ApiRecipe.class);
         ResponseEntity<Type> result = restTemplate.getForEntity(finalUri, Type.class);
         return ResponseEntity.ok(result.getBody());
         //resposta do JSON com a minha api key
@@ -42,7 +50,7 @@ public class ExternalAPIController {
 
 
     @GetMapping(path = "/byid/{recipeId}")
-    public ResponseEntity<TypeTwo> getRecipeByIdInformation(@PathVariable String recipeId) {
+    public ResponseEntity<ApiRecipe> getRecipeByIdInformation(@PathVariable String recipeId) {
 
         //GET DO SITE SPOONACULAR
         //https://api.spoonacular.com/recipes/716429/information?includeNutrition=false
@@ -53,8 +61,13 @@ public class ExternalAPIController {
 
         String finalUri = uri + "recipes/" + recipeId + "/information?includeNutrition=false&apiKey=" + apikey;
         System.out.println("finalUri = " + finalUri);
+        //e preciso para transformar o JSON para aquilo que quero
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<TypeTwo> result = restTemplate.getForEntity(finalUri, TypeTwo.class);
+        ResponseEntity<ApiRecipe> result = restTemplate.getForEntity(finalUri, ApiRecipe.class);
+        //do link q temos, aquilo passou o body para uma classe q tem estes elementos todos -> ApiRecipe
+        ApiRecipe apiRecipe = restTemplate.getForObject(uri + "recipes/" + recipeId + "/information?includeNutrition=false&apiKey=" + apikey, ApiRecipe.class);
+        this.externalApiService.saveApiInDataBase(apiRecipe);
+
         return ResponseEntity.ok(result.getBody());
         //resposta do JSON com a minha api key
         //https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=b028691f707a4dd48a1222aeef34bd81

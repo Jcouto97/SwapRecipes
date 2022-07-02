@@ -1,13 +1,18 @@
 package mindera.midswap.SwapRecipes.externalApi.byid;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
+//para ir buscar do JSON
+//como se fosse um DTO
 
 @JsonIgnoreProperties
-public class TypeTwo {
+public class ApiRecipe {
 
-    private int id;
     private String title;
     private int readyInMinutes;
     private String sourceUrl;
@@ -16,10 +21,9 @@ public class TypeTwo {
     private boolean glutenFree;
     private boolean dairyFree;
     private boolean cheap;
-    private List<ApiIngredients> extendedIngredients;
+    private List<ApiIngredients> extendedIngredients;//n posso mudar o nome aqui
     private String[] dishTypes;
     private String summary;
-
 
 
 
@@ -55,13 +59,6 @@ public class TypeTwo {
         this.sourceUrl = sourceUrl;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;

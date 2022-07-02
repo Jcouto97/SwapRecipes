@@ -6,7 +6,6 @@ import mindera.midswap.SwapRecipes.commands.RecipeUpdateDto;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
 import mindera.midswap.SwapRecipes.converters.UserConverterI;
-import mindera.midswap.SwapRecipes.exceptions.CategoryNotFoundException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Category;
@@ -16,7 +15,6 @@ import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.persistence.repositories.CategoryJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
-import mindera.midswap.SwapRecipes.persistence.repositories.UserJPARepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,7 +69,7 @@ public class RecipeService implements RecipeServiceI {
         newRecipe.setCategoryIds(recipeDto.getCategory());
         Set<Ingredient> ingredientSet = recipeDto.getIngredients();
         if (ingredientSet != null) {
-            newRecipe.setIngredientsIds(recipeDto.getIngredients()
+            newRecipe.setExtendedIngredients(recipeDto.getIngredients()
                     .stream()
                     .map(ing -> {
                         Ingredient ingredient = ing;
@@ -129,7 +127,7 @@ public class RecipeService implements RecipeServiceI {
                 .orElseThrow(() -> new RecipeNotFoundException(RECIPE_NOT_FOUND));
         Recipe updatedRecipe = this.recipeConverterI.updateDtoToEntity(recipeUpdate, recipeToBeUpdated);
         updatedRecipe.setCategoryIds(recipeUpdate.getCategory());
-        updatedRecipe.setIngredientsIds(recipeUpdate.getIngredients());
+        updatedRecipe.setExtendedIngredients(recipeUpdate.getIngredients());
 
         this.recipeRepository.save(updatedRecipe);
         return this.recipeConverterI.entityToDto(updatedRecipe);

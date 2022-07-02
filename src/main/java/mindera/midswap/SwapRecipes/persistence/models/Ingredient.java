@@ -28,7 +28,7 @@ public class Ingredient {
 
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "ingredientsIds",
+    @ManyToMany(mappedBy = "extendedIngredients",
             fetch = FetchType.LAZY,
             cascade = CascadeType.DETACH)
     private Set<Recipe> recipesSet = new HashSet<>();
