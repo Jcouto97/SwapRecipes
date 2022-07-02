@@ -1,24 +1,22 @@
 package mindera.midswap.SwapRecipes;
 
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import mindera.midswap.SwapRecipes.persistence.models.User;
-import mindera.midswap.SwapRecipes.services.UserServiceImpI;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.Bean;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 @EnableCaching //guarda automaticamente numa colecção
 //receitas e ingredientes
 @SpringBootApplication
 public class Application {
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

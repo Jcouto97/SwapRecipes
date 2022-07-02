@@ -83,6 +83,7 @@ public class RecipeService implements RecipeServiceI {
         return this.recipeRepository.findByIngredient(ingredientId);
     }
 
+
     @Override
     public UserDto saveFavouriteRecipe(Long userId, Long recipeId) {
         Recipe recipe = recipeConverterI.dtoToEntity(getRecipeById(recipeId));

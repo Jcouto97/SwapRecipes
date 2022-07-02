@@ -4,9 +4,12 @@ import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
 import mindera.midswap.SwapRecipes.persistence.models.User;
 import mindera.midswap.SwapRecipes.services.UserServiceI;
+import mindera.midswap.SwapRecipes.zgreetings.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 //@RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/user") //@RequestMapping("/response")
 public class UserController {
 
     private UserServiceI userServiceI;
@@ -87,10 +91,25 @@ public class UserController {
         return this.userServiceI.addUser(userDto);
     }
 
-//
-//    @GetMapping("/list")
-//    public Iterable<User> list() {
-//        return this.userServiceI.list();
-//    }
+
+
+
+    @PostMapping(
+            value = "/postbody",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<User> postBody(@RequestBody User user) {
+        User persistedUser = userServiceI.save(user);
+        return ResponseEntity
+                .created(URI
+                        .create(String.format("/user/%s",
+                                user.getName(),
+                                user.getUsername(),
+                                user.getCitizenNumber(),
+                                user.getPassword(),
+                                user.getFavouriteRecipesIds())))
+
+                .body(persistedUser);
+    }
 
 }
