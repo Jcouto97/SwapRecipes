@@ -1,8 +1,10 @@
 package mindera.midswap.SwapRecipes.controllers;
 
 import lombok.RequiredArgsConstructor;
+import mindera.midswap.SwapRecipes.persistence.models.ApiRecipe;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
+import mindera.midswap.SwapRecipes.persistence.models.Results;
 import mindera.midswap.SwapRecipes.services.RecipeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,15 +19,27 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/api/v1")
 public class ExternalAPIController {
-    //String uri = "http://www.omdbapi.com/"; //localhost:8080/api/v1/mealbyid/52773
-    //String apikey = "PUT_HERE_YOUR_API_KEY";
+    //GET recipes
+    //https://spoonacular.com/food-api/docs#Search-Recipes-Complex
+
 
     private final RecipeService recipeService;
     String uri = "https://api.spoonacular.com/";
     String apikey = "b028691f707a4dd48a1222aeef34bd81";
 //https://api.spoonacular.com/food/products/search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
 
-    @GetMapping(path = "/ingredientsdb/{ingredient}")
+    @GetMapping(path = "/apirecipe/{ingredient}")
+    public ResponseEntity<Results> getMeal(@PathVariable String ingredient) {
+        //https://api.spoonacular.com/food/products/ search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
+        String finalUri = uri + "food/products/search?query=" + ingredient + "&apiKey=" + apikey;
+        System.out.println("finalUri = " + finalUri);
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Results> result = restTemplate.getForEntity(finalUri, Results.class);
+        return ResponseEntity.ok(result.getBody());
+    }
+
+/*
+*  @GetMapping(path = "/ingredientsdb/{ingredient}")
     public ResponseEntity<Ingredient> getMeal(@PathVariable String ingredient) {
         //https://api.spoonacular.com/food/products/ search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
         String finalUri = uri + "food/products/search?query=" + ingredient + "&apiKey=" + apikey;
@@ -34,6 +48,14 @@ public class ExternalAPIController {
         ResponseEntity<Ingredient> result = restTemplate.getForEntity(finalUri, Ingredient.class);
         return ResponseEntity.ok(result.getBody());
     }
+*/
+
+
+
+
+
+
+
 
     //https://api.spoonacular.com/recipes/{id}/ingredientWidget.json
 
