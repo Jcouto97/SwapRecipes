@@ -6,10 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.nio.file.LinkOption;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -35,6 +32,12 @@ public class Ingredient {
             fetch = FetchType.LAZY,
             cascade = CascadeType.DETACH)
     private Set<Recipe> recipesSet = new HashSet<>();
+
+    private String title;
+    private String image;
+    private String imageType;
+    private String type;
+    //private String products;
 
     //PERSIST em vez de ALL, porque com PERSIST impede que a brand seja apagada se pelo menos um vehículo a esitver a usar
 
