@@ -1,10 +1,7 @@
 package mindera.midswap.SwapRecipes.controllers;
 
 import lombok.RequiredArgsConstructor;
-import mindera.midswap.SwapRecipes.persistence.models.ApiRecipe;
-import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
-import mindera.midswap.SwapRecipes.persistence.models.Recipe;
-import mindera.midswap.SwapRecipes.persistence.models.Results;
+import mindera.midswap.SwapRecipes.externalApi.Type;
 import mindera.midswap.SwapRecipes.services.RecipeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,12 +26,12 @@ public class ExternalAPIController {
 //https://api.spoonacular.com/food/products/search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
 
     @GetMapping(path = "/apirecipe/{ingredient}")
-    public ResponseEntity<Results> getMeal(@PathVariable String ingredient) {
+    public ResponseEntity<Type> getMeal(@PathVariable String ingredient) {
         //https://api.spoonacular.com/food/products/ search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
         String finalUri = uri + "food/products/search?query=" + ingredient + "&apiKey=" + apikey;
         System.out.println("finalUri = " + finalUri);
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Results> result = restTemplate.getForEntity(finalUri, Results.class);
+        ResponseEntity<Type> result = restTemplate.getForEntity(finalUri, Type.class);
         return ResponseEntity.ok(result.getBody());
     }
 
