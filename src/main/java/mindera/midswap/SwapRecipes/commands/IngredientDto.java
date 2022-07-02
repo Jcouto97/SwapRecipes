@@ -28,9 +28,8 @@ public class IngredientDto {
    private Set<Recipe> recipeId;
 
 
-    private String title;
-    private String image;
-    private String imageType;
-    private String type;
+//    private String title;
+    private float amount;
+    private String unit;
     //private String products;
 }
