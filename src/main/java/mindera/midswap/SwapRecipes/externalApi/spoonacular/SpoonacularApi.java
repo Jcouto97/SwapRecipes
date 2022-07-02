@@ -24,13 +24,14 @@ public class SpoonacularApi {
 //localhost:8080/api/v1/ingredientsdb/yogurt
 //https://api.spoonacular.com/food/products/search?query=yogurt&apiKey=75f535603fa8415f8ce7778ca86ae7d1
 
+    //https://api.spoonacular.com/recipes/search?query=yogurt&apiKey=75f535603fa8415f8ce7778ca86ae7d1
     @GetMapping(path = "/ingredientsdb/{ingredient}")
-    public ResponseEntity<Type> getMeal(@PathVariable String ingredient) {
-        //https://api.spoonacular.com/food/products/ search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
-        String finalUri = uri + "food/products/search?query=" + ingredient + "&apiKey=" + apikey;
+    public ResponseEntity<Results> getMeal(@PathVariable String ingredient) {
+
+        String finalUri = uri + "recipes/search?query=" + ingredient + "&apiKey=" + apikey;
         System.out.println("finalUri = " + finalUri);
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Type> result = restTemplate.getForEntity(finalUri, Type.class);
+        ResponseEntity<Results> result = restTemplate.getForEntity(finalUri, Results.class);
         return ResponseEntity.ok(result.getBody());
 
 

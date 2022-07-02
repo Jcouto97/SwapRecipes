@@ -1,40 +1,40 @@
-package mindera.midswap.SwapRecipes.externalApi.MealDB;
-
-//package mindera.midswap.SwapRecipes.controllers;
-
-import lombok.RequiredArgsConstructor;
-import mindera.midswap.SwapRecipes.externalApi.spoonacular.Type;
-import mindera.midswap.SwapRecipes.services.RecipeService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-
-@RequiredArgsConstructor
-@RestController
-@RequestMapping("/api/v1")
-
-public class MealDBAPI {
-    private final RecipeService recipeService;
-
-    String uri = "http://www.themealdb.com/api/json/v1";
-    String apikey = "1";
-
-
-
-    @GetMapping(path = "/mealbyname/{mealname}")
-    public ResponseEntity<Meals> getMeal(@PathVariable String mealname) {
-        //www.themealdb.com/api/json/v1 /1/ lookup.php?i=52772
-        String finalUri = uri + "/" + apikey + "/search.php?s=" + mealname;
-        //String finalUri = uri + "?t=" + mealId + "&apikey=" + apikey;
-        System.out.println("finalUri = " + finalUri);
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Meals> result = restTemplate.getForEntity(finalUri, Meals.class);
-        System.out.println(result);
-        return ResponseEntity.ok(result.getBody());
-    }
+//package mindera.midswap.SwapRecipes.externalApi.MealDB;
+//
+////package mindera.midswap.SwapRecipes.controllers;
+//
+//import lombok.RequiredArgsConstructor;
+//
+//import mindera.midswap.SwapRecipes.services.RecipeService;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.web.client.RestTemplate;
+//
+//@RequiredArgsConstructor
+//@RestController
+//@RequestMapping("/api/v1")
+//
+//public class MealDBAPI {
+//    private final RecipeService recipeService;
+//
+//    String uri = "http://www.themealdb.com/api/json/v1";
+//    String apikey = "1";
+//
+//
+//
+//    @GetMapping(path = "/mealbyname/{mealname}")
+//    public ResponseEntity<Meals> getMeal(@PathVariable String mealname) {
+//        //www.themealdb.com/api/json/v1 /1/ lookup.php?i=52772
+//        String finalUri = uri + "/" + apikey + "/search.php?s=" + mealname;
+//        //String finalUri = uri + "?t=" + mealId + "&apikey=" + apikey;
+//        System.out.println("finalUri = " + finalUri);
+//        RestTemplate restTemplate = new RestTemplate();
+//        ResponseEntity<Meals> result = restTemplate.getForEntity(finalUri, Meals.class);
+//        System.out.println(result);
+//        return ResponseEntity.ok(result.getBody());
+//    }
 
 //
 //        {
@@ -153,5 +153,5 @@ public class MealDBAPI {
 //            }
 //    ]
 //        }
-    }
+//    }
 

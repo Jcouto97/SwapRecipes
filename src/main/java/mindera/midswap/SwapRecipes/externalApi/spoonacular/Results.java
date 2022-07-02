@@ -1,15 +1,14 @@
 package mindera.midswap.SwapRecipes.externalApi.spoonacular;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties
-public class Product {
+public class Results {
     private int id;
     private String title;
     private String image;
-    private String jpeg;
+//    private String jpeg;
 
 //    public Product(int id, String title, String image, String jpeg) {
 //        this.id = id;
@@ -46,13 +45,13 @@ public class Product {
         this.image = image;
     }
 
-    public String getJpeg() {
-        return jpeg;
-    }
-
-    public void setJpeg(String jpeg) {
-        this.jpeg = jpeg;
-    }
+//    public String getJpeg() {
+//        return jpeg;
+//    }
+//
+//    public void setJpeg(String jpeg) {
+//        this.jpeg = jpeg;
+//    }
 
 
 }

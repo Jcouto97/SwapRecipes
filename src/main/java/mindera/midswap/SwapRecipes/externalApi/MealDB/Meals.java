@@ -1,49 +1,49 @@
-package mindera.midswap.SwapRecipes.externalApi.MealDB;
-
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.ToString;
-
-@JsonIgnoreProperties
-@ToString
-public class Meals {
-    private int idMeal;
-    private String strMeal;
-    private String strCategory;
-    private String strInstructions;
-
-    public int getIdMeal() {
-        return idMeal;
-    }
-
-    public void setIdMeal(int idMeal) {
-        this.idMeal = idMeal;
-    }
-
-    public String getStrMeal() {
-        return strMeal;
-    }
-
-    public void setStrMeal(String strMeal) {
-        this.strMeal = strMeal;
-    }
-
-    public String getStrCategory() {
-        return strCategory;
-    }
-
-    public void setStrCategory(String strCategory) {
-        this.strCategory = strCategory;
-    }
-
-    public String getStrInstructions() {
-        return strInstructions;
-    }
-
-    public void setStrInstructions(String strInstructions) {
-        this.strInstructions = strInstructions;
-    }
-}
+//package mindera.midswap.SwapRecipes.externalApi.MealDB;
+//
+//
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import lombok.ToString;
+//
+//@JsonIgnoreProperties
+//@ToString
+//public class Meals {
+//    private int idMeal;
+//    private String strMeal;
+//    private String strCategory;
+//    private String strInstructions;
+//
+//    public int getIdMeal() {
+//        return idMeal;
+//    }
+//
+//    public void setIdMeal(int idMeal) {
+//        this.idMeal = idMeal;
+//    }
+//
+//    public String getStrMeal() {
+//        return strMeal;
+//    }
+//
+//    public void setStrMeal(String strMeal) {
+//        this.strMeal = strMeal;
+//    }
+//
+//    public String getStrCategory() {
+//        return strCategory;
+//    }
+//
+//    public void setStrCategory(String strCategory) {
+//        this.strCategory = strCategory;
+//    }
+//
+//    public String getStrInstructions() {
+//        return strInstructions;
+//    }
+//
+//    public void setStrInstructions(String strInstructions) {
+//        this.strInstructions = strInstructions;
+//    }
+//}
 
 
 //
