@@ -1,6 +1,7 @@
 package mindera.midswap.SwapRecipes.controllers;
 
 import lombok.RequiredArgsConstructor;
+import mindera.midswap.SwapRecipes.externalApi.Results;
 import mindera.midswap.SwapRecipes.externalApi.Type;
 import mindera.midswap.SwapRecipes.services.RecipeService;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +26,17 @@ public class ExternalAPIController {
     String apikey = "b028691f707a4dd48a1222aeef34bd81";
 //https://api.spoonacular.com/food/products/search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
 
+    //  https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2&apiKey=b028691f707a4dd48a1222aeef34bd81 //auth
 
-    @GetMapping(path = "/apirecipe/{ingredient}")
+
+
+    @GetMapping(path = "/byrecipe/{ingredient}")
     public ResponseEntity<Type> getMeal(@PathVariable String ingredient) {
-        //https://api.spoonacular.com/food/products/ search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
-        String finalUri = uri + "food/products/search?query=" + ingredient + "&apiKey=" + apikey;
+        //https://api.spoonacular.com/food/products/search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
+
+        //https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=b028691f707a4dd48a1222aeef34bd81
+
+        String finalUri = uri + "recipes/complexSearch?query=" + ingredient + "&apiKey=" + apikey;
         System.out.println("finalUri = " + finalUri);
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Type> result = restTemplate.getForEntity(finalUri, Type.class);

@@ -7,17 +7,14 @@ import java.util.List;
 
 @JsonIgnoreProperties
 public class Type {
-    private List<Product> products;
+    private List<Results> results; //nome tem q ser igual à prop que vem no JSON
 
-//    public Type(List<Product> products) {
-//        this.products = products;
-//    }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<Results> getResults() {
+        return results;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setResults(List<Results> results) {
+        this.results = results;
     }
 }
