@@ -25,6 +25,7 @@ public class ExternalAPIController {
     String apikey = "b028691f707a4dd48a1222aeef34bd81";
 //https://api.spoonacular.com/food/products/search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
 
+
     @GetMapping(path = "/apirecipe/{ingredient}")
     public ResponseEntity<Type> getMeal(@PathVariable String ingredient) {
         //https://api.spoonacular.com/food/products/ search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
@@ -34,6 +35,17 @@ public class ExternalAPIController {
         ResponseEntity<Type> result = restTemplate.getForEntity(finalUri, Type.class);
         return ResponseEntity.ok(result.getBody());
     }
+
+
+//    @GetMapping(path = "/apirecipe/{ingredient}")
+//    public ResponseEntity<Type> getMeal(@PathVariable String ingredient) {
+//        //https://api.spoonacular.com/food/products/ search?query=yogurt&apiKey=b028691f707a4dd48a1222aeef34bd81
+//        String finalUri = uri + "food/products/search?query=" + ingredient + "&apiKey=" + apikey;
+//        System.out.println("finalUri = " + finalUri);
+//        RestTemplate restTemplate = new RestTemplate();
+//        ResponseEntity<Type> result = restTemplate.getForEntity(finalUri, Type.class);
+//        return ResponseEntity.ok(result.getBody());
+//    }
 
 /*
 *  @GetMapping(path = "/ingredientsdb/{ingredient}")
