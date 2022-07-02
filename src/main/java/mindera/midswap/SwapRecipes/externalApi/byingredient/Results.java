@@ -1,4 +1,4 @@
-package mindera.midswap.SwapRecipes.externalApi;
+package mindera.midswap.SwapRecipes.externalApi.byingredient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
