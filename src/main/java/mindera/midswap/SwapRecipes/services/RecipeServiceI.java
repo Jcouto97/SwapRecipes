@@ -39,4 +39,6 @@ List<RecipeDto> getRecipesByIngredientName(String ingredientName);
     List<RecipeDto> getGlutenFreeRecipes();
 
     List<RecipeDto> getDairyFreeRecipes();
+
+    RecipeDto addIngredientToRecipe(Long ingredientId, Long recipeId);
 }

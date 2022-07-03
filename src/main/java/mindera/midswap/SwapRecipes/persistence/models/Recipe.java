@@ -51,7 +51,7 @@ public class Recipe {
 
     @JsonIgnore
     @Column(nullable = false, unique = false, updatable = true)
-    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JoinTable(name = "usedIngredients",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
@@ -78,6 +78,9 @@ public class Recipe {
     }
 
 
+    public void addSingleIngredient(Ingredient ingredient){
+        this.extendedIngredients.add(ingredient);
+    }
 
     public void addIngredients(Set<Ingredient> ingredientsIds) {
         this.extendedIngredients.addAll(ingredientsIds);
