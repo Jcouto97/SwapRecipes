@@ -6,6 +6,7 @@ import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
 import mindera.midswap.SwapRecipes.converters.UserConverterI;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
 import mindera.midswap.SwapRecipes.exceptions.UserNotFoundException;
+import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.persistence.repositories.CategoryJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
@@ -52,7 +53,6 @@ public class RecipeServiceTest {
     IngrendientConverterI ingrendientConverterI;
 
 
-
     @BeforeEach
     public void setup() {
         this.recipeServiceI = new RecipeService(recipeConverterI, recipeJPARepository, userServiceI,
@@ -60,10 +60,8 @@ public class RecipeServiceTest {
     }
 
 
-
-
     @Test
-    void getRecipeSizeTest(){
+    void getRecipeSizeTest() {
         when(recipeJPARepository.findAll()).thenReturn(List.of(RECIPE_ENTITY_1, RECIPE_ENTITY_2));
 
         // assert
@@ -71,11 +69,13 @@ public class RecipeServiceTest {
     }
 
 
-
     @Test
-    void saveRecipeTest(){
+    void saveRecipeTest() {
+        when(recipeJPARepository.findByTitle(any())).thenReturn(Optional.empty());
 
-        when(recipeJPARepository.findByTitle(any())).thenReturn(Optional.ofNullable(RECIPE_ENTITY_1));
+        when(recipeConverterI.entityToDto(any()))
+                .thenReturn(RECIPE_DTO_1);
+
 
         when(recipeJPARepository.save(any())).thenReturn(RECIPE_ENTITY_1);
 
@@ -87,18 +87,15 @@ public class RecipeServiceTest {
 
     @Test
     void testGetRecipeByIdSuccess() {
-//        Expected :Recipe(id=1, title=bacalhau, readyInMinutes=60, sourceUrl=www.tugameals.com, vegetarian=true, vegan=false, glutenFree=false, dairyFree=false, cheap=true, summary=very nice, usersThatLiked=[], extendedIngredients=[], categoryIds=[])
-//        Actual   :null
-
         // arrange
         when(recipeJPARepository.findById(any()))
                 .thenReturn(Optional.of(RECIPE_ENTITY_1));
 
         // act
-        RecipeDto result = recipeConverterI.entityToDto(recipeServiceI.getRecipeById(any()));
+        Recipe result = recipeServiceI.getRecipeById(any());
 
         // assert
-        assertEquals(RECIPE_DTO_1, result);
+        assertEquals(RECIPE_ENTITY_1, result);
     }
 
     @Test
