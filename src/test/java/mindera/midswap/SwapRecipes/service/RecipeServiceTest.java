@@ -110,6 +110,60 @@ public class RecipeServiceTest {
         // assert
         assertThrows(RecipeNotFoundException.class, action);
     }
+
+    @Test
+    void testGetRecipeDtoByIdSuccess(){
+        when(recipeJPARepository.findById(any()))
+                .thenReturn(Optional.of(RECIPE_ENTITY_1));
+
+        when(recipeConverterI.entityToDto(any())).thenReturn(RECIPE_DTO_1);
+
+        RecipeDto result = recipeServiceI.getRecipeDtoById(any());
+
+        assertEquals(RECIPE_DTO_1, result);
+    }
+
+    @Test
+    void testGetRecipeDtoByIdNotFound() {   //PORQUE FUNCIONA?
+        // arrange
+        when(recipeJPARepository.findById(55L))
+                .thenReturn(Optional.empty());
+
+        // atc
+        Executable action = () -> recipeServiceI.getRecipeDtoById(55L);
+
+        // assert
+        assertThrows(RecipeNotFoundException.class, action);
+    }
+
+    @Test
+    void RemoveRecipeTest(){
+        //arrange
+
+        when(recipeJPARepository.findById(1L))
+                .thenReturn(Optional.empty());
+        //act
+
+        Executable action = () -> recipeServiceI.removeRecipe(1L);
+
+        //assert
+        assertThrows(RecipeNotFoundException.class, action);
+
+    }
+
+    @Test
+    void testGetRecipesByIngredientSuccess(){
+        when(recipeJPARepository.findByIngredient(any()))
+                .thenReturn(List.of(RECIPE_ENTITY_1));
+
+        when(recipeConverterI.entityListToDtoList(any())).thenReturn(List.of(RECIPE_DTO_1));
+
+       List <RecipeDto> result = recipeServiceI.getRecipesByIngredient(any());
+
+        assertEquals(List.of(RECIPE_DTO_1), result);
+    }
+
+
 }
 
 

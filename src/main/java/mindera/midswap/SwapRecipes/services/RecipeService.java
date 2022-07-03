@@ -74,8 +74,6 @@ public class RecipeService implements RecipeServiceI {
         newRecipe.setTitle(recipeDto.getTitle());
         newRecipe.setCategoryIds(recipeDto.getCategory());
 
-
-
         Set<Ingredient> ingredientSet = this.ingrendientConverterI.apiEntityToEntity(recipeDto.getExtendedIngredients());
 
 //        Set<Ingredient> ingredientSet = recipeDto.getExtendedIngredients()
@@ -83,10 +81,6 @@ public class RecipeService implements RecipeServiceI {
 //                    .map(apiIngredients -> this.modelMapper.map(apiIngredients, Ingredient.class)).collect(Collectors.toSet());
 
 //objetivo passar de apiIngredient -> Ingredient
-
-
-
-
 
         if (ingredientSet != null) {
             newRecipe.setExtendedIngredients(recipeDto.getExtendedIngredients()
