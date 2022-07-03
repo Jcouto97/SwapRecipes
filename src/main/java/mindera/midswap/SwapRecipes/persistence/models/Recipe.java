@@ -63,8 +63,8 @@ public class Recipe {
     @JsonIgnore
     @Column(nullable = false, unique = false, updatable = true)
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinTable(name = "recipeCategory",                                 //nome da tabela que junta as duas
-            joinColumns = @JoinColumn(name = "recipe_id"),              //nome das colunas da nova tabela
+    @JoinTable(name = "recipeCategory", //nome da tabela que junta as duas
+            joinColumns = @JoinColumn(name = "recipe_id"), //nome das colunas da nova tabela
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categoryIds = new HashSet<>();
 
@@ -78,21 +78,7 @@ public class Recipe {
         this.extendedIngredients = extendedIngredients;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
 
     public void addIngredients(Set<Ingredient> ingredientsIds) {
         this.extendedIngredients.addAll(ingredientsIds);
@@ -105,6 +91,7 @@ public class Recipe {
     public void addCategory(Category category) {
         this.categoryIds.add(category);
     }
+
 
 
 }

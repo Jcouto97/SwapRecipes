@@ -135,7 +135,7 @@ public class RecipeService implements RecipeServiceI {
         return recipeConverterI.entityToDto(recipe);
     }
 
-    @Override
+    @Override //está a devolver todos
     public List<RecipeDto> getRecipesByCategory(Long categoryId) {
         List<Recipe> recipes = this.recipeRepository.findByCategory(categoryId);
         return this.recipeConverterI.entityListToDtoList(recipes);

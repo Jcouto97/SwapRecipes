@@ -25,10 +25,10 @@ public class IngredientDto {
     @Size(min = 2, max = 50, message = "Name should have at least 2 characters")
     private String name;
 
-   private Set<Recipe> recipeId;
+    private Set<Recipe> recipeId; //será um set de ApiRecipe?
 
 
-//    private String title;
+    //    private String title;
     private float amount;
     private String unit;
     //private String products;

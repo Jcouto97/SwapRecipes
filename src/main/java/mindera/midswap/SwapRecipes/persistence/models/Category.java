@@ -28,10 +28,14 @@ public class Category {
 
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "categoryIds",       //igual ao nome da lista de categories na Receita
+    @ManyToMany(mappedBy = "categoryIds", //igual ao nome da lista de categories na Receita
             fetch = FetchType.LAZY,
             cascade = CascadeType.DETACH)
     private Set<Recipe> recipesSet = new HashSet<>();
+
+
+
+
 
     public Set<Recipe> getRecipesSet() {
         return recipesSet;

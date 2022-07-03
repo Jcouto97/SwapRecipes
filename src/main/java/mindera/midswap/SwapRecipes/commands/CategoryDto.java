@@ -22,5 +22,5 @@ public class CategoryDto {
     @NotEmpty
     @Size(max = 20)
     private String name;
-    private Set<Recipe> recipe_Id;
+    private Set<Recipe> recipeId; //mudei de recipe_id
 }

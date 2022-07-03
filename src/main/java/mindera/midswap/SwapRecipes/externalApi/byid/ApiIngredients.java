@@ -7,12 +7,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties
 public class ApiIngredients {
 
-
-     private String name;
-     private float amount;
-     private String unit;
-
-
+    private Long id; //para aparecer o id do ingredient no postman
+    private String name;
+    private float amount;
+    private String unit;
 
 
     public String getName() {
@@ -23,7 +21,13 @@ public class ApiIngredients {
         this.name = name;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public float getAmount() {
         return amount;

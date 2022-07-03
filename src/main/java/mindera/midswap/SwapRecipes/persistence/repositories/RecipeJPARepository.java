@@ -20,6 +20,7 @@ public interface RecipeJPARepository extends JpaRepository<Recipe, Long> {
 
     Optional<Object> findByTitle(String name);
 
+    //props da Recipe
     @Query("Select r FROM Recipe r JOIN r.categoryIds i WHERE i.id = ?1")
     List<Recipe> findByCategory(Long category);
 }
