@@ -66,7 +66,7 @@ public class RecipeServiceTest {
 //
 
     @Test
-    void getRecipesTest(){
+    void getRecipeSizeTest(){
         when(recipeJPARepository.findAll()).thenReturn(List.of(RECIPE_ENTITY_1, RECIPE_ENTITY_2));
 
         // assert

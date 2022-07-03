@@ -48,30 +48,30 @@ public class UserControllerTest {
         RestAssured.port = this.port;
     }
 
-    @Test
-        //Rest Template
-    void test_getStudentById_shouldReturnStudentWithId1() {
-        // arrange
-        when(authenticationProvider.getAuthentication(any(HttpServletRequest.class)))
-                .thenReturn(AUTHENTICATION_1);
-        when(userJPARepository.findById(1L))
-                .thenReturn(Optional.of(USER_ENTITY_1));
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer something");
-        HttpEntity<Object> entity = new HttpEntity<>(headers);
-
-        // act
-        ResponseEntity<UserDto> response = restTemplate.exchange(
-                "/api/v1/user/1",
-                HttpMethod.GET,
-                entity,
-                UserDto.class);
-
-        // assert
-        verify(userJPARepository, times(1))
-                .findById(anyLong());
-        assertEquals(USER_DTO_NO_PASS_1, response.getBody());
-    }
+//    @Test
+//        //Rest Template
+//    void test_getStudentById_shouldReturnStudentWithId1() {
+//        // arrange
+//        when(authenticationProvider.getAuthentication(any(HttpServletRequest.class)))
+//                .thenReturn(AUTHENTICATION_1);
+//        when(userJPARepository.findById(1L))
+//                .thenReturn(Optional.of(USER_ENTITY_1));
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.add("Authorization", "Bearer something");
+//        HttpEntity<Object> entity = new HttpEntity<>(headers);
+//
+//        // act
+//        ResponseEntity<UserDto> response = restTemplate.exchange(
+//                "/api/v1/user/1",
+//                HttpMethod.GET,
+//                entity,
+//                UserDto.class);
+//
+//        // assert
+//        verify(userJPARepository, times(1))
+//                .findById(anyLong());
+//        assertEquals(USER_DTO_NO_PASS_1, response.getBody());
+//    }
 
 }

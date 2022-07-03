@@ -18,10 +18,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
 import java.util.Optional;
 
-import static mindera.midswap.SwapRecipes.MockedPojos.USER_DTO_1;
-import static mindera.midswap.SwapRecipes.MockedPojos.USER_ENTITY_1;
+import static mindera.midswap.SwapRecipes.MockedPojos.*;
+import static mindera.midswap.SwapRecipes.MockedPojos.RECIPE_ENTITY_2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
@@ -49,6 +50,18 @@ public class UserServiceTest {
     @Nested
     class getUserByIdTest {
 
+
+        @Test
+        void getUsersSizeTest(){
+            when(userJPARepository.findAll()).thenReturn(List.of(USER_ENTITY_1, USER_ENTITY_2));
+
+            // assert
+            assertEquals(2, userJPARepository.findAll().size());
+        }
+
+
+
+
         @Test
         void testGetUserByIdSuccess() {
             //Expected :User(id=1, name=Elisa Moutinho, citizenNumber=100000001, username=elisamoutinho, password=elisamoutinho, favouriteRecipesIds=[])
@@ -67,11 +80,11 @@ public class UserServiceTest {
         @Test
         void testGetUserByIdNotFound() {   //PORQUE FUNCIONA?
             // arrange
-            when(userJPARepository.findById(3L))
+            when(userJPARepository.findById(55L))
                     .thenReturn(Optional.empty());
 
             // atc
-            Executable action = () -> userServiceI.getUserById(3L);
+            Executable action = () -> userServiceI.getUserById(55L);
 
             // assert
             assertThrows(UserNotFoundException.class, action);
