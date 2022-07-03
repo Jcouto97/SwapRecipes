@@ -40,6 +40,7 @@ public class Ingredient {
     private String unit;
 
 
+
 //    public Ingredient findByNameForQuery(Set<Ingredient> ingredientList){
 //        for (Ingredient ingredient: ingredientList){
 //
