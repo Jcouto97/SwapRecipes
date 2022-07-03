@@ -19,7 +19,7 @@ spring:
       show-sql: true
   datasource:
     platform: postgres
-    url: ${POSTGRES_URL:jdbc:postgresql://ec2-23-23-151-191.compute-1.amazonaws.com:5432/d7rnaolbfphe0n}
-    username: ${POSTGRES_USER:vcairsauvnetnm}
-    password: ${POSTGRES_PASSWORD:9bd86207e33ed95aac93cce30b5e9ea81ddba2ef0217ace4c30f6fd9fd985929}
+    url: ${POSTGRES_URL:jdbc:postgresql://ec2-52-212-228-71.eu-west-1.compute.amazonaws.com:5432/d32jsq0d9qne7c}
+    username: ${POSTGRES_USER:cebjfzqlyhjxyb}
+    password: ${POSTGRES_PASSWORD:cc314e79ba42655459e1ff86dc197afe13661b6134c237d6c7ce0ab29a2f78e1}
     driverClassName: org.postgresql.Driver
