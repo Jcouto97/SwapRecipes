@@ -25,8 +25,8 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "recipe_id", nullable = false, unique = true, updatable = false)
     private Long id;
-    @Column(length = 5000)
-    private String description;
+//    @Column(length = 5000)
+//    private String description;
 
     //private String name;
     private String title;

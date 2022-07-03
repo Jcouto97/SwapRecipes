@@ -19,8 +19,12 @@ import java.util.ArrayList;
 import static mindera.midswap.SwapRecipes.security.SecurityConstants.*;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
-    public JWTAuthorizationFilter(AuthenticationManager authManager) {
+
+    private AuthenticationProvider provider;
+
+    public JWTAuthorizationFilter(AuthenticationManager authManager, AuthenticationProvider provider) {
         super(authManager);
+        this.provider = provider;
     }
 
     @Override
@@ -34,33 +38,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             return;
         }
 
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
+        UsernamePasswordAuthenticationToken authentication = provider.getAuthentication(req);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(req, res);
-    }
-
-    // Reads the JWT from the Authorization header, and then uses JWT to validate the token
-    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-        String token = request.getHeader(HEADER_STRING);
-
-        if (token != null) {
-            String user = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
-                    .build()
-                    .verify(token.replace(TOKEN_PREFIX, ""))
-                    .getSubject();
-
-            if (user != null) {
-                // new arraylist means authorities
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-            }
-
-            return null;
-        }
-
-        return null;
-    }
-    public SecretKey secretKey() {
-        return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 }

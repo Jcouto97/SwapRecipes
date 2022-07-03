@@ -25,10 +25,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private UserServiceImpI userDetailsService;
     private PasswordEncoder bCryptPasswordEncoder;
+    private AuthenticationProvider provider;
 
-    public WebSecurity(UserServiceImpI userService, PasswordEncoder bCryptPasswordEncoder) {
+    public WebSecurity(UserServiceImpI userService, PasswordEncoder bCryptPasswordEncoder, AuthenticationProvider provider) {
         this.userDetailsService = userService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.provider = provider;
     }
 
     @Override
@@ -43,7 +45,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager(), provider))
                 // this disables session creation on Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }

@@ -36,13 +36,13 @@ public class RecipeService implements RecipeServiceI {
 
     private final CategoryServiceI categoryServiceI;
 
-    private final IngredientServiceI ingredientServiceI;
+//    private final IngredientServiceI ingredientServiceI;
     private IngredientJPARepository ingredientJPARepository;
 
-    private CategoryJPARepository categoryJPARepository;
-
-    private UserConverterI userConverterI;
-    private ModelMapper modelMapper;
+//    private CategoryJPARepository categoryJPARepository;
+//
+//    private UserConverterI userConverterI;
+//    private ModelMapper modelMapper;
 
     private IngrendientConverterI ingrendientConverterI;
 
