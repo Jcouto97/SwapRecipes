@@ -44,4 +44,9 @@ public class IngredientController {
         return this.ingredientServiceI.updateIngredient(id, ingredientUpdateDto);
     }
 
+    @GetMapping("/ingredientName/{ingredientName}")
+    public List<IngredientDto> getIngredientByName(@PathVariable("ingredientName") String ingredientName) {
+        return this.ingredientServiceI.findByNameForQuery(ingredientName);
+    }
+
 }

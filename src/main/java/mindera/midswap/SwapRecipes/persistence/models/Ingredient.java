@@ -40,6 +40,12 @@ public class Ingredient {
     private String unit;
 
 
+//    public Ingredient findByNameForQuery(Set<Ingredient> ingredientList){
+//        for (Ingredient ingredient: ingredientList){
+//
+//        }
+//    }
+
     //PERSIST em vez de ALL, porque com PERSIST impede que a brand seja apagada se pelo menos um vehículo a esitver a usar
 
 

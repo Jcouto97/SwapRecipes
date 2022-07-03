@@ -4,7 +4,6 @@ package mindera.midswap.SwapRecipes.services;
 import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.IngredientDto;
 import mindera.midswap.SwapRecipes.commands.IngredientUpdateDto;
-import mindera.midswap.SwapRecipes.converters.IngredientConverterImp;
 import mindera.midswap.SwapRecipes.converters.IngrendientConverterI;
 import mindera.midswap.SwapRecipes.exceptions.IngredientAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.IngredientNotFoundException;
@@ -12,6 +11,7 @@ import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static mindera.midswap.SwapRecipes.exceptions.exceptionMessages.ExceptionMessages.INGREDIENT_ALREADY_EXISTS;
@@ -41,6 +41,7 @@ public class IngredientServiceImp implements IngredientServiceI{
                 .orElseThrow(() -> new IngredientNotFoundException(INGREDIENT_NOT_FOUND));
     }
 
+    //NÃO ESQUECER ALTERAR ESTE
     @Override
     public IngredientDto addIngredient(Ingredient ingredient) {
         if(this.ingredientJPARepository.findByName(ingredient.getName()).isPresent()) {
@@ -72,5 +73,21 @@ public class IngredientServiceImp implements IngredientServiceI{
     @Override
     public boolean isIngredientPresent(Long id) {
         return this.ingredientJPARepository.findById(id).isPresent();
+    }
+
+    @Override
+    public List<IngredientDto> findByNameForQuery(String ingredientName) {
+        List<Ingredient> ingredientList = this.ingredientJPARepository.findByNameForQuery(ingredientName);
+        return this.ingredientConverter.entityListToDtoList(ingredientList);
+
+        //        //ir buscar todos
+//        List<Ingredient> ingredientList = this.ingredientJPARepository.findAll();
+//        List<IngredientDto> ingredientDtoList = new ArrayList<>();
+//        for (Ingredient ingredient: ingredientList) {
+//            if (ingredient.getName().equals(ingredientName)){
+//                ingredientDtoList.add(this.ingredientConverter.entityToDto(ingredient));
+//            }
+//        }
+//       return ingredientDtoList;
     }
 }

@@ -21,4 +21,6 @@ public interface IngredientServiceI {
     IngredientDto updateIngredient(Long id, IngredientUpdateDto ingredientUpdateDto);
 
     boolean isIngredientPresent(Long id);
+
+    List<IngredientDto> findByNameForQuery(String ingredientName);
 }
