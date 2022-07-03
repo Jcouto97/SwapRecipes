@@ -33,11 +33,7 @@ public class RecipeService implements RecipeServiceI {
     private final RecipeJPARepository recipeRepository;
     private final UserServiceI userServiceI;
     private final CategoryServiceI categoryServiceI;
-    private final IngredientServiceI ingredientServiceI;
     private IngredientJPARepository ingredientJPARepository;
-    private CategoryJPARepository categoryJPARepository;
-    private UserConverterI userConverterI;
-    private ModelMapper modelMapper;
     private IngrendientConverterI ingrendientConverterI;
 
 
@@ -102,36 +98,52 @@ public class RecipeService implements RecipeServiceI {
     @Override
     public List<RecipeDto> getRecipesByIngredientName(String ingredientName) {
         List<Recipe> recipes = this.recipeRepository.findByIngredientName(ingredientName);
+        if(recipes.isEmpty()) {
+            throw new RecipeNotFoundException(RECIPE_NOT_FOUND);
+        }
         return this.recipeConverterI.entityListToDtoList(recipes);
     }
 
     @Override
     public List<RecipeDto> getVegetarianRecipes() {
         List<Recipe> recipes = this.recipeRepository.findVegetarianRecipes();
+        if(recipes.isEmpty()) {
+            throw new RecipeNotFoundException(RECIPE_NOT_FOUND);
+        }
         return this.recipeConverterI.entityListToDtoList(recipes);
     }
 
     @Override
     public List<RecipeDto> getVeganRecipes() {
         List<Recipe> recipes = this.recipeRepository.findVeganRecipes();
+        if(recipes.isEmpty()) {
+            throw new RecipeNotFoundException(RECIPE_NOT_FOUND);
+        }
         return this.recipeConverterI.entityListToDtoList(recipes);
     }
 
     @Override
     public List<RecipeDto> getGlutenFreeRecipes() {
         List<Recipe> recipes = this.recipeRepository.findGlutenFreeRecipes();
+        if(recipes.isEmpty()) {
+            throw new RecipeNotFoundException(RECIPE_NOT_FOUND);
+        }
         return this.recipeConverterI.entityListToDtoList(recipes);
     }
 
     @Override
     public List<RecipeDto> getDairyFreeRecipes() {
         List<Recipe> recipes = this.recipeRepository.findDairyFreeRecipes();
+        if(recipes.isEmpty()) {
+            throw new RecipeNotFoundException(RECIPE_NOT_FOUND);
+        }
         return this.recipeConverterI.entityListToDtoList(recipes);
     }
 
     @Override
     public UserDto saveFavouriteRecipe(Long userId, Long recipeId) {
         Recipe recipe = getRecipeById(recipeId);
+        //if user of recipe doesnt exist, throw exception
         return this.userServiceI.saveFavouriteRecipe(userId, recipe);
     }
 
@@ -147,6 +159,9 @@ public class RecipeService implements RecipeServiceI {
     @Override //RecipeServiceI "return value of the method is never used
     public List<RecipeDto> findByCategory(Long categoryId) {
         List<Recipe> recipes = this.recipeRepository.findByCategory(categoryId);
+        if(recipes.isEmpty()) {
+            throw new RecipeNotFoundException(CATEGORY_NOT_FOUND);
+        }
         return this.recipeConverterI.entityListToDtoList(recipes);
     }
 

@@ -7,14 +7,14 @@ import mindera.midswap.SwapRecipes.commands.CategoryUpdateDto;
 import mindera.midswap.SwapRecipes.converters.CategoryConverterI;
 import mindera.midswap.SwapRecipes.exceptions.CategoryAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.CategoryNotFoundException;
+import mindera.midswap.SwapRecipes.exceptions.UserNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Category;
 import mindera.midswap.SwapRecipes.persistence.repositories.CategoryJPARepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static mindera.midswap.SwapRecipes.exceptions.exceptionMessages.ExceptionMessages.CATEGORY_ALREADY_EXISTS;
-import static mindera.midswap.SwapRecipes.exceptions.exceptionMessages.ExceptionMessages.CATEGORY_NOT_FOUND;
+import static mindera.midswap.SwapRecipes.exceptions.exceptionMessages.ExceptionMessages.*;
 
 @AllArgsConstructor
 @Service
@@ -25,7 +25,11 @@ public class CategoryServiceImp implements CategoryServiceI{
 
     @Override
     public List<CategoryDto> getCategoriesList() {
-        return this.categoryConverterI.entityListToDtoList(this.categoryJPARepository.findAll());
+        List<Category> categoriesList = this.categoryJPARepository.findAll();
+        if (categoriesList.isEmpty()) {
+            throw new UserNotFoundException(CATEGORY_NOT_FOUND);
+        }
+        return this.categoryConverterI.entityListToDtoList(categoriesList);
     }
 
     @Override
