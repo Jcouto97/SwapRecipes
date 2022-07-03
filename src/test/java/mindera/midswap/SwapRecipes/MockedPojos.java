@@ -116,18 +116,18 @@ public class MockedPojos {
             .build();
 
 
-    public static final UserDto USER_DTO_NO_PASS_1 = UserDto.builder()
-            .id(1L)
-            .name("Elisa Moutinho")
-            .citizenNumber(100000001L)
-            .username("elisamoutinho")
-            .favouriteRecipes(new ArrayList<>())
-            .build();
-
-
-    //acceptance tests
-    public static final UsernamePasswordAuthenticationToken AUTHENTICATION_1 = new UsernamePasswordAuthenticationToken(
-            "rafael.miranda", null, new ArrayList<>());
-
-    public static final Map<String, String> AUTH_HEADER = Map.of("Authorization", "Bearer jwtsomething");
+//    public static final UserDto USER_DTO_NO_PASS_1 = UserDto.builder()
+//            .id(1L)
+//            .name("Elisa Moutinho")
+//            .citizenNumber(100000001L)
+//            .username("elisamoutinho")
+//            .favouriteRecipes(new ArrayList<>())
+//            .build();
+//
+//
+//    //acceptance tests
+//    public static final UsernamePasswordAuthenticationToken AUTHENTICATION_1 = new UsernamePasswordAuthenticationToken(
+//            "rafael.miranda", null, new ArrayList<>());
+//
+//    public static final Map<String, String> AUTH_HEADER = Map.of("Authorization", "Bearer jwtsomething");
 }

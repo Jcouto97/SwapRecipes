@@ -60,15 +60,7 @@ public class RecipeServiceTest {
     }
 
 
-//    @Test
-//    void getRecipeTest(){
-//        when(recipeJPARepository.save(RECIPE_ENTITY_1).
-////                thenReturn(List.of(RECIPE_ENTITY_1);
-//
-//        // assert
-//        assertEquals(2, recipeServiceI.getRecipes().size());
-//    }
-//
+
 
     @Test
     void getRecipeSizeTest(){
@@ -82,8 +74,6 @@ public class RecipeServiceTest {
 
     @Test
     void saveRecipeTest(){
-//        Expected :Recipe(id=1, title=bacalhau, readyInMinutes=60, sourceUrl=www.tugameals.com, vegetarian=true, vegan=false, glutenFree=false, dairyFree=false, cheap=true, summary=very nice, usersThatLiked=[], extendedIngredients=[], categoryIds=[])
-//        Actual   :null
 
         when(recipeJPARepository.findByTitle(any())).thenReturn(Optional.ofNullable(RECIPE_ENTITY_1));
 
