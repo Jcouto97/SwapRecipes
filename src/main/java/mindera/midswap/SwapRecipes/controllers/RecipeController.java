@@ -67,6 +67,27 @@ public class RecipeController {
         this.recipeService.removeRecipe(id);
     }
 
+    @GetMapping("/vegetarian")
+    public List<RecipeDto> getVegetarianRecipes(){
+        return this.recipeService.getVegetarianRecipes();
+    }
+
+    @GetMapping("/vegan")
+    public List<RecipeDto> getVeganRecipes(){
+        return this.recipeService.getVeganRecipes();
+    }
+
+    @GetMapping("/glutenFree")
+    public List<RecipeDto> getGlutenFreeRecipes(){
+        return this.recipeService.getGlutenFreeRecipes();
+    }
+
+    @GetMapping("/dairyFree")
+    public List<RecipeDto> getDairyFreeRecipes(){
+        return this.recipeService.getDairyFreeRecipes();
+    }
+
+
 
 }
 

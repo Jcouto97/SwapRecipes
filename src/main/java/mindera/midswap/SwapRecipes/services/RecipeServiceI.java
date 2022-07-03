@@ -31,4 +31,12 @@ List<RecipeDto> getRecipesByIngredientName(String ingredientName);
     List<RecipeDto> findByCategory(Long categoryId);
 
     RecipeDto updateRecipe(Long recipeId, RecipeUpdateDto recipeUpdate);
+
+    List<RecipeDto> getVegetarianRecipes();
+
+    List<RecipeDto> getVeganRecipes();
+
+    List<RecipeDto> getGlutenFreeRecipes();
+
+    List<RecipeDto> getDairyFreeRecipes();
 }

@@ -32,17 +32,12 @@ public class RecipeService implements RecipeServiceI {
     private final RecipeConverterI recipeConverterI;
     private final RecipeJPARepository recipeRepository;
     private final UserServiceI userServiceI;
-
     private final CategoryServiceI categoryServiceI;
-
     private final IngredientServiceI ingredientServiceI;
     private IngredientJPARepository ingredientJPARepository;
-
     private CategoryJPARepository categoryJPARepository;
-
     private UserConverterI userConverterI;
     private ModelMapper modelMapper;
-
     private IngrendientConverterI ingrendientConverterI;
 
 
@@ -72,21 +67,12 @@ public class RecipeService implements RecipeServiceI {
         //newRecipe.setDescription(recipeDto.getDescription());
         newRecipe.setTitle(recipeDto.getTitle());
         newRecipe.setCategoryIds(recipeDto.getCategory());
-
-
-
         Set<Ingredient> ingredientSet = this.ingrendientConverterI.apiEntityToEntity(recipeDto.getExtendedIngredients());
-
 //        Set<Ingredient> ingredientSet = recipeDto.getExtendedIngredients()
 //                .stream()
 //                    .map(apiIngredients -> this.modelMapper.map(apiIngredients, Ingredient.class)).collect(Collectors.toSet());
 
 //objetivo passar de apiIngredient -> Ingredient
-
-
-
-
-
         if (ingredientSet != null) {
             newRecipe.setExtendedIngredients(recipeDto.getExtendedIngredients()
                     .stream()
@@ -116,6 +102,30 @@ public class RecipeService implements RecipeServiceI {
     @Override
     public List<RecipeDto> getRecipesByIngredientName(String ingredientName) {
         List<Recipe> recipes = this.recipeRepository.findByIngredientName(ingredientName);
+        return this.recipeConverterI.entityListToDtoList(recipes);
+    }
+
+    @Override
+    public List<RecipeDto> getVegetarianRecipes() {
+        List<Recipe> recipes = this.recipeRepository.findVegetarianRecipes();
+        return this.recipeConverterI.entityListToDtoList(recipes);
+    }
+
+    @Override
+    public List<RecipeDto> getVeganRecipes() {
+        List<Recipe> recipes = this.recipeRepository.findVeganRecipes();
+        return this.recipeConverterI.entityListToDtoList(recipes);
+    }
+
+    @Override
+    public List<RecipeDto> getGlutenFreeRecipes() {
+        List<Recipe> recipes = this.recipeRepository.findGlutenFreeRecipes();
+        return this.recipeConverterI.entityListToDtoList(recipes);
+    }
+
+    @Override
+    public List<RecipeDto> getDairyFreeRecipes() {
+        List<Recipe> recipes = this.recipeRepository.findDairyFreeRecipes();
         return this.recipeConverterI.entityListToDtoList(recipes);
     }
 
@@ -151,4 +161,6 @@ public class RecipeService implements RecipeServiceI {
         this.recipeRepository.save(updatedRecipe);
         return this.recipeConverterI.entityToDto(updatedRecipe);
     }
+
+
 }
