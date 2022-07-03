@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.commands;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import mindera.midswap.SwapRecipes.externalApi.byid.ApiIngredients;
 import mindera.midswap.SwapRecipes.persistence.models.Category;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.User;
@@ -18,20 +19,17 @@ import java.util.Set;
 @NoArgsConstructor
 @ToString
 public class RecipeUpdateDto {
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Long id;
-
 
     @NotEmpty
-    @Size(min = 2, max = 100, message = "Name should have at least 2 characters!")
-    private String name;
-
-    private String description;
-
-    private Set<Ingredient> ingredients;
-
-    private Set<Category> category;  //tabem para ligar nos dtos
-
- //   private Set<UserDto> usersThatLiked;
+    @Size(min = 2, max = 100, message = "Name should have at least 2 characters")
+    private String title;
+    private int readyInMinutes;
+    private boolean vegetarian;
+    private boolean vegan;
+    private boolean glutenFree;
+    private boolean dairyFree;
+    private boolean cheap;
+    //private Set<ApiIngredients> extendedIngredients; //parte quando tento fazer update dos ingredients
+    private String summary;
 
 }

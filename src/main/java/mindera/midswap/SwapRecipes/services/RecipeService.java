@@ -1,22 +1,18 @@
 package mindera.midswap.SwapRecipes.services;
 
-
 import lombok.AllArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.RecipeUpdateDto;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.IngrendientConverterI;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
-import mindera.midswap.SwapRecipes.converters.UserConverterI;
 import mindera.midswap.SwapRecipes.exceptions.RecipeAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Category;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
-import mindera.midswap.SwapRecipes.persistence.repositories.CategoryJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,13 +56,14 @@ public class RecipeService implements RecipeServiceI {
         }
         Recipe newRecipe = new Recipe();
         newRecipe.setId(recipeDto.getId());
-        //newRecipe.setDescription(recipeDto.getDescription());
         newRecipe.setTitle(recipeDto.getTitle());
-        newRecipe.setCategoryIds(recipeDto.getCategory());
+        newRecipe.setCategoryIds(recipeDto.getCategory());//ver se tendo isto aqui, posso nao ter no AddRecipe no Postman
+        //alteracoes teste
+        //newRecipe.setExtendedIngredients(this.ingrendientConverterI.apiEntityToEntity(recipeDto.getExtendedIngredients()));//api ing -> ing
+        newRecipe.setReadyInMinutes(recipeDto.getReadyInMinutes());
+        newRecipe.setSourceUrl(recipeDto.getSourceUrl());
+        newRecipe.setSummary(recipeDto.getSummary());
         Set<Ingredient> ingredientSet = this.ingrendientConverterI.apiEntityToEntity(recipeDto.getExtendedIngredients());
-//        Set<Ingredient> ingredientSet = recipeDto.getExtendedIngredients()
-//                .stream()
-//                    .map(apiIngredients -> this.modelMapper.map(apiIngredients, Ingredient.class)).collect(Collectors.toSet());
 
 //objetivo passar de apiIngredient -> Ingredient
         if (ingredientSet != null) {
@@ -169,12 +166,17 @@ public class RecipeService implements RecipeServiceI {
     public RecipeDto updateRecipe(Long recipeId, RecipeUpdateDto recipeUpdate) {
         Recipe recipeToBeUpdated = this.recipeRepository.findById(recipeId)
                 .orElseThrow(() -> new RecipeNotFoundException(RECIPE_NOT_FOUND));
-        Recipe updatedRecipe = this.recipeConverterI.updateDtoToEntity(recipeUpdate, recipeToBeUpdated);
-        updatedRecipe.setCategoryIds(recipeUpdate.getCategory());
-        updatedRecipe.setExtendedIngredients(recipeUpdate.getIngredients());
+        Recipe newRecipe = this.recipeConverterI.updateDtoToEntity(recipeUpdate, recipeToBeUpdated);
 
-        this.recipeRepository.save(updatedRecipe);
-        return this.recipeConverterI.entityToDto(updatedRecipe);
+        newRecipe.setSourceUrl(newRecipe.getSourceUrl());
+        newRecipe.setCategoryIds(newRecipe.getCategoryIds());
+        newRecipe.setExtendedIngredients(newRecipe.getExtendedIngredients());
+//        newRecipe.setCategoryIds(recipeUpdate.getCategory());
+//        newRecipe.setExtendedIngredients(recipeUpdate.getIngredients());
+
+
+        Recipe savedRecipe = this.recipeRepository.save(newRecipe);
+        return this.recipeConverterI.entityToDto(savedRecipe);
     }
 
 

@@ -25,7 +25,7 @@ public class RecipeDto {
     private Long id;
     @NotEmpty
     @Size(min = 2, max = 100, message = "Name should have at least 2 characters")
-    private String title;     //tirar
+    private String title;
     private int readyInMinutes;
     private String sourceUrl;
     private boolean vegetarian;
@@ -35,20 +35,6 @@ public class RecipeDto {
     private boolean cheap;
     private Set<Category> category;  //tabem para ligar nos dtos
     private Set<ApiIngredients> extendedIngredients;
-    //private String[] dishTypes;
     private String summary;
 
-
-
-
-//    private String description;   //tirar
-//
-//    private Set<Ingredient> ingredients;   //tirar
-
-
-
-
-
-
-  //  private Set<UserDto> usersThatLiked;
 }
