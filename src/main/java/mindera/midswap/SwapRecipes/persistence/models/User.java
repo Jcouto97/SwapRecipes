@@ -45,14 +45,6 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "recipe_Id"))
     private Set<Recipe> favouriteRecipesIds = new HashSet<>();
 
-
-
-
-
-
-
-
-
     public User addFavouriteRecipeId(Recipe recipe) {
         this.favouriteRecipesIds.add(recipe);
         return this;

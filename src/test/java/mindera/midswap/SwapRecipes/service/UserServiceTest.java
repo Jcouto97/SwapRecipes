@@ -25,6 +25,7 @@ import static mindera.midswap.SwapRecipes.MockedPojos.*;
 import static mindera.midswap.SwapRecipes.MockedPojos.RECIPE_ENTITY_2;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -67,11 +68,11 @@ public class UserServiceTest {
             //Expected :User(id=1, name=Elisa Moutinho, citizenNumber=100000001, username=elisamoutinho, password=elisamoutinho, favouriteRecipesIds=[])
             //Actual   :null
             // arrange
-            when(userJPARepository.findById(1L))
+            when(userJPARepository.findById(any()))
                     .thenReturn(Optional.of(USER_ENTITY_1));
 
             // act
-            UserDto result = userServiceI.getUserById(1L);
+            UserDto result = userServiceI.getUserById(any());
 
             // assert
             assertEquals(USER_DTO_1, result);

@@ -124,6 +124,8 @@ public class MockedPojos {
             .favouriteRecipes(new ArrayList<>())
             .build();
 
+
+    //acceptance tests
     public static final UsernamePasswordAuthenticationToken AUTHENTICATION_1 = new UsernamePasswordAuthenticationToken(
             "rafael.miranda", null, new ArrayList<>());
 

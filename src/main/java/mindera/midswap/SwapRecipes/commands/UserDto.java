@@ -16,6 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 @NoArgsConstructor
+@EqualsAndHashCode
 public class UserDto {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
