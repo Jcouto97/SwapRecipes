@@ -8,6 +8,8 @@ class ApplicationTests {
 
 	@Test
 	void contextLoads() {
+
+		//http://localhost:8080/swagger-ui/index.html#/
 	}
 
 }
