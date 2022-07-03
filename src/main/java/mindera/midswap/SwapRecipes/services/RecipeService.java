@@ -5,6 +5,7 @@ import mindera.midswap.SwapRecipes.commands.RecipeUpdateDto;
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.IngrendientConverterI;
 import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
+import mindera.midswap.SwapRecipes.exceptions.IngredientAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
 import mindera.midswap.SwapRecipes.persistence.models.Category;
@@ -14,11 +15,9 @@ import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import static mindera.midswap.SwapRecipes.exceptions.exceptionMessages.ExceptionMessages.*;
 
 @Service
@@ -31,6 +30,7 @@ public class RecipeService implements RecipeServiceI {
     private final CategoryServiceI categoryServiceI;
     private IngredientJPARepository ingredientJPARepository;
     private IngrendientConverterI ingrendientConverterI;
+    private IngredientServiceI ingredientServiceI;
 
 
     @Override
@@ -137,6 +137,7 @@ public class RecipeService implements RecipeServiceI {
         return this.recipeConverterI.entityListToDtoList(recipes);
     }
 
+
     @Override
     public UserDto saveFavouriteRecipe(Long userId, Long recipeId) {
         Recipe recipe = getRecipeById(recipeId);
@@ -149,6 +150,21 @@ public class RecipeService implements RecipeServiceI {
         Recipe recipe = getRecipeById(recipeId);
         Category category = this.categoryServiceI.getCategoryById(categoryId);
         recipe.addCategory(category);
+        this.recipeRepository.save(recipe);
+        return recipeConverterI.entityToDto(recipe);
+    }
+
+    @Override
+    public RecipeDto addIngredientToRecipe(Long ingredientId, Long recipeId) {
+        Recipe recipe = getRecipeById(recipeId);
+        Ingredient ingredient = this.ingredientServiceI.getIngredientById(ingredientId);
+        //se o ingrediente ja existir, lançar uma excepção
+        for (Ingredient ing: recipe.getExtendedIngredients()) {
+            if (ing.equals(ingredient)){
+                throw new IngredientAlreadyExistsException(INGREDIENT_ALREADY_EXISTS);
+            }
+        }
+        recipe.addSingleIngredient(ingredient);
         this.recipeRepository.save(recipe);
         return recipeConverterI.entityToDto(recipe);
     }
