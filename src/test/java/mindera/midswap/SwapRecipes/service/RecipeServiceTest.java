@@ -19,6 +19,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -163,6 +164,24 @@ public class RecipeServiceTest {
         assertEquals(List.of(RECIPE_DTO_1), result);
     }
 
+  /*  @Test
+    void testGetRecipesByIngredientNotFound() {   //PORQUE FUNCIONA?
+        // arrange
+        when(recipeJPARepository.findByIngredient(5L))
+                .thenReturn(Collections.emptyList());
+
+        // atc
+        Executable action = () -> recipeServiceI.getRecipesByIngredient(5L);
+
+        // assert
+        assertEquals(Collections.emptyList(), action);
+    } */
+
+
+@Test
+    void testSaveFavouriteRecipe() {
+
+}
 
 }
 
