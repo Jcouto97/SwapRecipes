@@ -3,9 +3,7 @@ package mindera.midswap.SwapRecipes.persistence.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-
 import javax.persistence.*;
-import java.nio.file.LinkOption;
 import java.util.*;
 
 @Getter
@@ -18,6 +16,7 @@ import java.util.*;
 @Entity
 @Table(name = "ingredients")
 public class Ingredient {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ingredient_id", nullable = false, unique = true, updatable = false)
@@ -26,18 +25,15 @@ public class Ingredient {
     @Column(nullable = false, unique = true)
     private String name;
 
-
     @JsonIgnore
-    @ManyToMany(mappedBy = "extendedIngredients",
+    @ManyToMany(mappedBy = "extendedIngredients", //nome variável API externa
             fetch = FetchType.LAZY,
             cascade = CascadeType.DETACH)
     private Set<Recipe> recipesSet = new HashSet<>();
 
     private float amount;
     private String unit;
-    //private String imageType;
-    //private String type;
-    //private String products;
+
 
     //PERSIST em vez de ALL, porque com PERSIST impede que a brand seja apagada se pelo menos um vehículo a esitver a usar
 

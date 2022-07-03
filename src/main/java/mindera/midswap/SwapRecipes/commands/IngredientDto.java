@@ -2,6 +2,7 @@ package mindera.midswap.SwapRecipes.commands;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import mindera.midswap.SwapRecipes.externalApi.byid.ApiRecipe;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 
@@ -26,7 +27,7 @@ public class IngredientDto {
     private String name;
 
     private Set<Recipe> recipeId; //será um set de ApiRecipe?
-
+    //private Set<Recipe> recipeId; //será um set de ApiRecipe?
 
     //    private String title;
     private float amount;

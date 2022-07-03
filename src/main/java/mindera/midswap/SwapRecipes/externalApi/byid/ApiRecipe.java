@@ -23,7 +23,6 @@ public class ApiRecipe {
     private boolean dairyFree;
     private boolean cheap;
     private Set<ApiIngredients> extendedIngredients;//n posso mudar o nome aqui
-    //private String[] dishTypes;
     private String summary;
 
 
@@ -36,13 +35,6 @@ public class ApiRecipe {
         this.summary = summary;
     }
 
-//    public String[] getDishTypes() {
-//        return dishTypes;
-//    }
-//
-//    public void setDishTypes(String[] dishTypes) {
-//        this.dishTypes = dishTypes;
-//    }
 
     public int getReadyInMinutes() {
         return readyInMinutes;

@@ -37,8 +37,7 @@ public class Recipe {
     private boolean glutenFree;
     private boolean dairyFree;
     private boolean cheap;
-    //private List<Ingredient> extendedIngredients;
-    //private String[] dishTypes;
+
     @Column(length = 5000)
     private String summary;
 

@@ -2,6 +2,8 @@ package mindera.midswap.SwapRecipes.externalApi.byid;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Set;
+
 //esta classe vai ter q ser a nossa classe Ingredients
 //temos q fazer refactor da nossa classe Ingredients para receber estas props
 @JsonIgnoreProperties
@@ -11,7 +13,16 @@ public class ApiIngredients {
     private String name;
     private float amount;
     private String unit;
+    //private Set<ApiRecipe> associatedRecipes; //aparece no postman
 
+
+//    public Set<ApiRecipe> getAssociatedRecipes() {
+//        return associatedRecipes;
+//    }
+//
+//    public void setAssociatedRecipes(Set<ApiRecipe> associatedRecipes) {
+//        this.associatedRecipes = associatedRecipes;
+//    }
 
     public String getName() {
         return name;

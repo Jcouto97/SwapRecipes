@@ -5,13 +5,7 @@ import lombok.RequiredArgsConstructor;
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.commands.RecipeUpdateDto;
 import mindera.midswap.SwapRecipes.commands.UserDto;
-import mindera.midswap.SwapRecipes.persistence.models.Recipe;
-import mindera.midswap.SwapRecipes.persistence.models.User;
-import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
-import mindera.midswap.SwapRecipes.persistence.repositories.UserJPARepository;
-import mindera.midswap.SwapRecipes.services.IngredientServiceI;
 import mindera.midswap.SwapRecipes.services.RecipeServiceI;
-import mindera.midswap.SwapRecipes.services.UserServiceI;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
