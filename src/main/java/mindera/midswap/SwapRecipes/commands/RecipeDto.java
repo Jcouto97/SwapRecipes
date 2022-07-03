@@ -23,6 +23,9 @@ import java.util.Set;
 public class RecipeDto {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
+    @NotEmpty
+    @Size(min = 2, max = 100, message = "Name should have at least 2 characters")
+    private String title;     //tirar
     private int readyInMinutes;
     private String sourceUrl;
     private boolean vegetarian;
@@ -30,20 +33,19 @@ public class RecipeDto {
     private boolean glutenFree;
     private boolean dairyFree;
     private boolean cheap;
+    private Set<Category> category;  //tabem para ligar nos dtos
     private Set<ApiIngredients> extendedIngredients;
     //private String[] dishTypes;
     private String summary;
 
 
-    @NotEmpty
-    @Size(min = 2, max = 100, message = "Name should have at least 2 characters")
-    private String title;     //tirar
+
 
 //    private String description;   //tirar
 //
 //    private Set<Ingredient> ingredients;   //tirar
 
-    private Set<Category> category;  //tabem para ligar nos dtos
+
 
 
 

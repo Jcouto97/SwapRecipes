@@ -58,7 +58,7 @@ public class RecipeController {
        return this.recipeService.saveFavouriteRecipe(userId, recipeId);
     }
 
-    @PutMapping("/{categoryId}/{recipeId}")
+    @PutMapping("/{categoryId}/category-recipe/{recipeId}")
     public RecipeDto addCategoryToRecipe(@PathVariable("categoryId") Long categoryId, @PathVariable("recipeId") Long recipeId) {
       RecipeDto updatedRecipe = this.recipeService.addCategoryToRecipe(categoryId, recipeId);
        return updatedRecipe;

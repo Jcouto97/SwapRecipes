@@ -1,6 +1,7 @@
 package mindera.midswap.SwapRecipes.dataloader;
 
 import lombok.AllArgsConstructor;
+import mindera.midswap.SwapRecipes.commands.CategoryDto;
 import mindera.midswap.SwapRecipes.externalApi.byid.ApiRecipeList;
 import mindera.midswap.SwapRecipes.persistence.models.Category;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
@@ -83,7 +84,24 @@ public class DataLoader implements ApplicationRunner {
                         .build()
         ));
         this.userJPARepository.saveAll(userList);
-//
+
+
+        //lista Categories
+        List<Category> categoryList = new ArrayList<>(Arrays.asList(
+                Category.builder().name("Starter").build(),
+                Category.builder().name("Main course").build(),
+                Category.builder().name("Soup").build(),
+                Category.builder().name("Salad").build(),
+                Category.builder().name("Dessert").build(),
+                Category.builder().name("Breakfast").build()
+        ));
+        this.categoryJPARepository.saveAll(categoryList);
+
+
+
+
+
+
 //        //lista Ingredients
 //        List<Ingredient> ingredientList = new ArrayList<>(Arrays.asList(
 //                Ingredient.builder().name("Banana").build(),
