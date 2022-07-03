@@ -49,10 +49,10 @@ public class DataLoader implements ApplicationRunner {
             newRecipe.getExtendedIngredients().stream()
                     .forEach(ingredient -> {
                         //bloqueio ingredients
-                        if (!this.ingredientJPARepository.findByName(ingredient.getName()).isPresent()) {  //adiciona os ingredientes a DB
+//                        if (!this.ingredientJPARepository.findByName(ingredient.getName()).isPresent()) {  //adiciona os ingredientes a DB
                             newIngredientList.add(this.ingredientJPARepository.saveAndFlush(ingredient));
                             //fim bloqueio
-                        }
+//                        }
                     });
             newRecipe.setExtendedIngredients(newIngredientList); //adiciona os ingredientes à receita
             //esta linha estoura se fizermos deploy 2x

@@ -29,16 +29,15 @@ public class RecipeController {
         return this.recipeService.getRecipeDtoById(id);
     }
 
-    @GetMapping("/byCategory/{categoryId}")
-    public List<RecipeDto> getRecipesByCategory (@PathVariable("categoryId") Long categoryId) {
-        this.recipeService.getRecipesByCategory(categoryId);
-
-        return this.recipeService.getRecipes();
+    @GetMapping("/byCategoryId/{categoryId}")
+    public List<RecipeDto> getRecipesByCategory(@PathVariable("categoryId") Long categoryId) {
+        return this.recipeService.findByCategory(categoryId);
+        //        this.recipeService.findByCategory(categoryId);
     }
 
-    @GetMapping("/byIngredient/{ingredientId}")
-    public List<RecipeDto> getRecipesByIngredients(@PathVariable("ingredientId") Long ingredientId) {
-        return this.recipeService.getRecipesByIngredient(ingredientId);
+    @GetMapping("/byIngredientName/{ingredientName}")
+    public List<RecipeDto> getRecipesByIngredientName(@PathVariable("ingredientName") String ingredientName) {
+        return this.recipeService.getRecipesByIngredientName(ingredientName);
 
     }
     @PostMapping
@@ -48,7 +47,6 @@ public class RecipeController {
 
     @PutMapping("/{userId}/user-recipe/{recipeId}")
     public UserDto addRecipeToFavourites(@PathVariable("userId") Long userId, @PathVariable("recipeId") Long recipeId) {
-        //return this.userServiceI.saveFavouriteRecipe(userId, recipeId);
        return this.recipeService.saveFavouriteRecipe(userId, recipeId);
     }
 

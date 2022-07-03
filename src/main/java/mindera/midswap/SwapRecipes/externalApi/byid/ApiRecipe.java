@@ -22,6 +22,7 @@ public class ApiRecipe {
     private boolean glutenFree;
     private boolean dairyFree;
     private boolean cheap;
+    //queremos o internal id dos ingredients
     private Set<ApiIngredients> extendedIngredients;//n posso mudar o nome aqui
     private String summary;
 

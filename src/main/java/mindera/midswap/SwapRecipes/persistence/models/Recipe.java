@@ -26,7 +26,7 @@ public class Recipe {
     @Column(name= "recipe_id", nullable = false, unique = true, updatable = false)
     private Long id;
     @Column(length = 5000)
-    private String description;
+    //private String description;
 
     //private String name;
     private String title;

@@ -9,7 +9,6 @@ import mindera.midswap.SwapRecipes.converters.RecipeConverterI;
 import mindera.midswap.SwapRecipes.converters.UserConverterI;
 import mindera.midswap.SwapRecipes.exceptions.RecipeAlreadyExistsException;
 import mindera.midswap.SwapRecipes.exceptions.RecipeNotFoundException;
-import mindera.midswap.SwapRecipes.externalApi.byid.ApiRecipe;
 import mindera.midswap.SwapRecipes.persistence.models.Category;
 import mindera.midswap.SwapRecipes.persistence.models.Ingredient;
 import mindera.midswap.SwapRecipes.persistence.models.Recipe;
@@ -115,8 +114,8 @@ public class RecipeService implements RecipeServiceI {
 
 
     @Override
-    public List<RecipeDto> getRecipesByIngredient(Long ingredientId) {
-        List<Recipe> recipes = this.recipeRepository.findByIngredient(ingredientId);
+    public List<RecipeDto> getRecipesByIngredientName(String ingredientName) {
+        List<Recipe> recipes = this.recipeRepository.findByIngredientName(ingredientName);
         return this.recipeConverterI.entityListToDtoList(recipes);
     }
 
@@ -135,8 +134,8 @@ public class RecipeService implements RecipeServiceI {
         return recipeConverterI.entityToDto(recipe);
     }
 
-    @Override //está a devolver todos
-    public List<RecipeDto> getRecipesByCategory(Long categoryId) {
+    @Override //RecipeServiceI "return value of the method is never used
+    public List<RecipeDto> findByCategory(Long categoryId) {
         List<Recipe> recipes = this.recipeRepository.findByCategory(categoryId);
         return this.recipeConverterI.entityListToDtoList(recipes);
     }

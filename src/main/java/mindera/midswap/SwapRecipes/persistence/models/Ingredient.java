@@ -22,7 +22,12 @@ public class Ingredient {
     @Column(name = "ingredient_id", nullable = false, unique = true, updatable = false)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    //nova prop unique do Ingredient que é unique, esta deverá receber o id dos ApiIngredients!
+    //Column(nullable = false, unique = true, updatable = false)
+    private Long internalId;
+
+    //acho que o nome não vai poder ser unique
+    //@Column(nullable = false, unique = false)
     private String name;
 
     @JsonIgnore
