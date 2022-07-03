@@ -19,7 +19,7 @@ spring:
       show-sql: true
   datasource:
     platform: postgres
-    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/SwapRecipes}
-    username: ${POSTGRES_USER:postgres}
-    password: ${POSTGRES_PASSWORD:password}
+    url: ${POSTGRES_URL:jdbc:postgresql://ec2-44-198-82-71.compute-1.amazonaws.com:5432/dfph104hoc5h0v}
+    username: ${POSTGRES_USER:rpspxawoyczbus}
+    password: ${POSTGRES_PASSWORD:0abfbbdd3126490ed52b71efa05cde28b8bdf256a1343b954711eedf1e54c648}
     driverClassName: org.postgresql.Driver
