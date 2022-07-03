@@ -40,6 +40,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                         "/configuration/security", "/swagger-ui.html", "/webjars/**", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
                 //Portas para permitir acesso no Swagger
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
+                //.antMatchers(HttpMethod.POST).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))

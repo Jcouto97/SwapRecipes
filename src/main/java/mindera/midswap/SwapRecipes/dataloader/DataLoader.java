@@ -39,7 +39,7 @@ public class DataLoader implements ApplicationRunner {
         //sempre que chamarmos este Get, vamos ter a recipe -> "apiRecipe"
         //receber a chamada da API, e transforma num obj ApiRecipeLit
         //Guarda as receitas que recebemos numa lista
-        ApiRecipeList apiRecipeList = restTemplate.getForObject("https://api.spoonacular.com/recipes/random?number=50&apiKey=75f535603fa8415f8ce7778ca86ae7d1", ApiRecipeList.class);
+        ApiRecipeList apiRecipeList = restTemplate.getForObject("https://api.spoonacular.com/recipes/random?number=100&apiKey=75f535603fa8415f8ce7778ca86ae7d1", ApiRecipeList.class);
 
         //popular a nossa DB, um por um!
         for (int i = 0; i < apiRecipeList.getRecipes().size(); i++) {

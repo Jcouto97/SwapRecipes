@@ -11,7 +11,7 @@ public class ApiIngredients {
 
     //como fazemos para aparecer o id da Api Externa?
     private Long id; //para aparecer o id do ingredient no postman
-    private Long internalId;
+    private Long internalId; //para tirar
     private String name;
     private float amount;
     private String unit;
