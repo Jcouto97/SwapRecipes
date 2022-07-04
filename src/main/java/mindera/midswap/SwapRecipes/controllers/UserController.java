@@ -2,13 +2,10 @@ package mindera.midswap.SwapRecipes.controllers;
 
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
-import mindera.midswap.SwapRecipes.security.JWTAuthenticationFilter;
 import mindera.midswap.SwapRecipes.services.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,8 +73,8 @@ public class UserController {
         return this.userServiceI.getAllUsers();
     }
     //When the above code block is run, any cached data with getAllUsers() will be deleted from cache.
-    @CacheEvict(value = "users")
     @GetMapping("/evict/allusers")
+    @CacheEvict(value = "users")
     public void evictAllUsers() {
         System.out.println("Clearing getAllUsers() cache");
     }
