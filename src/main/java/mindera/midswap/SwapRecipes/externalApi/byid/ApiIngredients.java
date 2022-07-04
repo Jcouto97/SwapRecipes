@@ -11,20 +11,11 @@ public class ApiIngredients {
 
     //como fazemos para aparecer o id da Api Externa?
     private Long id; //para aparecer o id do ingredient no postman
-    private Long internalId; //para tirar
+    //private Long internalId; //para tirar
     private String name;
     private float amount;
     private String unit;
     //private Set<ApiRecipe> associatedRecipes; //aparece no postman
-
-
-//    public Set<ApiRecipe> getAssociatedRecipes() {
-//        return associatedRecipes;
-//    }
-//
-//    public void setAssociatedRecipes(Set<ApiRecipe> associatedRecipes) {
-//        this.associatedRecipes = associatedRecipes;
-//    }
 
     public String getName() {
         return name;
@@ -42,14 +33,6 @@ public class ApiIngredients {
         this.id = id;
     }
 
-
-    public Long getInternalId() {
-        return internalId;
-    }
-
-    public void setInternalId(Long internalId) {
-        this.internalId = internalId;
-    }
 
     public float getAmount() {
         return amount;
