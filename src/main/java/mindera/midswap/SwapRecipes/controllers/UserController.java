@@ -2,16 +2,18 @@ package mindera.midswap.SwapRecipes.controllers;
 
 import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.commands.UserUpdateDto;
+import mindera.midswap.SwapRecipes.security.JWTAuthenticationFilter;
 import mindera.midswap.SwapRecipes.services.UserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -20,6 +22,7 @@ import java.util.List;
 public class UserController {
 
     private UserServiceI userServiceI;
+//    private JWTAuthenticationFilter jwtAuthenticationFilter;
 
     @Autowired
     public UserController(UserServiceI userServiceI) {
@@ -84,6 +87,13 @@ public class UserController {
     public UserDto addUser(@Valid @RequestBody UserDto userDto) {
         return this.userServiceI.addUser(userDto);
     }
+
+//    @PostMapping("/login")
+//    public Authentication loginUser(@RequestBody UserDto userDto, HttpServletRequest req, HttpServletResponse res, FilterChain chain,
+//                          Authentication auth) throws IOException {
+//         this.jwtAuthenticationFilter.attemptAuthentication(req, res);
+//         this.jwtAuthenticationFilter.successfulAuthentication(req, res, chain, auth);
+//    }
 
 
 }
