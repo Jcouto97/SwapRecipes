@@ -15,7 +15,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         #org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: ${HIBERNATE_DDL_AUTO:update} #create-drop #mandar para deploy mandar com UPDATE
+      ddl-auto: ${HIBERNATE_DDL_AUTO:create-drop} #create-drop #mandar para deploy mandar com UPDATE
       show-sql: true
   datasource:
     platform: postgres

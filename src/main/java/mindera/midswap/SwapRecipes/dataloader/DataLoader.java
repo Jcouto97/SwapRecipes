@@ -66,24 +66,24 @@ public class DataLoader implements ApplicationRunner {
 
 
         //lista Users
-//        List<User> userList = new ArrayList<>(Arrays.asList(
-//                User.builder().name("Elisa")
-//                        .citizenNumber(100000001L)
-//                        .username("elisamoutinho")
-//                        .password("elisamoutinho")
-//                        .build(),
-//                User.builder().name("Ala")
-//                        .citizenNumber(100000002L)
-//                        .username("alakropa")
-//                        .password("alakropa")
-//                        .build(),
-//                User.builder().name("Joao")
-//                        .citizenNumber(100000003L)
-//                        .username("joaocouto")
-//                        .password("joaocouto")
-//                        .build()
-//        ));
-//        this.userJPARepository.saveAll(userList);
+        List<User> userList = new ArrayList<>(Arrays.asList(
+                User.builder().name("Elisa")
+                        .citizenNumber(100000001L)
+                        .username("elisamoutinho")
+                        .password("elisamoutinho")
+                        .build(),
+                User.builder().name("Ala")
+                        .citizenNumber(100000002L)
+                        .username("alakropa")
+                        .password("alakropa")
+                        .build(),
+                User.builder().name("Joao")
+                        .citizenNumber(100000003L)
+                        .username("joaocouto")
+                        .password("joaocouto")
+                        .build()
+        ));
+        this.userJPARepository.saveAll(userList);
 
 
         //lista Categories
