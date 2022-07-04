@@ -1,4 +1,4 @@
-package mindera.midswap.SwapRecipes;
+package mindera.midswap.Tests;
 
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.commands.UserDto;

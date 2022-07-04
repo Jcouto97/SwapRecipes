@@ -1,10 +1,7 @@
-package mindera.midswap.SwapRecipes.service;
+package mindera.midswap.Tests.service;
 
-import mindera.midswap.SwapRecipes.commands.UserDto;
 import mindera.midswap.SwapRecipes.converters.UserConverterI;
 import mindera.midswap.SwapRecipes.exceptions.UserNotFoundException;
-import mindera.midswap.SwapRecipes.persistence.models.Recipe;
-import mindera.midswap.SwapRecipes.persistence.models.User;
 import mindera.midswap.SwapRecipes.persistence.repositories.UserJPARepository;
 import mindera.midswap.SwapRecipes.services.UserServiceI;
 import mindera.midswap.SwapRecipes.services.UserServiceImpI;
@@ -20,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.List;
 import java.util.Optional;
 
-import static mindera.midswap.SwapRecipes.MockedPojos.*;
+import static mindera.midswap.Tests.MockedPojos.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;

@@ -1,4 +1,4 @@
-package mindera.midswap.SwapRecipes.service;
+package mindera.midswap.Tests.service;
 
 import mindera.midswap.SwapRecipes.commands.RecipeDto;
 import mindera.midswap.SwapRecipes.converters.IngrendientConverterI;
@@ -8,6 +8,8 @@ import mindera.midswap.SwapRecipes.persistence.models.Recipe;
 import mindera.midswap.SwapRecipes.persistence.repositories.IngredientJPARepository;
 import mindera.midswap.SwapRecipes.persistence.repositories.RecipeJPARepository;
 import mindera.midswap.SwapRecipes.services.*;
+import mindera.midswap.Tests.MockedPojos;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +20,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 
-import static mindera.midswap.SwapRecipes.MockedPojos.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -61,7 +62,7 @@ public class RecipeServiceTest {
 
     @Test
     void getRecipeSizeTest() {
-        when(recipeJPARepository.findAll()).thenReturn(List.of(RECIPE_ENTITY_1, RECIPE_ENTITY_2));
+        when(recipeJPARepository.findAll()).thenReturn(List.of(MockedPojos.RECIPE_ENTITY_1, MockedPojos.RECIPE_ENTITY_2));
 
         // assert
         assertEquals(2, recipeJPARepository.findAll().size());
@@ -73,28 +74,28 @@ public class RecipeServiceTest {
         when(recipeJPARepository.findByTitle(any())).thenReturn(Optional.empty());
 
         when(recipeConverterI.entityToDto(any()))
-                .thenReturn(RECIPE_DTO_1);
+                .thenReturn(MockedPojos.RECIPE_DTO_1);
 
 
-        when(recipeJPARepository.save(any())).thenReturn(RECIPE_ENTITY_1);
+        when(recipeJPARepository.save(any())).thenReturn(MockedPojos.RECIPE_ENTITY_1);
 
-        RecipeDto result = recipeServiceI.addRecipe(RECIPE_DTO_1);
+        RecipeDto result = recipeServiceI.addRecipe(MockedPojos.RECIPE_DTO_1);
         //dto é o que o metodo recebe
 
-        assertEquals(RECIPE_DTO_1, result);
+        Assertions.assertEquals(MockedPojos.RECIPE_DTO_1, result);
     }
 
     @Test
     void testGetRecipeByIdSuccess() {
         // arrange
         when(recipeJPARepository.findById(any()))
-                .thenReturn(Optional.of(RECIPE_ENTITY_1));
+                .thenReturn(Optional.of(MockedPojos.RECIPE_ENTITY_1));
 
         // act
         Recipe result = recipeServiceI.getRecipeById(any());
 
         // assert
-        assertEquals(RECIPE_ENTITY_1, result);
+        Assertions.assertEquals(MockedPojos.RECIPE_ENTITY_1, result);
     }
 
     @Test
@@ -113,13 +114,13 @@ public class RecipeServiceTest {
     @Test
     void testGetRecipeDtoByIdSuccess(){
         when(recipeJPARepository.findById(any()))
-                .thenReturn(Optional.of(RECIPE_ENTITY_1));
+                .thenReturn(Optional.of(MockedPojos.RECIPE_ENTITY_1));
 
-        when(recipeConverterI.entityToDto(any())).thenReturn(RECIPE_DTO_1);
+        when(recipeConverterI.entityToDto(any())).thenReturn(MockedPojos.RECIPE_DTO_1);
 
         RecipeDto result = recipeServiceI.getRecipeDtoById(any());
 
-        assertEquals(RECIPE_DTO_1, result);
+        Assertions.assertEquals(MockedPojos.RECIPE_DTO_1, result);
     }
 
     @Test
