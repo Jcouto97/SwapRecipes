@@ -14,6 +14,7 @@ import mindera.midswap.SwapRecipes.persistence.repositories.UserJPARepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -29,6 +30,7 @@ public class DataLoader implements ApplicationRunner {
     private RestTemplate restTemplate;
     private CategoryJPARepository categoryJPARepository;
     private ModelMapper modelMapper;
+    private PasswordEncoder passwordEncoder;
 
     //controllerEXT API VER
 
@@ -70,17 +72,17 @@ public class DataLoader implements ApplicationRunner {
                 User.builder().name("Elisa")
                         .citizenNumber(100000001L)
                         .username("elisamoutinho")
-                        .password("elisamoutinho")
+                        .password(passwordEncoder.encode("elisamoutinho"))
                         .build(),
                 User.builder().name("Ala")
                         .citizenNumber(100000002L)
                         .username("alakropa")
-                        .password("alakropa")
+                        .password(passwordEncoder.encode("alakropa"))
                         .build(),
                 User.builder().name("Joao")
                         .citizenNumber(100000003L)
                         .username("joaocouto")
-                        .password("joaocouto")
+                        .password(passwordEncoder.encode("joaocouto"))
                         .build()
         ));
         this.userJPARepository.saveAll(userList);
