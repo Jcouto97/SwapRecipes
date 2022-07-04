@@ -79,10 +79,25 @@ public class DataLoader implements ApplicationRunner {
                         .username("alakropa")
                         .password(passwordEncoder.encode("alakropa"))
                         .build(),
-                User.builder().name("Joao")
+                User.builder().name("JoaoC")
                         .citizenNumber(100000003L)
                         .username("joaocouto")
                         .password(passwordEncoder.encode("joaocouto"))
+                        .build(),
+                User.builder().name("Nuno")
+                        .citizenNumber(100000004L)
+                        .username("nunocarmo")
+                        .password(passwordEncoder.encode("nunocarmo"))
+                        .build(),
+                User.builder().name("JoaoS")
+                        .citizenNumber(100000005L)
+                        .username("joaosilva")
+                        .password(passwordEncoder.encode("joaosilva"))
+                        .build(),
+                User.builder().name("Luis")
+                        .citizenNumber(100000005L)
+                        .username("luiscouto")
+                        .password(passwordEncoder.encode("luiscouto"))
                         .build()
         ));
         this.userJPARepository.saveAll(userList);
