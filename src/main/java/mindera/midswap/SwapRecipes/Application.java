@@ -14,4 +14,13 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
+	//HEROKU SERVER LINK (FOR POSTMAN)
+	//swaprecipes nome DB
+	//https://swaprecipes.herokuapp.com
+
+	//SWAGGER
+	//http://localhost:8080/swagger-ui/index.html
+	//https://swaprecipes.herokuapp.com/swagger-ui/index.html
+
+
 }
