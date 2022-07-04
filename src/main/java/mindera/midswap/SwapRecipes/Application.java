@@ -22,5 +22,6 @@ public class Application {
 	//http://localhost:8080/swagger-ui/index.html
 	//https://swaprecipes.herokuapp.com/swagger-ui/index.html
 
+	//temos a DB com create-drop para não dar erro ao estar sempre a adicionar os Users do DataLoader (repetidos)
 
 }
