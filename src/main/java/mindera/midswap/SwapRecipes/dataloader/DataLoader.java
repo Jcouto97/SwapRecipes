@@ -95,7 +95,7 @@ public class DataLoader implements ApplicationRunner {
                         .password(passwordEncoder.encode("joaosilva"))
                         .build(),
                 User.builder().name("Luis")
-                        .citizenNumber(100000005L)
+                        .citizenNumber(100000006L)
                         .username("luiscouto")
                         .password(passwordEncoder.encode("luiscouto"))
                         .build()
