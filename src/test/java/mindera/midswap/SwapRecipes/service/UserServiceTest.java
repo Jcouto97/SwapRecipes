@@ -90,6 +90,11 @@ public class UserServiceTest {
             // assert
             assertThrows(UserNotFoundException.class, action);
         }
+
+        @Test
+        void testAddUser(){
+
+        }
     }
 }
 
